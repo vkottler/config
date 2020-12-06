@@ -8,9 +8,14 @@ from {{package["name"]}} import PKG_NAME, VERSION, DESCRIPTION
 from mk.setup import setup
 
 
-author_info = {"name": "{{package["author_info"]["name"]}}",
-               "email": "{{package["author_info"]["email"]}}",
-               "username": "{{package["author_info"]["username"]}}"}
+author_info = {"name": "{{python["author_info"]["name"]}}",
+               "email": "{{python["author_info"]["email"]}}",
+               "username": "{{python["author_info"]["username"]}}"}
 pkg_info = {"name": PKG_NAME, "version": VERSION, "description": DESCRIPTION}
-setup(pkg_info, author_info, entry_override="dz")
-
+setup(
+    pkg_info,
+    author_info,
+{% for arg in package["setup_args"] %}
+    {{arg}},
+{% endfor %}
+)
