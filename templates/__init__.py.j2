@@ -3,7 +3,11 @@
 {{package["name"]}} - Useful defaults and other package metadata.
 """
 
+{% if "pypi_name" in package %}
+PKG_NAME = "{{package["pypi_name"]}}"
+{% else %}
 PKG_NAME = "{{package["name"]}}"
+{% endif%}
 VERSION = "{{package["version"]}}"
 DESCRIPTION = "{{package["description"]}}"
 {{package["init_local"]}}
