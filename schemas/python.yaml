@@ -1,0 +1,9 @@
+author_info:
+  type: dict
+  schema:
+    name:
+      type: string
+    email:
+      type: string
+    username:
+      type: string

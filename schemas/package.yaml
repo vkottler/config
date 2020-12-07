@@ -1,0 +1,12 @@
+name:
+  type: string
+version:
+  type: string
+description:
+  type: string
+setup_args:
+  type: list
+  schema:
+    type: string
+init_local:
+  type: string
