@@ -10,3 +10,7 @@ setup_args:
     type: string
 init_local:
   type: string
+  required: false
+pypi_name:
+  type: string
+  required: false
