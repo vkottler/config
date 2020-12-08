@@ -8,6 +8,7 @@ setup_args:
   type: list
   schema:
     type: string
+  required: false
 init_local:
   type: string
   required: false
