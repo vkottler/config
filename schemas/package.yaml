@@ -15,3 +15,6 @@ init_local:
 pypi_name:
   type: string
   required: false
+no_chdir_arg:
+  type: boolean
+  required: false
