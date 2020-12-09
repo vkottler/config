@@ -1,0 +1,32 @@
+templates:
+- "../templates"
+
+schemas:
+- "../schemas"
+
+configs:
+- "../configs"
+
+compiles:
+- name: "python"
+
+renders:
+- name: "setup.py"
+  output_dir: "."
+  dependencies:
+  - "compiles-python"
+- name: "entry.py"
+  output_dir: "{{project}}"
+  dependencies:
+  - "compiles-python"
+- name: "__init__.py"
+  output_dir: "{{project}}"
+  dependencies:
+  - "compiles-python"
+
+groups:
+- name: "python"
+  dependencies:
+  - "renders-__init__.py"
+  - "renders-setup.py"
+  - "renders-entry.py"
