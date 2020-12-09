@@ -3,11 +3,11 @@
 {{package["name"]}} - Package definition for distribution.
 """
 
-# internal
-from {{package["name"]}} import PKG_NAME, VERSION, DESCRIPTION
-
 # third-party
 from vmklib.setup import setup
+
+# internal
+from {{package["name"]}} import PKG_NAME, VERSION, DESCRIPTION
 
 
 author_info = {"name": "{{python["author_info"]["name"]}}",
