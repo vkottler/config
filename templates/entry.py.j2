@@ -6,7 +6,9 @@
 # built-in
 import argparse
 import logging
+{% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
 import os
+{% endif %}
 import sys
 from typing import List
 
