@@ -47,7 +47,7 @@ def main(argv: List[str] = None) -> int:
         args = parser.parse_args(command_args[1:])
         args.version = VERSION
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
-	args.dir = os.path.abspath(args.dir)
+        args.dir = os.path.abspath(args.dir)
 {% endif %}
 
         # initialize logging
