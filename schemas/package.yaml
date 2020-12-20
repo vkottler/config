@@ -4,6 +4,9 @@ version:
   type: string
 description:
   type: string
+entry:
+  type: string
+  required: false
 setup_args:
   type: list
   schema:
