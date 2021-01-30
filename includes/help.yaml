@@ -1,0 +1,18 @@
+commands:
+- name: "ensure-venv"
+  command: "mk"
+  arguments:
+  - "venv"
+  - "PYTHON_VERSION={{python_version}}"
+- name: "install-local"
+  command: "mk"
+  arguments:
+  - "python-editable"
+  dependencies:
+  - "commands-ensure-venv"
+- name: "help"
+  command: "./venv{{python_version}}/bin/{{entry}}"
+  arguments:
+  - "-h"
+  dependencies:
+  - "commands-install-local"
