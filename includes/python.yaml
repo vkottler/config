@@ -23,6 +23,10 @@ renders:
   output_dir: "{{project}}"
   dependencies:
   - "compiles-python"
+- name: "python_readme_header.md"
+  no_file: true
+  dependencies:
+  - "compiles-python"
 
 groups:
 - name: "python"
