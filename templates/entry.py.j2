@@ -35,8 +35,7 @@ def main(argv: List[str] = None) -> int:
                         help="set to increase logging verbosity")
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
     parser.add_argument("-C", "--dir", default=os.getcwd(), dest="dir",
-                        help=("execute from a specific directory (default: " +
-                              "'%(default)s')"))
+                        help=("execute from a specific directory")
     starting_dir = os.getcwd()
 {% endif %}
 
