@@ -1,0 +1,6 @@
+version: "1.0"
+xmlns: http://www.w3.org/2000/svg
+x1: {{x_offset}}
+y1: {{y_offset}}
+x2: {{width + x_offset}}
+y2: {{height + y_offset}}

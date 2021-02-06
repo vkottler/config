@@ -1,0 +1,12 @@
+version: 
+  type: string
+xmlns:
+  type: string
+x1:
+  type: integer
+y1:
+  type: integer
+x2:
+  type: integer
+y2:
+  type: integer
