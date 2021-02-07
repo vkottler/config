@@ -4,3 +4,5 @@ x1: {{x_offset}}
 y1: {{y_offset}}
 x2: {{width + x_offset}}
 y2: {{height + y_offset}}
+width: {{width}}
+height: {{height}}

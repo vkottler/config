@@ -10,3 +10,7 @@ x2:
   type: integer
 y2:
   type: integer
+width:
+  type: integer
+height:
+  type: integer
