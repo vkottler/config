@@ -7,6 +7,9 @@ schemas:
 configs:
 - "../configs"
 
+variables:
+- "../variables"
+
 compiles:
 - name: "python"
 
