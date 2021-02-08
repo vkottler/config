@@ -12,6 +12,7 @@ commands:
   - "commands-ensure-venv"
 - name: "help"
   command: "./venv{{python_version}}/bin/{{entry}}"
+  force: true
   arguments:
   - "-h"
   dependencies:
