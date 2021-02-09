@@ -1,4 +1,32 @@
-<svg version="{{svg["version"]}}" xmlns="{{svg["xmlns"]}}"
-    viewBox="{{svg["x1"]}} {{svg["y1"]}} {{svg["x2"]}} {{svg["y2"]}}">
+<svg version="{{svg.version}}" xmlns="{{svg.xmlns}}"
+    viewBox="{{svg.x1}} {{svg.y1}} {{svg.x2}} {{svg.y2}}">
 {{svg_content}}
+
+<!-- grid -->
+{% set x_delta = svg.width / (svg.grid.lines + 1) %}
+{% set y_delta = svg.height / (svg.grid.lines + 1) %}
+{% set curr_x = x_delta %}
+{% set curr_y = y_delta %}
+{% for i in range(svg.grid.lines) %}
+<line x1="{{curr_x + (i * x_delta)}}" y1="0"
+      x2="{{curr_x + (i * x_delta)}}" y2="{{svg.height}}"
+      style="stroke:{{svg.grid.color}};stroke-width:{{svg.grid.width}}" />
+<line x1="0" y1="{{curr_y + (i * y_delta)}}"
+      x2="{{svg.width}}" y2="{{curr_y + (i * y_delta)}}"
+      style="stroke:{{svg.grid.color}};stroke-width:{{svg.grid.width}}" />
+{% endfor %}
+
+<!-- border -->
+<line x1="0" y1="0"
+      x2="0" y2="{{svg.height}}"
+      style="stroke:{{svg.border.color}};stroke-width:{{svg.border.width}}" />
+<line x1="0" y1="0"
+      x2="{{svg.width}}" y2="0"
+      style="stroke:{{svg.border.color}};stroke-width:{{svg.border.width}}" />
+<line x1="0" y1="{{svg.height}}"
+      x2="{{svg.width}}" y2="{{svg.height}}"
+      style="stroke:{{svg.border.color}};stroke-width:{{svg.border.width}}" />
+<line x1="{{svg.width}}" y1="0"
+      x2="{{svg.width}}" y2="{{svg.height}}"
+      style="stroke:{{svg.border.color}};stroke-width:{{svg.border.width}}" />
 </svg> 

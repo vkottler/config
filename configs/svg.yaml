@@ -1,8 +1,15 @@
 version: "1.0"
 xmlns: http://www.w3.org/2000/svg
-x1: {{x_offset}}
-y1: {{y_offset}}
+x1: {{x_offset|default(0, true)}}
+y1: {{y_offset|default(0, true)}}
 x2: {{width + x_offset}}
 y2: {{height + y_offset}}
 width: {{width}}
 height: {{height}}
+grid:
+  lines: {{grid.lines|default(0, true)}}
+  color: {{grid.color|default("black", true)}}
+  width: {{grid.width|default(0, true)}}
+border:
+  color: {{border.color|default("black", true)}}
+  width: {{border.width|default(0, true)}}

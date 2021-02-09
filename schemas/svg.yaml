@@ -14,3 +14,19 @@ width:
   type: integer
 height:
   type: integer
+grid:
+  type: dict
+  schema:
+    lines:
+      type: integer
+    color:
+      type: string
+    width:
+      type: integer
+border:
+  type: dict
+  schema:
+    color:
+      type: string
+    width:
+      type: integer
