@@ -1,11 +1,15 @@
 version: "1.0"
 xmlns: http://www.w3.org/2000/svg
-x1: {{x_offset|default(0, true)}}
-y1: {{y_offset|default(0, true)}}
-x2: {{width + x_offset}}
-y2: {{height + y_offset}}
-width: {{width}}
-height: {{height}}
+{% set _x_offset = x_offset|default(0, true) %}
+{% set _y_offset = y_offset|default(0, true) %}
+{% set _width = width|default(100, true) %}
+{% set _height = height|default(100, true) %}
+x1: {{_x_offset}}
+y1: {{_y_offset}}
+x2: {{_width + _x_offset}}
+y2: {{_height + _y_offset}}
+width: {{_width}}
+height: {{_height}}
 grid:
   lines: {{grid.lines|default(0, true)}}
   color: {{grid.color|default("black", true)}}
