@@ -1,8 +1,14 @@
 <svg version="{{svg.version}}" xmlns="{{svg.xmlns}}"
      viewBox="{{svg.x1}} {{svg.y1}} {{svg.x2}} {{svg.y2}}">
+{% if svg.background.color %}
+    <!-- background -->
+    <rect x="{{svg.x1}}" y="{{svg.y1}}"
+          width="{{svg.x2 - svg.x1}}" height="{{svg.y2 - svg.y1}}"
+          style="fill:{{svg.background.color}}" />
+{% endif %}
 {{svg_content}}
-
 {% if svg.grid.width > 0 %}
+
     <!-- grid -->
 {% set x_delta = svg.width / (svg.grid.lines + 1) %}
 {% set y_delta = svg.height / (svg.grid.lines + 1) %}

@@ -14,6 +14,11 @@ width:
   type: integer
 height:
   type: integer
+background:
+  type: dict
+  schema:
+    color:
+      type: string
 grid:
   type: dict
   schema:

@@ -17,3 +17,5 @@ grid:
 border:
   color: {{border.color|default("black", true)}}
   width: {{border.width|default(0, true)}}
+background:
+  color: "{{background.color}}"
