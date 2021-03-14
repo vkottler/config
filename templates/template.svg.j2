@@ -1,20 +1,20 @@
 <svg version="{{svg.version}}" xmlns="{{svg.xmlns}}"
-     viewBox="{{svg.x1}} {{svg.y1}} {{svg.x2}} {{svg.y2}}">
+     viewBox="{{svg.x_offset}} {{svg.y_offset}} {{svg.x_offset|int + svg.width|int}} {{svg.y_offset|int + svg.height|int}}">
 {% if svg.background.color %}
     <!-- background -->
-    <rect x="{{svg.x1}}" y="{{svg.y1}}"
-          width="{{svg.x2 - svg.x1}}" height="{{svg.y2 - svg.y1}}"
+    <rect x="{{svg.x_offset}}" y="{{svg.y_offset}}"
+          width="{{svg.width}}" height="{{svg.height}}"
           style="fill:{{svg.background.color}}" />
 {% endif %}
 {{svg_content}}
-{% if svg.grid.width > 0 %}
+{% if svg.grid.width|int > 0 %}
 
     <!-- grid -->
-{% set x_delta = svg.width / (svg.grid.lines + 1) %}
-{% set y_delta = svg.height / (svg.grid.lines + 1) %}
+{% set x_delta = svg.width|int / (svg.grid.lines|int + 1) %}
+{% set y_delta = svg.height|int / (svg.grid.lines|int + 1) %}
 {% set curr_x = x_delta %}
 {% set curr_y = y_delta %}
-{% for i in range(svg.grid.lines) %}
+{% for i in range(svg.grid.lines|int) %}
     <line x1="{{curr_x + (i * x_delta)}}" y1="0"
           x2="{{curr_x + (i * x_delta)}}" y2="{{svg.height}}"
           style="stroke:{{svg.grid.color}};stroke-width:{{svg.grid.width}}" />
@@ -24,7 +24,7 @@
 {% endfor %}
 {% endif %}
 
-{% if svg.border.width > 0 %}
+{% if svg.border.width|int > 0 %}
     <!-- border -->
     <line x1="0" y1="0"
           x2="0" y2="{{svg.height}}"

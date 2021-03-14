@@ -2,13 +2,9 @@ version:
   type: string
 xmlns:
   type: string
-x1:
+x_offset:
   type: integer
-y1:
-  type: integer
-x2:
-  type: integer
-y2:
+y_offset:
   type: integer
 width:
   type: integer

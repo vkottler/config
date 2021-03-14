@@ -1,0 +1,27 @@
+templates:
+- "../templates"
+
+configs:
+- "../configs"
+
+variables:
+- "../variables"
+- "../colors"
+
+schemas:
+- "../schemas"
+
+compiles:
+- name: "svg"
+
+renders:
+- name: "w{width}_h{height}_bg-{background.color}_grid-none.svg"
+  key: "template.svg"
+  override_path: "svg"
+  dependencies:
+  - "svg"
+- name: "w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}.svg"
+  key: "template.svg"
+  override_path: "svg"
+  dependencies:
+  - "svg"
