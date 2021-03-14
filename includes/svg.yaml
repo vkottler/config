@@ -12,16 +12,43 @@ schemas:
 - "../schemas"
 
 compiles:
-- name: "svg"
+- name: "svg-w{width}_h{height}_none"
+  override_path: "svg"
+- name: "svg-w{width}_h{height}_bg-{background.color}_grid-none"
+  override_path: "svg"
+- name: "svg-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}"
+  override_path: "svg"
 
 renders:
+- name: "w{width}_h{height}_none.svg"
+  key: "template.svg"
+  dependencies:
+  - "compiles-svg-w{width}_h{height}_none"
+
 - name: "w{width}_h{height}_bg-{background.color}_grid-none.svg"
   key: "template.svg"
-  override_path: "svg"
   dependencies:
-  - "svg"
+  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-none"
+
 - name: "w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}.svg"
   key: "template.svg"
-  override_path: "svg"
   dependencies:
-  - "svg"
+  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}"
+
+- name: "{dep}-w{width}_h{height}_none.svg"
+  key: "template.svg"
+  dependencies:
+  - "compiles-svg-w{width}_h{height}_none"
+  - "renders-{dep}-w{width}_h{height}_none"
+
+- name: "{dep}-w{width}_h{height}_bg-{background.color}_grid-none.svg"
+  key: "template.svg"
+  dependencies:
+  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-none"
+  - "renders-{dep}-w{width}_h{height}_none"
+
+- name: "{dep}-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}.svg"
+  key: "template.svg"
+  dependencies:
+  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}"
+  - "renders-{dep}-w{width}_h{height}_none"
