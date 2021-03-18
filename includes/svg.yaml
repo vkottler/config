@@ -12,43 +12,43 @@ schemas:
 - "../schemas"
 
 compiles:
-- name: "svg-w{width}_h{height}_none"
+- name: "svg:w{width}:h{height}:"
   override_path: "svg"
-- name: "svg-w{width}_h{height}_bg-{background.color}_grid-none"
+- name: "svg:w{width}:h{height}:bg-{background.color}:"
   override_path: "svg"
-- name: "svg-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}"
+- name: "svg:w{width}:h{height}:bg-{background.color}:grid-{grid.lines}-{grid.width}:"
   override_path: "svg"
 
 renders:
-- name: "w{width}_h{height}_none.svg"
+- name: "w{width}:h{height}.svg"
   key: "template.svg"
   dependencies:
-  - "compiles-svg-w{width}_h{height}_none"
+  - "compiles-svg:w{width}:h{height}:"
 
-- name: "w{width}_h{height}_bg-{background.color}_grid-none.svg"
+- name: "w{width}:h{height}:bg-{background.color}:grid.svg"
   key: "template.svg"
   dependencies:
-  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-none"
+  - "compiles-svg:w{width}:h{height}:bg-{background.color}:"
 
-- name: "w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}.svg"
+- name: "w{width}:h{height}:bg-{background.color}:grid-{grid.lines}-{grid.width}.svg"
   key: "template.svg"
   dependencies:
-  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}"
+  - "compiles-svg:w{width}:h{height}:bg-{background.color}:grid-{grid.lines}-{grid.width}:"
 
-- name: "{dep}-w{width}_h{height}_none.svg"
+- name: "{dep}:w{width}:h{height}.svg"
   key: "template.svg"
   dependencies:
-  - "compiles-svg-w{width}_h{height}_none"
-  - "renders-{dep}-w{width}_h{height}_none"
+  - "compiles-svg:w{width}:h{height}:"
+  - "renders-{dep}:w{width}:h{height}:"
 
-- name: "{dep}-w{width}_h{height}_bg-{background.color}_grid-none.svg"
+- name: "{dep}:w{width}:h{height}:bg-{background.color}.svg"
   key: "template.svg"
   dependencies:
-  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-none"
-  - "renders-{dep}-w{width}_h{height}_none"
+  - "compiles-svg:w{width}:h{height}:bg-{background.color}:"
+  - "renders-{dep}:w{width}:h{height}:"
 
-- name: "{dep}-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}.svg"
+- name: "{dep}:w{width}:h{height}:bg-{background.color}:grid-{grid.lines}-{grid.width}.svg"
   key: "template.svg"
   dependencies:
-  - "compiles-svg-w{width}_h{height}_bg-{background.color}_grid-{grid.lines}-{grid.width}"
-  - "renders-{dep}-w{width}_h{height}_none"
+  - "compiles-svg:w{width}:h{height}:bg-{background.color}:grid-{grid.lines}-{grid.width}:"
+  - "renders-{dep}:w{width}:h{height}:"
