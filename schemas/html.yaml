@@ -1,0 +1,25 @@
+language:
+  type: string
+charset:
+  type: string
+style:
+  type: string
+title:
+  type: string
+author:
+  type: string
+description:
+  type: string
+keywords:
+  type: string
+viewport:
+  type: string
+stylesheets:
+  type: list
+  schema:
+    type: string
+body:
+  type: dict
+  schema:
+    style:
+      type: string

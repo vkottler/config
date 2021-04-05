@@ -1,0 +1,11 @@
+language: en
+charset: utf-8
+style: "{{style|default('height:100%;', true)}}"
+title: "{{title|default('untitled', true)}}"
+author: "{{author}}"
+description: "{{description}}"
+keywords: "{{', '.join(keywords)}}"
+viewport: "{{viewport|default('width=device-width, initial-scale=1.0', true)}}"
+stylesheets: []
+body:
+  style: "{{body.style|default('margin:0;height:100%;', true)}}"

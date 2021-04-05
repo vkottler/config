@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="{{html.language}}" style="{{html.style}}">
+  <head>
+    <meta charset="{{html.charset}}">
+    <title>{{html.title}}</title>
+    <meta name="author" content="{{html.author}}">
+    <meta name="description" content="{{html.description}}">
+    <meta name="keywords" content="{{html.keywords}}">
+    <meta name="viewport" content="{{html.viewport}}">
+{% for sheet in html.stylesheets %}
+    <link rel="stylesheet" href="{{sheet}}">
+{% endfor %}
+  </head>
+  <body style="{{html.body.style}}">
+    {{html_content}}
+  </body>
+</html>
