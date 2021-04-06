@@ -7,11 +7,15 @@
     <meta name="description" content="{{html.description}}">
     <meta name="keywords" content="{{html.keywords}}">
     <meta name="viewport" content="{{html.viewport}}">
+{% if html.icon %}
+    <link rel="icon" type="image/x-icon" href="{{html.icon}}">
+{% endif %}
 {% for sheet in html.stylesheets %}
     <link rel="stylesheet" href="{{sheet}}">
 {% endfor %}
   </head>
   <body style="{{html.body.style}}">
 {{html_content}}
+{{__children__}}
   </body>
 </html>

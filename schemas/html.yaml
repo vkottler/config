@@ -14,6 +14,8 @@ keywords:
   type: string
 viewport:
   type: string
+icon:
+  type: string
 stylesheets:
   type: list
   schema:
