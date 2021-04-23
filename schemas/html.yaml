@@ -16,6 +16,8 @@ viewport:
   type: string
 icon:
   type: string
+theme:
+  type: string
 stylesheets:
   type: list
   schema:

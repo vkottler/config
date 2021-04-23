@@ -1,0 +1,14 @@
+{% for item in color %}
+{% for category in color[item] %}
+{% for level in color[item][category] %}
+.{{item}}_{{category}}_{{level}} {
+  color: {{color[item][category][level]}};
+}
+
+.bg_{{item}}_{{category}}_{{level}} {
+  background-color: {{color[item][category][level]}};
+}
+
+{% endfor %}
+{% endfor %}
+{% endfor %}
