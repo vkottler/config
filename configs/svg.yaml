@@ -4,12 +4,18 @@ x_offset: {{x_offset|default(0, true)}}
 y_offset: {{y_offset|default(0, true)}}
 width: {{width|default(100, true)}}
 height: {{height|default(100, true)}}
+{% if grid %}
 grid:
   color: "{{grid.color|default('black', true)}}"
   lines: {{grid.lines|default(0, true)}}
   width: {{grid.width|default(0, true)}}
+{% endif %}
+{% if border %}
 border:
   color: "{{border.color|default('black', true)}}"
   width: {{border.width|default(0, true)}}
+{% endif %}
+{% if background %}
 background:
   color: "{{background.color}}"
+{% endif %}
