@@ -10,9 +10,11 @@ from vmklib.setup import setup  # type: ignore
 from {{package["name"]}} import PKG_NAME, VERSION, DESCRIPTION
 
 
-author_info = {"name": "{{python["author_info"]["name"]}}",
-               "email": "{{python["author_info"]["email"]}}",
-               "username": "{{python["author_info"]["username"]}}"}
+author_info = {
+    "name": "{{python["author_info"]["name"]}}",
+    "email": "{{python["author_info"]["email"]}}",
+    "username": "{{python["author_info"]["username"]}}",
+}
 pkg_info = {"name": PKG_NAME, "version": VERSION, "description": DESCRIPTION}
 setup(
     pkg_info,

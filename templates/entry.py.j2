@@ -18,7 +18,7 @@ from {{package["name"]}}.app import entry, add_app_args
 
 
 def main(argv: List[str] = None) -> int:
-    """ Program entry-point. """
+    """Program entry-point."""
 
     result = 0
 
@@ -29,13 +29,25 @@ def main(argv: List[str] = None) -> int:
 
     # initialize argument parsing
     parser = argparse.ArgumentParser(description=DESCRIPTION)
-    parser.add_argument("--version", action="version",
-                        version="%(prog)s {0}".format(VERSION))
-    parser.add_argument("-v", "--verbose", action="store_true",
-                        help="set to increase logging verbosity")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version="%(prog)s {0}".format(VERSION),
+    )
+    parser.add_argument(
+        "-v",
+        "--verbose",
+        action="store_true",
+        help="set to increase logging verbosity",
+    )
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
-    parser.add_argument("-C", "--dir", default=os.getcwd(), dest="dir",
-                        help="execute from a specific directory")
+    parser.add_argument(
+        "-C",
+        "--dir",
+        default=os.getcwd(),
+        dest="dir",
+        help="execute from a specific directory",
+    )
     starting_dir = os.getcwd()
 {% endif %}
 
@@ -51,9 +63,10 @@ def main(argv: List[str] = None) -> int:
 
         # initialize logging
         log_level = logging.DEBUG if args.verbose else logging.INFO
-        logging.basicConfig(level=log_level,
-                            format=("%(name)-36s - %(levelname)-6s - "
-                                    "%(message)s"))
+        logging.basicConfig(
+            level=log_level,
+            format="%(name)-36s - %(levelname)-6s - %(message)s",
+        )
 
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
         # change to the specified directory
