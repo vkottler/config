@@ -1,6 +1,6 @@
 <svg version="{{svg.version}}" xmlns="{{svg.xmlns}}"
      viewBox="{{svg.x_offset}} {{svg.y_offset}} {{svg.x_offset|int + svg.width|int}} {{svg.y_offset|int + svg.height|int}}">
-{% if svg.background.color %}
+{% if "background" in svg %}
     <!-- background -->
     <rect x="{{svg.x_offset}}" y="{{svg.y_offset}}"
           width="{{svg.width}}" height="{{svg.height}}"
@@ -8,7 +8,7 @@
 {% endif %}
 {{svg_content}}
 {{__children__}}
-{% if svg.grid.width|int > 0 %}
+{% if "grid" in svg and svg.grid.width|int > 0 %}
 
     <!-- grid -->
 {% set x_delta = svg.width|int / (svg.grid.lines|int + 1) %}
@@ -24,7 +24,7 @@
           style="stroke:{{svg.grid.color}};stroke-width:{{svg.grid.width}}" />
 {% endfor %}
 {% endif %}
-{% if svg.border.width|int > 0 %}
+{% if "border" in svg and svg.border.width|int > 0 %}
 
     <!-- border -->
     <line x1="0" y1="0"
