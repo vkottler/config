@@ -30,6 +30,9 @@ renders:
   no_file: true
   dependencies:
   - "compiles-python"
+- name: "python-package.yml"
+  dependencies:
+  - "compiles-python"
 
 groups:
 - name: "python"
@@ -37,3 +40,5 @@ groups:
   - "renders-__init__.py"
   - "renders-setup.py"
   - "renders-entry.py"
+  # fix: https://github.com/vkottler/datazen/issues/28
+  # - "renders-python-package.yml"

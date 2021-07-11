@@ -15,7 +15,18 @@ author_info = {
     "email": "{{python["author_info"]["email"]}}",
     "username": "{{python["author_info"]["username"]}}",
 }
-pkg_info = {"name": PKG_NAME, "version": VERSION, "description": DESCRIPTION}
+pkg_info = {
+    "name": PKG_NAME,
+    "version": VERSION,
+    "description": DESCRIPTION,
+{% if "versions" in python %}
+    "versions": [
+{% for version in python["versions"] %}
+        "{{version}}",
+{% endfor %}
+    ],
+{% endif %}
+}
 setup(
     pkg_info,
     author_info,
