@@ -31,6 +31,7 @@ renders:
   dependencies:
   - "compiles-python"
 - name: "python-package.yml"
+  output_dir: ".github/workflows"
   dependencies:
   - "compiles-python"
 
@@ -40,5 +41,4 @@ groups:
   - "renders-__init__.py"
   - "renders-setup.py"
   - "renders-entry.py"
-  # fix: https://github.com/vkottler/datazen/issues/28
-  # - "renders-python-package.yml"
+  - "renders-python-package.yml"
