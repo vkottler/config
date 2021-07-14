@@ -34,6 +34,7 @@ renders:
 
 groups:
 - name: "python-file-renders"
+  dependencies:
   - "renders-__init__.py"
   - "renders-setup.py"
   - "renders-entry.py"
