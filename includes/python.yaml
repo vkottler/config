@@ -4,9 +4,6 @@ templates:
 schemas:
 - "../schemas"
 
-configs:
-- "../configs"
-
 variables:
 - "../variables"
 
