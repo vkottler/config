@@ -17,6 +17,7 @@ author_info = {
 }
 pkg_info = {
     "name": PKG_NAME,
+    "slug": PKG_NAME.replace("-", "_"),
     "version": VERSION,
     "description": DESCRIPTION,
 {% if "versions" in python %}
