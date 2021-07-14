@@ -7,7 +7,7 @@
 from vmklib.setup import setup
 
 # internal
-from {{package["name"]}} import PKG_NAME, VERSION, DESCRIPTION
+from {{package["name"]|replace("-", "_")}} import PKG_NAME, VERSION, DESCRIPTION
 
 
 author_info = {

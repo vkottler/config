@@ -13,8 +13,8 @@ import sys
 from typing import List
 
 # internal
-from {{package["name"]}} import VERSION, DESCRIPTION
-from {{package["name"]}}.app import entry, add_app_args
+from {{package["name"]|replace("-", "_")}} import VERSION, DESCRIPTION
+from {{package["name"]|replace("-", "_")}}.app import entry, add_app_args
 
 
 def main(argv: List[str] = None) -> int:
