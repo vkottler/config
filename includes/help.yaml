@@ -10,7 +10,7 @@ commands:
   - "python-editable"
   dependencies:
   - "commands-ensure-venv"
-  - "renders-setup.py"
+  - "groups-python-file-renders"
 - name: "help"
   command: "./venv{{python_version}}/bin/{{entry}}"
   force: true

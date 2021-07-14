@@ -33,9 +33,11 @@ renders:
   - "compiles-python"
 
 groups:
-- name: "python"
-  dependencies:
+- name: "python-file-renders"
   - "renders-__init__.py"
   - "renders-setup.py"
   - "renders-entry.py"
+- name: "python"
+  dependencies:
+  - "groups-python-file-renders"
   - "renders-python-package.yml"
