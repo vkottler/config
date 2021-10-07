@@ -22,7 +22,7 @@ commands:
   arguments: ["log", "-n", "1", "--pretty=%ae"]
 
 renders:
-- name: git.yaml
+- name: git.json
   output_dir: "{{git_output}}"
   dependencies:
   - commands-git_hash
@@ -37,7 +37,7 @@ compiles:
   configs:
   - "{{git_output}}"
   dependencies:
-  - "renders-git.yaml"
+  - "renders-git.json"
 
 - name: "release-post-data"
   configs:
@@ -45,4 +45,4 @@ compiles:
   variables:
   - "{{git_output}}"
   dependencies:
-  - "renders-git.yaml"
+  - "renders-git.json"
