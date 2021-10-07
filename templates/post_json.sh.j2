@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e && set -x
-
+{{post["prologue"]}}
 curl \
 	-X POST \
 {% for header in post["headers"] %}
@@ -8,3 +8,4 @@ curl \
 {% endfor %}
 	{{post["protocol"]}}://{{post["uri"]}} \
 	-d '{{post["data"]|tojson}}'
+{{post["epilogue"]}}

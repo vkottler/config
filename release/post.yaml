@@ -1,0 +1,24 @@
+{% set github = global.github %}
+{% set version = global.package %}
+{% set git = global.git %}
+{% set version_string = version.major ~ "." ~ version.minor ~ "." ~ version.patch %}
+{% set version_prefixed = "v" ~ version_string %}
+protocol: https
+prologue: |
+
+  if [ -z "$GITHUB_API_TOKEN" ]; then
+  	echo "Set '\$GITHUB_API_TOKEN'."
+  	exit 1;
+  fi
+
+headers:
+- "Authorization: token $GITHUB_API_TOKEN"
+- "Accept: application/vnd.github.v3+json"
+uri: "api.github.com/repos/{{github.username}}/{{github.repository}}/releases"
+data:
+  tag_name: {{version_prefixed}}
+  name: "{{version_prefixed}} - {{(git.subject|replace(version_string, ''))|trim}}"
+  draft: {{draft}}
+  prerelease: {{prerelease}}
+  target_commitish: {{git.hash}}
+  body: "{{(git.body ~ '\\n\\n' ~ git.author_name ~ ' `<' ~ git.author_email ~ '>`\\n' ~ git.date)|trim}}"
