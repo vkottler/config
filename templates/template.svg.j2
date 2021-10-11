@@ -1,13 +1,26 @@
+{%- block svg_header %}
 <svg version="{{svg.version}}" xmlns="{{svg.xmlns}}"
      viewBox="{{svg.x_offset}} {{svg.y_offset}} {{svg.x_offset|int + svg.width|int}} {{svg.y_offset|int + svg.height|int}}">
+{% endblock svg_header %}
+
+{%- block svg_background %}
 {% if "background" in svg %}
+
     <!-- background -->
     <rect x="{{svg.x_offset}}" y="{{svg.y_offset}}"
           width="{{svg.width}}" height="{{svg.height}}"
           style="fill:{{svg.background.color}}" />
 {% endif %}
+{% endblock svg_background %}
+
+{%- block svg_body %}
+
+    <!-- body -->
 {{svg_content}}
 {{__children__}}
+{% endblock svg_body %}
+
+{%- block svg_grid %}
 {% if "grid" in svg and svg.grid.width|int > 0 %}
 
     <!-- grid -->
@@ -24,6 +37,9 @@
           style="stroke:{{svg.grid.color}};stroke-width:{{svg.grid.width}}" />
 {% endfor %}
 {% endif %}
+{% endblock svg_grid %}
+
+{%- block svg_border %}
 {% if "border" in svg and svg.border.width|int > 0 %}
 
     <!-- border -->
@@ -40,4 +56,8 @@
           x2="{{svg.width}}" y2="{{svg.height}}"
           style="stroke:{{svg.border.color}};stroke-width:{{svg.border.width}}" />
 {% endif %}
+{% endblock svg_border %}
+
+{%- block svg_footer %}
 </svg> 
+{% endblock svg_footer %}
