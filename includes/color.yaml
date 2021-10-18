@@ -1,0 +1,9 @@
+schema_types:
+- ../color/schema_types
+
+compiles:
+- name: colors
+  configs:
+  - "{{config_root}}/color/configs"
+  schemas:
+  - "{{config_root}}/color/schemas"

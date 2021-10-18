@@ -1,0 +1,11 @@
+type: dict
+keysrules:
+  type: string
+  regex: "[a-z_]+"
+valuesrules:
+  type: dict
+  keysrules:
+    type: integer
+  valuesrules:
+    type: string
+    regex: "#[0-9a-fA-F]+"
