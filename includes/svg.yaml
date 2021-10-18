@@ -11,6 +11,9 @@ variables:
 schemas:
 - "../schemas"
 
+schema_types:
+- "../schema_types"
+
 compiles:
 - name: "svg:w{width}:h{height}:"
   override_path: "svg"

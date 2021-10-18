@@ -17,5 +17,7 @@ border:
 {% endif %}
 {% if background %}
 background:
-  color: "{{background.color}}"
+  theme: {{background.theme}}
+  variant: {{background.variant}}
+  hue: {{background.hue}}
 {% endif %}

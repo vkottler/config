@@ -1,0 +1,11 @@
+required: false
+type: dict
+schema:
+  theme:
+    type: string
+    regex: "[a-z_]+"
+  variant:
+    type: string
+    regex: "[a-z_]+"
+  hue:
+    type: integer

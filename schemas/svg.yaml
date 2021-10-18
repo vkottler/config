@@ -14,8 +14,14 @@ background:
   required: false
   type: dict
   schema:
-    color:
+    theme:
       type: string
+      regex: "[a-z_]+"
+    variant:
+      type: string
+      regex: "[a-z_]+"
+    hue:
+      type: integer
 grid:
   required: false
   type: dict
