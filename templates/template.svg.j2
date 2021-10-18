@@ -1,3 +1,4 @@
+{% import __templates__["macros.svg"] as macros %}
 {%- block svg_header %}
 <svg version="{{svg.version}}" xmlns="{{svg.xmlns}}"
      viewBox="{{svg.x_offset}} {{svg.y_offset}} {{svg.x_offset|int + svg.width|int}} {{svg.y_offset|int + svg.height|int}}">
@@ -9,7 +10,7 @@
     <!-- background -->
     <rect x="{{svg.x_offset}}" y="{{svg.y_offset}}"
           width="{{svg.width}}" height="{{svg.height}}"
-          style="fill:{{color[svg.background.theme][svg.background.variant][svg.background.hue]}}" />
+          style="fill:{{macros.get_color(svg.background, color)}}" />
 {% endif %}
 {% endblock svg_background %}
 
