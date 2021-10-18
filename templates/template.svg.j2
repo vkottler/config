@@ -5,7 +5,7 @@
 {% endblock svg_header %}
 
 {%- block svg_background %}
-{% if "background" in svg %}
+{% if "background" in svg and svg.background.enabled|default(false) %}
 
     <!-- background -->
     <rect x="{{svg.x_offset}}" y="{{svg.y_offset}}"

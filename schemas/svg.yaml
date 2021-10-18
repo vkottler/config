@@ -17,11 +17,17 @@ background:
     theme:
       type: string
       regex: "[a-z_]+"
+      required: false
     variant:
       type: string
       regex: "[a-z_]+"
+      required: false
     hue:
       type: integer
+      required: false
+    enabled:
+      type: boolean
+      required: false
 grid:
   required: false
   type: dict
