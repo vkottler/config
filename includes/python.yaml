@@ -1,44 +1,45 @@
+---
 templates:
-- "../templates"
+  - "../templates"
 
 schemas:
-- "../schemas"
+  - "../schemas"
 
 variables:
-- "../variables"
+  - "../variables"
 
 compiles:
-- name: "python"
+  - name: "python"
 
 renders:
-- name: "setup.py"
-  output_dir: "."
-  dependencies:
-  - "compiles-python"
-- name: "entry.py"
-  output_dir: "{{project}}"
-  dependencies:
-  - "compiles-python"
-- name: "__init__.py"
-  output_dir: "{{project}}"
-  dependencies:
-  - "compiles-python"
-- name: "python_readme_header.md"
-  no_file: true
-  dependencies:
-  - "compiles-python"
-- name: "python-package.yml"
-  output_dir: ".github/workflows"
-  dependencies:
-  - "compiles-python"
+  - name: "setup.py"
+    output_dir: "."
+    dependencies:
+      - "compiles-python"
+  - name: "entry.py"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "__init__.py"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "python_readme_header.md"
+    no_file: true
+    dependencies:
+      - "compiles-python"
+  - name: "python-package.yml"
+    output_dir: ".github/workflows"
+    dependencies:
+      - "compiles-python"
 
 groups:
-- name: "python-file-renders"
-  dependencies:
-  - "renders-__init__.py"
-  - "renders-setup.py"
-  - "renders-entry.py"
-- name: "python"
-  dependencies:
-  - "groups-python-file-renders"
-  - "renders-python-package.yml"
+  - name: "python-file-renders"
+    dependencies:
+      - "renders-__init__.py"
+      - "renders-setup.py"
+      - "renders-entry.py"
+  - name: "python"
+    dependencies:
+      - "groups-python-file-renders"
+      - "renders-python-package.yml"

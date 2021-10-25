@@ -1,3 +1,4 @@
+---
 version: "1.0"
 xmlns: http://www.w3.org/2000/svg
 x_offset: {{x_offset|default(0, true)}}

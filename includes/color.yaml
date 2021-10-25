@@ -1,8 +1,9 @@
+---
 compiles:
-- name: colors
-  configs:
-  - "{{config_root}}/color/configs"
-  schemas:
-  - "{{config_root}}/color/schemas"
-  schema_types:
-  - "{{config_root}}/color/schema_types"
+  - name: colors
+    configs:
+      - "{{config_root}}/color/configs"
+    schemas:
+      - "{{config_root}}/color/schemas"
+    schema_types:
+      - "{{config_root}}/color/schema_types"

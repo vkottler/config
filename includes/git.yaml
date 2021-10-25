@@ -1,48 +1,49 @@
+---
 params:
   git_output: local/generated
 
 commands:
-- name: git_hash
-  command: git
-  arguments: ["log", "-n", "1", "--pretty=%H"]
-- name: "git_date_{fmt}"
-  command: git
-  arguments: ["log", "-n", "1", "--pretty=%{fmt}"]
-- name: git_subject
-  command: git
-  arguments: ["log", "-n", "1", "--pretty=%s"]
-- name: git_body
-  command: git
-  arguments: ["log", "-n", "1", "--pretty=%b"]
-- name: git_author_name
-  command: git
-  arguments: ["log", "-n", "1", "--pretty=%an"]
-- name: git_author_email
-  command: git
-  arguments: ["log", "-n", "1", "--pretty=%ae"]
+  - name: git_hash
+    command: git
+    arguments: ["log", "-n", "1", "--pretty=%H"]
+  - name: "git_date_{fmt}"
+    command: git
+    arguments: ["log", "-n", "1", "--pretty=%{fmt}"]
+  - name: git_subject
+    command: git
+    arguments: ["log", "-n", "1", "--pretty=%s"]
+  - name: git_body
+    command: git
+    arguments: ["log", "-n", "1", "--pretty=%b"]
+  - name: git_author_name
+    command: git
+    arguments: ["log", "-n", "1", "--pretty=%an"]
+  - name: git_author_email
+    command: git
+    arguments: ["log", "-n", "1", "--pretty=%ae"]
 
 renders:
-- name: git.json
-  output_dir: "{{git_output}}"
-  dependencies:
-  - commands-git_hash
-  - commands-git_date_cD
-  - commands-git_subject
-  - commands-git_body
-  - commands-git_author_name
-  - commands-git_author_email
+  - name: git.json
+    output_dir: "{{git_output}}"
+    dependencies:
+      - commands-git_hash
+      - commands-git_date_cD
+      - commands-git_subject
+      - commands-git_body
+      - commands-git_author_name
+      - commands-git_author_email
 
 compiles:
-- name: git
-  configs:
-  - "{{git_output}}"
-  dependencies:
-  - "renders-git.json"
+  - name: git
+    configs:
+      - "{{git_output}}"
+    dependencies:
+      - "renders-git.json"
 
-- name: "release-post-data"
-  configs:
-  - "config/release"
-  variables:
-  - "{{git_output}}"
-  dependencies:
-  - "renders-git.json"
+  - name: "release-post-data"
+    configs:
+      - "config/release"
+    variables:
+      - "{{git_output}}"
+    dependencies:
+      - "renders-git.json"

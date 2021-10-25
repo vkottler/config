@@ -1,4 +1,5 @@
-version: 
+---
+version:
   type: string
 xmlns:
   type: string

@@ -1,20 +1,21 @@
+---
 commands:
-- name: "ensure-venv"
-  command: "mk"
-  arguments:
-  - "venv"
-  - "PYTHON_VERSION={{python_version}}"
-- name: "install-local"
-  command: "mk"
-  arguments:
-  - "python-editable"
-  dependencies:
-  - "commands-ensure-venv"
-  - "groups-python-file-renders"
-- name: "help"
-  command: "./venv{{python_version}}/bin/{{entry}}"
-  force: true
-  arguments:
-  - "-h"
-  dependencies:
-  - "commands-install-local"
+  - name: "ensure-venv"
+    command: "mk"
+    arguments:
+      - "venv"
+      - "PYTHON_VERSION={{python_version}}"
+  - name: "install-local"
+    command: "mk"
+    arguments:
+      - "python-editable"
+    dependencies:
+      - "commands-ensure-venv"
+      - "groups-python-file-renders"
+  - name: "help"
+    command: "./venv{{python_version}}/bin/{{entry}}"
+    force: true
+    arguments:
+      - "-h"
+    dependencies:
+      - "commands-install-local"
