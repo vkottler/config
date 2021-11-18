@@ -4,10 +4,13 @@
 """
 
 # third-party
-from vmklib.setup import setup
+try:
+    from vmklib.setup import setup
+except ImportError:
+    from vmklib_bootstrap.setup import setup
 
 # internal
-from {{package["name"]|replace("-", "_")}} import PKG_NAME, VERSION, DESCRIPTION
+from {{package["name"]|replace("-", "_")}} import DESCRIPTION, PKG_NAME, VERSION
 
 
 author_info = {
