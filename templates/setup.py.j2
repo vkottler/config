@@ -3,14 +3,22 @@
 {{package["name"]}} - Package definition for distribution.
 """
 
+{% if "vmklib" not in package["name"] %}
 # third-party
+{% else %}
+# internal
+from {{package["name"]|replace("-", "_")}} import DESCRIPTION, PKG_NAME, VERSION
+
+{% endif %}
 try:
     from vmklib.setup import setup
 except ImportError:
-    from vmklib_bootstrap.setup import setup
+    from vmklib_bootstrap.setup import setup  # type: ignore
+{% if "vmklib" not in package["name"] %}
 
 # internal
 from {{package["name"]|replace("-", "_")}} import DESCRIPTION, PKG_NAME, VERSION
+{% endif %}
 
 
 author_info = {
