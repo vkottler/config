@@ -12,7 +12,7 @@ from {{package["name"]|replace("-", "_")}} import DESCRIPTION, PKG_NAME, VERSION
 {% endif %}
 try:
     from vmklib.setup import setup
-except ImportError:
+except (ImportError, ModuleNotFoundError):
     from vmklib_bootstrap.setup import setup  # type: ignore
 {% if "vmklib" not in package["name"] %}
 
