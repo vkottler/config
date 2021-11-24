@@ -3,11 +3,11 @@
 {{package["name"]}} - Package definition for distribution.
 """
 
+{% set pkg_slug = package["name"]|replace("-", "_") %}
 {% if "vmklib" not in package["name"] %}
 # third-party
 {% else %}
 # internal
-{% set pkg_slug = package["name"]|replace("-", "_") %}
 from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
 
 {% endif %}
