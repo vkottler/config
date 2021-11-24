@@ -7,17 +7,18 @@
 # third-party
 {% else %}
 # internal
-from {{package["name"]|replace("-", "_")}} import DESCRIPTION, PKG_NAME, VERSION
+{% set pkg_slug = package["name"]|replace("-", "_") %}
+from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
 
 {% endif %}
 try:
     from vmklib.setup import setup
 except (ImportError, ModuleNotFoundError):
-    from vmklib_bootstrap.setup import setup  # type: ignore
+    from {{pkg_slug}}_bootstrap.setup import setup  # type: ignore
 {% if "vmklib" not in package["name"] %}
 
 # internal
-from {{package["name"]|replace("-", "_")}} import DESCRIPTION, PKG_NAME, VERSION
+from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
 {% endif %}
 
 author_info = {
