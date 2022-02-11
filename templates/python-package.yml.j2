@@ -16,10 +16,10 @@ jobs:
         python-version:
 {% if "versions" in python %}
 {% for version in python["versions"] %}
-          - {{version}}
+          - "{{version}}"
 {% endfor %}
 {% else %}
-          - 3.9
+          - "3.9"
 {% endif %}
 
     steps:
