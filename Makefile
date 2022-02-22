@@ -19,7 +19,7 @@ LINT_TARGETS := $(YAML_PREFIX)lint-color \
                 $(YAML_PREFIX)lint-variables
 
 lint: $(LINT_TARGETS)
-	-yamllint $($(PROJ)_DIR)/configs
-	-yamllint $($(PROJ)_DIR)/release
+	-$(PYTHON_BIN)/yamllint $($(PROJ)_DIR)/configs
+	-$(PYTHON_BIN)/yamllint $($(PROJ)_DIR)/release
 
 all: lint
