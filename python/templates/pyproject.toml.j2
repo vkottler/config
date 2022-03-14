@@ -1,6 +1,11 @@
 {% set pkg_slug = package["name"]|replace("-", "_") %}
+{% if "vmklib" in pkg_slug %}
 [build-system]
 requires = ["setuptools", "wheel"]
+{% else %}
+[build-system]
+requires = ["vmklib", "wheel"]
+{% endif %}
 
 [project]
 {% if "pypi_name" in package %}
