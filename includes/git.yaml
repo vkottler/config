@@ -2,6 +2,9 @@
 params:
   git_output: local/generated
 
+templates:
+  - "../templates"
+
 commands:
   - name: git_hash
     command: git
