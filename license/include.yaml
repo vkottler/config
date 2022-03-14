@@ -1,0 +1,24 @@
+---
+templates:
+  - templates
+
+schemas:
+  - schemas
+
+configs:
+  - configs
+
+compiles:
+  - name: license
+
+renders:
+  - name: LICENSE
+    key: LICENSE_MIT
+    output_dir: "."
+    dependencies:
+      - compiles-license
+
+groups:
+  - name: license
+    dependencies:
+      - renders-LICENSE

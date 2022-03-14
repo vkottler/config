@@ -31,7 +31,7 @@ pkg_info = {
     "slug": PKG_NAME.replace("-", "_"),
     "version": VERSION,
     "description": DESCRIPTION,
-{% if "versions" in python %}
+{% if "versions" in python and python["versions"] %}
     "versions": [
 {% for version in python["versions"] %}
         "{{version}}",

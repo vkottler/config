@@ -1,0 +1,65 @@
+---
+templates:
+  - templates
+
+schemas:
+  - schemas
+
+configs:
+  - configs
+
+compiles:
+  - name: python
+
+renders:
+  - name: "setup.py"
+    output_dir: "."
+    dependencies:
+      - "compiles-python"
+  - name: "pyproject.toml"
+    output_dir: "."
+    dependencies:
+      - "compiles-python"
+  - name: "entry.py"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "__init__.py"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "__main__.py"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "requirements.txt"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "dev_requirements.txt"
+    output_dir: "{{project}}"
+    dependencies:
+      - "compiles-python"
+  - name: "python_readme_header.md"
+    no_file: true
+    dependencies:
+      - "compiles-python"
+  - name: "python-package.yml"
+    output_dir: ".github/workflows"
+    dependencies:
+      - "compiles-python"
+
+groups:
+  - name: "python-file-renders"
+    dependencies:
+      - "renders-__init__.py"
+      - "renders-__main__.py"
+      - "renders-pyproject.toml"
+      - "renders-setup.py"
+      - "renders-entry.py"
+      - "renders-requirements.txt"
+      - "renders-dev_requirements.txt"
+  - name: "python"
+    dependencies:
+      - "groups-python-file-renders"
+      - "renders-python-package.yml"

@@ -1,0 +1,51 @@
+---
+# Package parameters.
+name:
+  type: string
+pypi_name:
+  type: string
+  required: false
+version:
+  type: string
+description:
+  type: string
+entry:
+  type: string
+  required: false
+setup_args:
+  type: list
+  schema:
+    type: string
+  required: false
+keywords:
+  type: list
+  schema:
+    type: string
+  required: false
+
+# See: https://peps.python.org/pep-0508/
+requirements:
+  type: list
+  schema:
+    type: string
+  required: false
+dev_requirements:
+  type: list
+  schema:
+    type: string
+  required: false
+
+# See: https://pypi.org/classifiers/
+classifiers:
+  type: list
+  schema:
+    type: string
+  required: false
+
+# Code-generation options.
+init_local:
+  type: string
+  required: false
+no_chdir_arg:
+  type: boolean
+  required: false

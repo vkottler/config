@@ -1,0 +1,63 @@
+{% set pkg_slug = package["name"]|replace("-", "_") %}
+[build-system]
+requires = ["setuptools", "wheel"]
+
+[project]
+{% if "pypi_name" in package %}
+name = "{{package["pypi_name"]}}"
+{% else %}
+name = "{{package["name"]}}"
+{% endif%}
+version = "{{package["version"]}}"
+description = "{{package["description"]}}"
+readme = "README.md"
+{% if "versions" in python and python["versions"] %}
+requires-python = ">={{python["versions"][0]}}"
+{% endif %}
+{% if "keywords" in package and package["keywords"] %}
+license = {file = "LICENSE"}
+keywords = [
+{% for keyword in package["keywords"] %}
+  "{{keyword}}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+]
+{% endif %}
+authors = [
+  {name = "{{python["author_info"]["name"]}}", email = "{{python["author_info"]["email"]}}"}
+]
+maintainers = [
+  {name = "{{python["author_info"]["name"]}}", email = "{{python["author_info"]["email"]}}"}
+]
+classifiers = [
+{% for classifier in package["classifiers"] %}
+  "{{classifier}}",
+{% endfor %}
+{% if "versions" in python and python["versions"] %}
+{% for version in python["versions"] %}
+  "Programming Language :: Python :: {{version}}",
+{% endfor %}
+{% endif %}
+  "License :: OSI Approved :: MIT License"
+]
+{% if "requirements" in package and package["requirements"] %}
+dependencies = [
+{% for dep in package["requirements"] %}
+  "{{dep}}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+]
+{% endif %}
+{% if "dev_requirements" in package and package["dev_requirements"] %}
+
+[project.optional-dependencies]
+test = [
+{% for dep in package["dev_requirements"] %}
+  "{{dep}}"{% if not loop.last %},{% endif %}
+
+{% endfor %}
+]
+{% endif %}
+
+[project.scripts]
+{{package["entry"]|default(package["name"], true)}} = "{{pkg_slug}}.entry:main"

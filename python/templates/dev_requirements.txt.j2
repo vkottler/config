@@ -1,0 +1,5 @@
+{% if "dev_requirements" in package and package["dev_requirements"] %}
+{% for dev_requirement in package["dev_requirements"] %}
+{{dev_requirement}}
+{% endfor %}
+{% endif %}
