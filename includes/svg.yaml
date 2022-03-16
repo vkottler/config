@@ -7,7 +7,7 @@ configs:
 
 variables:
   - "../variables"
-  - "../colors"
+  - "../color/configs"
 
 schemas:
   - "../schemas"
