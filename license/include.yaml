@@ -2,14 +2,12 @@
 templates:
   - templates
 
-schemas:
-  - schemas
-
-configs:
-  - configs
-
 compiles:
   - name: license
+    configs:
+      - configs
+    schemas:
+      - schemas
 
 renders:
   - name: LICENSE

@@ -1,15 +1,16 @@
 ---
+includes:
+  - help.yaml
+
 templates:
   - templates
 
-schemas:
-  - schemas
-
-configs:
-  - configs
-
 compiles:
   - name: python
+    schemas:
+      - schemas
+    configs:
+      - configs
 
 renders:
   - name: "setup.py"
