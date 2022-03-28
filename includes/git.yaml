@@ -39,14 +39,14 @@ renders:
 compiles:
   - name: git
     configs:
-      - "{{git_output}}"
+      - "../../{{git_output}}"
     dependencies:
       - "renders-git.json"
 
   - name: "release-post-data"
     configs:
-      - "config/release"
+      - "../release"
     variables:
-      - "{{git_output}}"
+      - "../../{{git_output}}"
     dependencies:
       - "renders-git.json"
