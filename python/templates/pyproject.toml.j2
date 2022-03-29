@@ -1,10 +1,10 @@
 {% set pkg_slug = package["name"]|replace("-", "_") %}
 {% if "vmklib" in pkg_slug %}
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools", "wheel", "trove-classifiers"]
 {% else %}
 [build-system]
-requires = ["vmklib", "wheel"]
+requires = ["vmklib", "wheel", "trove-classifiers"]
 {% endif %}
 
 [project]
