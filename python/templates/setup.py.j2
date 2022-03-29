@@ -3,46 +3,7 @@
 {{package["name"]}} - Package definition for distribution.
 """
 
-{% set pkg_slug = package["name"]|replace("-", "_") %}
-{% if "vmklib" not in package["name"] %}
 # third-party
-{% else %}
-# internal
-from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
+from setuptools import setup
 
-{% endif %}
-try:
-    from vmklib.setup import setup
-except (ImportError, ModuleNotFoundError):
-    from {{pkg_slug}}_bootstrap.setup import setup  # type: ignore
-{% if "vmklib" not in package["name"] %}
-
-# internal
-from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
-{% endif %}
-
-author_info = {
-    "name": "{{python["author_info"]["name"]}}",
-    "email": "{{python["author_info"]["email"]}}",
-    "username": "{{python["author_info"]["username"]}}",
-}
-pkg_info = {
-    "name": PKG_NAME,
-    "slug": PKG_NAME.replace("-", "_"),
-    "version": VERSION,
-    "description": DESCRIPTION,
-{% if "versions" in python and python["versions"] %}
-    "versions": [
-{% for version in python["versions"] %}
-        "{{version}}",
-{% endfor %}
-    ],
-{% endif %}
-}
-setup(
-    pkg_info,
-    author_info,
-{% for arg in package["setup_args"] %}
-    {{arg}},
-{% endfor %}
-)
+setup()

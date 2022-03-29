@@ -1,0 +1,37 @@
+{% set pkg_slug = package["name"]|replace("-", "_") %}
+[metadata]
+{% if "pypi_name" in package %}
+name = {{package["pypi_name"]}}
+{% else %}
+name = {{package["name"]}}
+{% endif%}
+description = {{package["description"]}}
+version = attr: {{pkg_slug}}.VERSION
+long_description = file: README.md
+long_description_content_type = text/markdown
+{% if "keywords" in package and package["keywords"] %}
+keywords = {{package["keywords"]|join(", ")}}
+{% endif %}
+license = MIT
+license_file = LICENSE
+classifiers =
+    License :: OSI Approved :: MIT License
+{% for version in python["versions"] %}
+    Programming Language :: Python :: {{version}}
+{% endfor %}
+{% for classifier in package["classifiers"] %}
+    {{classifier}}
+{% endfor %}
+
+[options]
+include_package_data = True
+packages = find:
+{% if "requirements" in package and package["requirements"] %}
+install_requires =
+{% for dep in package["requirements"] %}
+    {{dep}}
+{% endfor %}
+{% endif %}
+{% if "versions" in python and python["versions"] %}
+python_requires = >={{python["versions"][0]}}
+{% endif %}

@@ -13,6 +13,10 @@ compiles:
       - configs
 
 renders:
+  - name: "setup.cfg"
+    output_dir: "."
+    dependencies:
+      - "compiles-python"
   - name: "setup.py"
     output_dir: "."
     dependencies:
@@ -56,6 +60,7 @@ groups:
       - "renders-__init__.py"
       - "renders-__main__.py"
       - "renders-pyproject.toml"
+      - "renders-setup.cfg"
       - "renders-setup.py"
       - "renders-entry.py"
       - "renders-requirements.txt"

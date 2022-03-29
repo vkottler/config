@@ -7,3 +7,4 @@ dev_requirements:
   - mypy
   - black
   - isort
+  - types-setuptools
