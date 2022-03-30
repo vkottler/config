@@ -11,7 +11,8 @@ commands:
       - "python-editable"
     dependencies:
       - "commands-ensure-venv"
-      - "groups-python-file-renders"
+      - "groups-python-package-renders"
+      - "groups-python-cli-renders"
   - name: "help"
     command: "./venv{{python_version}}/bin/{{entry}}"
     force: true

@@ -51,16 +51,23 @@ renders:
       - "compiles-python"
 
 groups:
-  - name: "python-file-renders"
+  - name: "python-package-renders"
     dependencies:
       - "renders-__init__.py"
-      - "renders-__main__.py"
       - "renders-pyproject.toml"
       - "renders-setup.py"
-      - "renders-entry.py"
       - "renders-requirements.txt"
       - "renders-dev_requirements.txt"
+  - name: "python-cli-renders"
+    dependencies:
+      - "renders-__main__.py"
+      - "renders-entry.py"
   - name: "python"
     dependencies:
-      - "groups-python-file-renders"
+      - "groups-python-package-renders"
+      - "groups-python-cli-renders"
+      - "renders-python-package.yml"
+  - name: "python-no-cli"
+    dependencies:
+      - "groups-python-package-renders"
       - "renders-python-package.yml"
