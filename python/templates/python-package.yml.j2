@@ -1,5 +1,5 @@
 ---
-name: Python package
+name: Python Package
 
 on:
   push:
@@ -19,37 +19,49 @@ jobs:
           - "{{version}}"
 {% endfor %}
 {% else %}
-          - "3.9"
+          - "{{python["default_version"]}}"
 {% endif %}
-
+    env:
+      PYTHON_VERSION: ${{"{{matrix.python-version}}"}}
     steps:
       - uses: actions/checkout@master
         with:
           submodules: recursive
-      - name: python${{'{{matrix.python-version}}'}} setup
-        uses: actions/setup-python@v2
+
+      - name: python${{"{{matrix.python-version}}"}} setup
+        uses: actions/setup-python@main
         with:
-          python-version: ${{'{{matrix.python-version}}'}}
+          python-version: ${{"{{matrix.python-version}}"}}
+          cache: pip
+
       - name: install-mk
         run: |
-          pip${{'{{matrix.python-version}}'}} install vmklib
-      - name: venv
+          pip${{"{{matrix.python-version}}"}} install vmklib
+
+      - run: mk venv
+      - run: mk python-sa-types
+
+      - name: lint and build
         run: |
-          mk PYTHON_VERSION=${{'{{matrix.python-version}}'}} venv
-      - name: lint
-        run: |
-          mk PYTHON_VERSION=${{'{{matrix.python-version}}'}} python-lint yaml
-      - name: sa-types
-        run: |
-          mk PYTHON_VERSION=${{'{{matrix.python-version}}'}} python-sa-types
+          mk -- -j python-lint yaml python-build
+
       - name: sa
+        env:
+          PY_LINT_EXTRA_ARGS: --no-incremental
         run: |
-          mk PYTHON_VERSION=${{'{{matrix.python-version}}'}} python-sa PY_LINT_EXTRA_ARGS="--no-incremental"
-      - name: build
-        run: |
-          mk PYTHON_VERSION=${{'{{matrix.python-version}}'}} python-build
+          mk PY_LINT_EXTRA_ARGS="--no-incremental" python-sa
+
       - name: test
+        env:
+          PYTEST_EXTRA_ARGS: --cov-report=xml
         run: |
-          mk PYTHON_VERSION=${{'{{matrix.python-version}}'}} python-test PYTEST_EXTRA_ARGS="--cov-report=xml"
+          mk PYTEST_EXTRA_ARGS="--cov-report=xml" python-test
+
       - name: test-upload
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@master
+        if: ${{"{{matrix.python-version == '"}}{{python["default_version"]}}{{"'}}"}}
+
+      - name: package-upload
+        run: |
+          echo "TODO"
+        if: ${{"{{matrix.python-version == '"}}{{python["default_version"]}}{{"'}}"}}
