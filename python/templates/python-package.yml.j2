@@ -34,9 +34,7 @@ jobs:
           python-version: ${{"{{matrix.python-version}}"}}
           cache: pip
 
-      - name: install-mk
-        run: |
-          pip${{"{{matrix.python-version}}"}} install vmklib
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib
 
       - run: mk venv
       - run: mk python-sa-types
@@ -57,9 +55,7 @@ jobs:
         run: |
           mk PYTEST_EXTRA_ARGS="--cov-report=xml" python-test
 
-      - name: test-upload
-        uses: codecov/codecov-action@master
-        if: ${{"{{matrix.python-version == '"}}{{python["default_version"]}}{{"'}}"}}
+      - uses: codecov/codecov-action@master
 
       - name: package-upload
         run: |
