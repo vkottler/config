@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  SECRETHUB_CREDENTIAL: ${{"{{secrets.SECRETHUB_CREDENTIAL}}"}}
+
 jobs:
   build:
 
@@ -40,24 +43,29 @@ jobs:
       - run: mk python-sa-types
 
       - name: lint and build
-        run: |
-          mk -- -j python-lint yaml python-build
+        run: mk -- -j python-lint yaml python-build
 
-      - name: sa
+      - run: mk python-sa
         env:
           PY_LINT_EXTRA_ARGS: --no-incremental
-        run: |
-          mk PY_LINT_EXTRA_ARGS="--no-incremental" python-sa
 
-      - name: test
+      - run: mk python-test
         env:
           PYTEST_EXTRA_ARGS: --cov-report=xml
-        run: |
-          mk PYTEST_EXTRA_ARGS="--cov-report=xml" python-test
 
       - uses: codecov/codecov-action@master
 
-      - name: package-upload
-        run: |
-          echo "TODO"
-        if: ${{"{{matrix.python-version == '"}}{{python["default_version"]}}{{"'}}"}}
+      - uses: secrethub/actions/env-export@master
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: secrethub://{{python["author_info"]["username"]}}/pypi/api-keys/personal-upload
+        if: |
+          matrix.python-version == '{{python["default_version"]}}'
+          && env.SECRETHUB_CREDENTIAL != ''
+          && github.ref_name == 'master'
+
+      - run: mk pypi-upload-ci
+        if: |
+          matrix.python-version == '{{python["default_version"]}}'
+          && env.SECRETHUB_CREDENTIAL != ''
+          && github.ref_name == 'master'
