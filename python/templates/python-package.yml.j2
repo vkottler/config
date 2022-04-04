@@ -57,7 +57,6 @@ jobs:
 
       - uses: secrethub/actions/env-export@master
         env:
-          TWINE_USERNAME: __token__
           TWINE_PASSWORD: secrethub://{{python["author_info"]["username"]}}/pypi/api-keys/personal-upload
         if: |
           matrix.python-version == '{{python["default_version"]}}'
@@ -65,6 +64,8 @@ jobs:
           && github.ref_name == 'master'
 
       - run: mk pypi-upload-ci
+        env:
+          TWINE_USERNAME: __token__
         if: |
           matrix.python-version == '{{python["default_version"]}}'
           && env.SECRETHUB_CREDENTIAL != ''
