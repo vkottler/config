@@ -43,7 +43,7 @@ jobs:
       - run: mk python-sa-types
 
       - name: lint and build
-        run: mk -- -j python-lint yaml python-build
+        run: mk -- -j python-lint yaml python-build-once
 
       - run: mk python-sa
         env:
