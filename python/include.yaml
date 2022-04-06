@@ -19,6 +19,8 @@ commands:
     arguments:
       - python-deps
       - "PYTHON_VERSION={{python_version}}"
+    dependencies:
+      - groups-python-package-renders
 
 renders:
   - name: pyproject.toml
