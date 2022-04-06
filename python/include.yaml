@@ -12,62 +12,78 @@ compiles:
     configs:
       - configs
 
+commands:
+  - name: pydeps
+    command: mk
+    force: true
+    arguments:
+      - python-deps
+      - "PYTHON_VERSION={{python_version}}"
+
 renders:
-  - name: "setup.py"
+  - name: pyproject.toml
     output_dir: "."
     dependencies:
-      - "compiles-python"
-  - name: "pyproject.toml"
-    output_dir: "."
-    dependencies:
-      - "compiles-python"
-  - name: "entry.py"
-    output_dir: "{{project}}"
-    dependencies:
-      - "compiles-python"
-  - name: "__init__.py"
-    output_dir: "{{project}}"
-    dependencies:
-      - "compiles-python"
-  - name: "__main__.py"
-    output_dir: "{{project}}"
-    dependencies:
-      - "compiles-python"
-  - name: "requirements.txt"
-    output_dir: "{{project}}"
-    dependencies:
-      - "compiles-python"
-  - name: "dev_requirements.txt"
-    output_dir: "{{project}}"
-    dependencies:
-      - "compiles-python"
-  - name: "python_readme_header.md"
-    no_file: true
-    dependencies:
-      - "compiles-python"
-  - name: "python-package.yml"
+      - compiles-python
+  - name: python-package.yml
     output_dir: ".github/workflows"
     dependencies:
-      - "compiles-python"
+      - compiles-python
+
+  - name: setup.py
+    output_dir: "."
+    dependencies:
+      - compiles-python
+  - name: entry.py
+    output_dir: "{{project}}"
+    dependencies:
+      - compiles-python
+  - name: __init__.py
+    output_dir: "{{project}}"
+    dependencies:
+      - compiles-python
+  - name: __main__.py
+    output_dir: "{{project}}"
+    dependencies:
+      - compiles-python
+
+  - name: requirements.txt
+    output_dir: "{{project}}"
+    dependencies:
+      - compiles-python
+  - name: dev_requirements.txt
+    output_dir: "{{project}}"
+    dependencies:
+      - compiles-python
+
+  - name: python_readme_header.md
+    no_file: true
+    dependencies:
+      - compiles-python
+  - name: python_readme_dep_graph.md
+    no_file: true
+    dependencies:
+      - compiles-python
+      - commands-pydeps
 
 groups:
-  - name: "python-package-renders"
+  - name: python-package-renders
     dependencies:
-      - "renders-__init__.py"
-      - "renders-pyproject.toml"
-      - "renders-setup.py"
-      - "renders-requirements.txt"
-      - "renders-dev_requirements.txt"
-  - name: "python-cli-renders"
+      - renders-__init__.py
+      - renders-pyproject.toml
+      - renders-setup.py
+      - renders-requirements.txt
+      - renders-dev_requirements.txt
+  - name: python-cli-renders
     dependencies:
-      - "renders-__main__.py"
-      - "renders-entry.py"
-  - name: "python"
+      - renders-__main__.py
+      - renders-entry.py
+  - name: python
     dependencies:
-      - "groups-python-package-renders"
-      - "groups-python-cli-renders"
-      - "renders-python-package.yml"
-  - name: "python-no-cli"
+      - groups-python-package-renders
+      - groups-python-cli-renders
+      - renders-python-package.yml
+  - name: python-no-cli
     dependencies:
-      - "groups-python-package-renders"
-      - "renders-python-package.yml"
+      - groups-python-package-renders
+      - renders-python-package.yml
