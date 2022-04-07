@@ -4,7 +4,7 @@
 """
 
 {% set pkg_slug = package["name"]|replace("-", "_") %}
-{% if "vmklib" not in package["name"] %}
+{% if "setuptools-wrapper" not in package["name"] %}
 # third-party
 {% else %}
 # internal
@@ -12,10 +12,10 @@ from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
 
 {% endif %}
 try:
-    from vmklib.setup import setup
+    from setuptools_wrapper.setup import setup
 except (ImportError, ModuleNotFoundError):
     from {{pkg_slug}}_bootstrap.setup import setup  # type: ignore
-{% if "vmklib" not in package["name"] %}
+{% if "setuptools-wrapper" not in package["name"] %}
 
 # internal
 from {{pkg_slug}} import DESCRIPTION, PKG_NAME, VERSION
