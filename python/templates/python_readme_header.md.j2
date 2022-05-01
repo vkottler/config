@@ -1,3 +1,4 @@
+{% set pkg_slug = package["name"]|replace("-", "_") %}
 # {{package["name"]}} ([{{package["version"]}}](https://pypi.org/project/{{package["name"]}}/))
 
 [![python](https://img.shields.io/pypi/pyversions/{{package["name"]}}.svg)](https://pypi.org/project/{{package["name"]}}/)
@@ -5,3 +6,6 @@
 [![codecov](https://codecov.io/gh/{{python["author_info"]["username"]}}/{{package["name"]}}/branch/master/graphs/badge.svg?branch=master)](https://codecov.io/github/{{python["author_info"]["username"]}}/{{package["name"]}})
 
 *{{package["description"]}}*
+
+See also: [generated documentation](https://{{python["author_info"]["username"]}}.github.io/python/pydoc/{{pkg_slug}}.html)
+(created with [`pydoc`](https://docs.python.org/3/library/pydoc.html)).
