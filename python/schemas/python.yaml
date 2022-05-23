@@ -8,8 +8,15 @@ author_info:
       type: string
     username:
       type: string
+
 default_version:
   type: string
+
+systems:
+  type: list
+  schema:
+    type: string
+
 versions:
   required: false
   type: list

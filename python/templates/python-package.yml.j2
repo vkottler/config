@@ -13,7 +13,7 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ${{"{{matrix.system}}"}}
     strategy:
       matrix:
         python-version:
@@ -24,6 +24,10 @@ jobs:
 {% else %}
           - "{{python["default_version"]}}"
 {% endif %}
+        system:
+{% for system in python["systems"] %}
+          - {{system}}
+{% endfor %}
     env:
       PYTHON_VERSION: ${{"{{matrix.python-version}}"}}
     steps:
@@ -60,6 +64,7 @@ jobs:
           TWINE_PASSWORD: secrethub://{{python["author_info"]["username"]}}/pypi/api-keys/personal-upload
         if: |
           matrix.python-version == '{{python["default_version"]}}'
+          && matrix.system == 'ubuntu-latest'
           && env.SECRETHUB_CREDENTIAL != ''
           && github.ref_name == 'master'
 
@@ -68,5 +73,6 @@ jobs:
           TWINE_USERNAME: __token__
         if: |
           matrix.python-version == '{{python["default_version"]}}'
+          && matrix.system == 'ubuntu-latest'
           && env.SECRETHUB_CREDENTIAL != ''
           && github.ref_name == 'master'
