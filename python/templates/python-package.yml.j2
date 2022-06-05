@@ -43,8 +43,7 @@ jobs:
 
       - run: pip${{"{{matrix.python-version}}"}} install vmklib
 
-      - run: mk venv
-      - run: mk python-sa-types
+      - run: mk venv python-install-yamllint python-sa-types
 
       - name: lint and build
         run: mk python-lint python-sa yaml python-build-once
