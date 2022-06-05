@@ -42,6 +42,16 @@ classifiers = [
 {% for version in python["versions"] %}
   "Programming Language :: Python :: {{version}}",
 {% endfor %}
+{% if "windows-latest" in python["systems"] %}
+  "Operating System :: Microsoft :: Windows",
+{% endif %}
+{% if "macos-latest" in python["systems"] %}
+  "Operating System :: MacOS",
+{% endif %}
+{% if "ubuntu-latest" in python["systems"] %}
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Unix",
+{% endif %}
 {% endif %}
   "License :: OSI Approved :: MIT License"
 ]
