@@ -9,6 +9,8 @@ version:
   type: string
 description:
   type: string
+status:
+  type: string
 entry:
   type: string
   required: false

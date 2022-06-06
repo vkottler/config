@@ -4,8 +4,32 @@
 [![python](https://img.shields.io/pypi/pyversions/{{package["name"]}}.svg)](https://pypi.org/project/{{package["name"]}}/)
 ![Build Status](https://github.com/{{python["author_info"]["username"]}}/{{package["name"]}}/workflows/Python%20Package/badge.svg)
 [![codecov](https://codecov.io/gh/{{python["author_info"]["username"]}}/{{package["name"]}}/branch/master/graphs/badge.svg?branch=master)](https://codecov.io/github/{{python["author_info"]["username"]}}/{{package["name"]}})
+![PyPI - Status](https://img.shields.io/pypi/status/{{package["name"]}})
+![Dependents (via libraries.io)](https://img.shields.io/librariesio/dependents/pypi/{{package["name"]}})
 
 *{{package["description"]}}*
 
 See also: [generated documentation](https://{{python["author_info"]["username"]}}.github.io/python/pydoc/{{pkg_slug}}.html)
 (created with [`pydoc`](https://docs.python.org/3/library/pydoc.html)).
+{% if "versions" in python %}
+
+## Python Version Support
+
+This package is tested with the following Python minor versions:
+
+{% for version in python["versions"] %}
+* [`python{{version}}`](https://docs.python.org/{{version}}/)
+{% endfor %}
+{% endif %}
+{% if "systems" in python %}
+
+## Platform Support
+
+This package is tested on the following platforms:
+
+{% for system in python["systems"] %}
+* `{{system}}`
+{% endfor %}
+{% endif %}
+
+# Introduction

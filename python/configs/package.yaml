@@ -7,3 +7,5 @@ dev_requirements:
   - mypy
   - black
   - isort
+
+status: 5 - Production/Stable
