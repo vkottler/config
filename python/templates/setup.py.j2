@@ -42,7 +42,7 @@ pkg_info = {
 setup(
     pkg_info,
     author_info,
-{% for arg in package["setup_args"] %}
+{% for arg in package["setup_args"]|default([]) %}
     {{arg}},
 {% endfor %}
 )

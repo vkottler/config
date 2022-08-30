@@ -36,7 +36,7 @@ maintainers = [
   {name = "{{python["author_info"]["name"]}}", email = "{{python["author_info"]["email"]}}"}
 ]
 classifiers = [
-{% for classifier in package["classifiers"] %}
+{% for classifier in package["classifiers"]|default([]) %}
   "{{classifier}}",
 {% endfor %}
 {% if "versions" in python and python["versions"] %}
