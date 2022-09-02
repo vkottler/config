@@ -10,4 +10,6 @@ PKG_NAME = "{{package["pypi_name"]}}"
 PKG_NAME = "{{package["name"]}}"
 {% endif%}
 VERSION = "{{package["version"]}}"
+{% if "init_local" in package %}
 {{package["init_local"]}}
+{% endif %}
