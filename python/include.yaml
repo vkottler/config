@@ -11,6 +11,8 @@ compiles:
       - schemas
     configs:
       - configs
+    dependencies:
+      - compiles-local
 
 commands:
   - name: pydeps

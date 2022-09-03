@@ -1,0 +1,19 @@
+---
+compiles:
+  - name: funding
+    configs:
+      - configs
+    schemas: []
+
+renders:
+  - name: FUNDING.yml
+    output_dir: ".github"
+    dependencies:
+      - compiles-funding
+    templates:
+      - templates
+
+groups:
+  - name: funding
+    dependencies:
+      - renders-FUNDING.yml
