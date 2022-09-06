@@ -1,0 +1,20 @@
+---
+default_dirs: false
+
+compiles:
+  - name: funding
+    configs:
+      - configs
+
+renders:
+  - name: FUNDING.yml
+    output_dir: ".github"
+    dependencies:
+      - compiles-funding
+    templates:
+      - templates
+
+groups:
+  - name: funding
+    dependencies:
+      - renders-FUNDING.yml
