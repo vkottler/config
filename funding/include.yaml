@@ -1,9 +1,10 @@
 ---
+default_dirs: false
+
 compiles:
   - name: funding
     configs:
       - configs
-    schemas: []
 
 renders:
   - name: FUNDING.yml

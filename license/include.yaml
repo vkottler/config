@@ -1,4 +1,6 @@
 ---
+default_dirs: false
+
 templates:
   - templates
 
@@ -8,6 +10,9 @@ compiles:
       - configs
     schemas:
       - schemas
+    merge_deps: true
+    dependencies:
+      - compiles-local
 
 renders:
   - name: LICENSE
