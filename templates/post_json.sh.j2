@@ -8,4 +8,6 @@ curl \
 {% endfor %}
 	{{post["protocol"]}}://{{post["uri"]}} \
 	-d '{{post["data"]|tojson}}'
+{% if "epilogue" in post %}
 {{post["epilogue"]}}
+{% endif %}
