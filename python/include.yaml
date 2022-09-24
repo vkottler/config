@@ -31,6 +31,10 @@ renders:
     output_dir: "."
     dependencies:
       - compiles-python
+  - name: mypy.ini
+    output_dir: "."
+    dependencies:
+      - compiles-python
   - name: python-package.yml
     output_dir: ".github/workflows"
     dependencies:
@@ -77,6 +81,7 @@ groups:
     dependencies:
       - renders-__init__.py
       - renders-pyproject.toml
+      - renders-mypy.ini
       - renders-setup.py
       - renders-requirements.txt
       - renders-dev_requirements.txt

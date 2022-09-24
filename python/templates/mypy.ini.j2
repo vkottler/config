@@ -1,0 +1,19 @@
+[mypy]
+strict = True
+
+no_implicit_optional = False
+disallow_incomplete_defs = False
+disallow_untyped_defs = False
+
+[mypy-setup]
+warn_unused_ignores = False
+
+[mypy-tests.*]
+strict = False
+disallow_any_generics = False
+strict_equality = False
+{% if "mypy_local" in package %}
+
+# {{package["name"]}}-specific configurations.
+{{package["mypy_local"]}}
+{% endif %}

@@ -51,3 +51,8 @@ init_local:
 no_chdir_arg:
   type: boolean
   required: false
+
+# Project-specific configurations.
+mypy_local:
+  type: string
+  required: false
