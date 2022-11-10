@@ -79,7 +79,7 @@ def main(argv: List[str] = None) -> int:
         result = entry(args)
     except SystemExit as exc:
         result = 1
-        if exc.code is not None:
+        if exc.code is not None and isinstance(exc.code, int):
             result = exc.code
 
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
