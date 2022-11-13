@@ -62,8 +62,8 @@ dependencies = [
 {% for dep in package["requirements"] %}
 {% if ";" not in dep %}
   "{{dep}}"{% if not loop.last %},{% endif %}
-{% endif %}
 
+{% endif %}
 {% endfor %}
 ]
 {% endif %}
