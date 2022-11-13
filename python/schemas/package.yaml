@@ -56,3 +56,15 @@ no_chdir_arg:
 mypy_local:
   type: string
   required: false
+
+# Project-specific command-line commands.
+commands:
+  type: list
+  required: false
+  schema:
+    type: dict
+    schema:
+      name:
+        type: string
+      description:
+        type: string

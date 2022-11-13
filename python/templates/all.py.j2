@@ -1,0 +1,36 @@
+
+"""
+A module aggregating package commands.
+"""
+
+# built-in
+from typing import List as _List
+from typing import Tuple as _Tuple
+
+# third-party
+from vcorelib.args import CommandRegister as _CommandRegister
+{% if "commands" in package and package["commands"] %}
+
+# internal
+{% set pkg_slug = package["name"]|replace("-", "_") %}
+{% for command in package["commands"] %}
+from {{pkg_slug}}.commands.{{command["name"]}} import add_{{command["name"]}}_cmd
+{% endfor %}
+{% endif %}
+
+
+def commands() -> _List[_Tuple[str, str, _CommandRegister]]:
+    """Get this package's commands."""
+
+    return [
+{% if "commands" in package and package["commands"] %}
+{% for command in package["commands"] %}
+        (
+            "{{command["name"]}}",
+            "{{command["description"]}}",
+            add_{{command["name"]}}_cmd,
+        ),
+{% endfor %}
+{% endif %}
+        ("noop", "command stub (does nothing)", lambda _: lambda _: 0),
+    ]
