@@ -60,7 +60,9 @@ classifiers = [
 {% if "requirements" in package and package["requirements"] %}
 dependencies = [
 {% for dep in package["requirements"] %}
+{% if ";" not in dep %}
   "{{dep}}"{% if not loop.last %},{% endif %}
+{% endif %}
 
 {% endfor %}
 ]
