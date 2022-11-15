@@ -15,7 +15,11 @@
 {% endfor %}
   </head>
   <body style="{{html.body.style}}">
+{% if "html_content" in global %}
 {{html_content}}
+{% endif %}
+{% if "__children__" in global %}
 {{__children__}}
+{% endif %}
   </body>
 </html>
