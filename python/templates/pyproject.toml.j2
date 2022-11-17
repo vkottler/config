@@ -57,16 +57,7 @@ classifiers = [
   "Development Status :: {{package["status"]}}",
   "License :: OSI Approved :: MIT License"
 ]
-{% if "requirements" in package and package["requirements"] %}
-dependencies = [
-{% for dep in package["requirements"] %}
-{% if ";" not in dep %}
-  "{{dep}}"{% if not loop.last %},{% endif %}
-
-{% endif %}
-{% endfor %}
-]
-{% endif %}
+dynamic = ["dependencies"]
 {% if "dev_requirements" in package and package["dev_requirements"] %}
 
 [project.optional-dependencies]
