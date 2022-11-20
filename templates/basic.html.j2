@@ -1,17 +1,20 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="{{html.language}}"{% if html.style %} style="{{html.style}}"{% endif %}>
   <head>
-    <meta charset="{{html.charset}}">
+    <meta charset="{{html.charset}}" />
     <title>{{html.title}}</title>
-    <meta name="author" content="{{html.author}}">
-    <meta name="description" content="{{html.description}}">
-    <meta name="keywords" content="{{html.keywords}}">
-    <meta name="viewport" content="{{html.viewport}}">
+    <meta name="author" content="{{html.author}}" />
+    <meta
+      name="description"
+      content="{{html.description}}"
+    />
+    <meta name="keywords" content="{{html.keywords}}" />
+    <meta name="viewport" content="{{html.viewport}}" />
 {% if html.icon %}
-    <link rel="icon" type="image/x-icon" href="{{html.icon}}">
+    <link rel="icon" type="image/x-icon" href="{{html.icon}}" />
 {% endif %}
 {% for sheet in html.stylesheets %}
-    <link rel="stylesheet" href="{{sheet}}">
+    <link rel="stylesheet" href="{{sheet}}" />
 {% endfor %}
   </head>
   <body{% if html.body.style %} style="{{html.body.style}}"{% endif %}>
