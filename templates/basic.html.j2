@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{html.language}}" style="{{html.style}}">
+<html lang="{{html.language}}"{% if html.style %} style="{{html.style}}"{% endif %}>
   <head>
     <meta charset="{{html.charset}}">
     <title>{{html.title}}</title>
@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{sheet}}">
 {% endfor %}
   </head>
-  <body style="{{html.body.style}}">
+  <body{% if html.body.style %} style="{{html.body.style}}"{% endif %}>
 {% if "html_content" in global %}
 {{html_content}}
 {% endif %}
