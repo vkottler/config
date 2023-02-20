@@ -1,0 +1,13 @@
+---
+systems:
+  type: list
+  schema:
+    type: string
+
+versions:
+  type: list
+  schema:
+    type: string
+
+python_version:
+  type: string

@@ -1,0 +1,8 @@
+---
+systems:
+  - windows-latest
+  - macos-latest
+  - ubuntu-latest
+versions:
+  - "18"
+python_version: "3.9"

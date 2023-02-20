@@ -1,0 +1,31 @@
+---
+default_dirs: false
+
+templates:
+  - templates
+
+compiles:
+  - name: node
+    schemas:
+      - schemas
+    configs:
+      - configs
+    merge_deps: true
+    dependencies:
+      - compiles-local
+
+renders:
+  - name: node-package.yml
+    output_dir: ".github/workflows"
+    dependencies:
+      - compiles-node
+
+  - name: node_readme_header.md
+    no_file: true
+    dependencies:
+      - compiles-node
+
+groups:
+  - name: node-package-renders
+    dependencies:
+      - renders-node-package.yml

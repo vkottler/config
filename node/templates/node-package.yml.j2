@@ -1,0 +1,53 @@
+---
+name: Node Package
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+
+    runs-on: ${{"{{matrix.system}}"}}
+    strategy:
+      matrix:
+        system:
+        {% for system in node.systems %}
+          - {{system}}
+        {% endfor %}
+        node-version:
+        {% for version in node.versions %}
+          - {{version}}
+        {% endfor %}
+
+    env:
+      PYTHON_VERSION: {{node.python_version}}
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: recursive
+
+      - name: node{{"${{matrix.node-version}}"}} setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: {{"${{matrix.node-version}}"}}
+
+      - name: python{{node.python_version}} setup
+        uses: actions/setup-python@v2
+        with:
+          python-version: {{node.python_version}}
+
+      - name: install-mk
+        run: |
+          pip{{node.python_version}} install vmklib
+
+      - name: install packages
+        run: |
+          npm install
+
+      - name: test
+        run: |
+          mk node-lint node-test yaml
