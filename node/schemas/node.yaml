@@ -11,3 +11,9 @@ versions:
 
 python_version:
   type: string
+
+author_info:
+  type: dict
+  schema:
+    username:
+      type: string
