@@ -1,11 +1,3 @@
 ---
-dev_requirements:
-  - pylint
-  - flake8
-  - pytest
-  - pytest-cov
-  - mypy
-  - black
-  - isort
-
+dev_requirements: []
 status: 5 - Production/Stable
