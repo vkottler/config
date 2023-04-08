@@ -1,3 +1,11 @@
 ---
-dev_requirements: []
+dev_requirements:
+  - pylint
+  - flake8
+  - black
+  - ruff
+  - mypy
+  - isort
+  - yamllint
+
 status: 5 - Production/Stable
