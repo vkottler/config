@@ -76,6 +76,16 @@ renders:
       - compiles-python
       - commands-pydeps
 
+  - name: app.py
+    output_dir: "{{project}}"
+    dependencies:
+      - compiles-python
+
+  - name: all.py
+    output_dir: "{{project}}/commands"
+    dependencies:
+      - compiles-python
+
 groups:
   - name: python-package-renders
     dependencies:
@@ -89,6 +99,8 @@ groups:
     dependencies:
       - renders-__main__.py
       - renders-entry.py
+      - renders-app.py
+      - renders-all.py
   - name: python
     dependencies:
       - groups-python-package-renders
