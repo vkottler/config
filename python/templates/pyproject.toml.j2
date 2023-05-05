@@ -73,3 +73,7 @@ test = [
 [project.scripts]
 {{package["entry"]|default(package["name"], true)}} = "{{pkg_slug}}.entry:main"
 {% endif %}
+{% if "pyproject_local" in package and package["pyproject_local"] %}
+
+{{package["pyproject_local"]}}
+{% endif %}

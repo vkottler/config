@@ -57,6 +57,11 @@ mypy_local:
   type: string
   required: false
 
+# Additional pyproject.toml contents.
+pyproject_local:
+  type: string
+  required: false
+
 # Project-specific command-line commands.
 commands:
   type: list
