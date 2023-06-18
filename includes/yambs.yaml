@@ -1,0 +1,3 @@
+---
+includes:
+  - "../python/yambs/include.yaml"

@@ -1,0 +1,17 @@
+---
+default_dirs: false
+
+templates:
+  - templates
+
+renders:
+  - name: native_tasks.py
+    output_dir: tasks
+    output_path: conf.py
+    dependencies:
+      - compiles-local
+
+groups:
+  - name: yambs-native-renders
+    dependencies:
+      - renders-native_tasks.py
