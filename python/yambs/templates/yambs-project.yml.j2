@@ -1,0 +1,32 @@
+---
+name: Yambs Project
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11]
+    env:
+      PYTHON_VERSION: ${{"{{matrix.python-version}}"}}
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          submodules: recursive
+
+      - name: python${{"{{matrix.python-version}}"}} setup
+        uses: actions/setup-python@main
+        with:
+          python-version: ${{"{{matrix.python-version}}"}}
+          cache: pip
+
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
+
+      - run: mk python-lint python-sa

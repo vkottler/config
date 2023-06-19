@@ -11,7 +11,13 @@ renders:
     dependencies:
       - compiles-local
 
+  - name: yambs-project.yml
+    output_dir: ".github/workflows"
+    dependencies:
+      - compiles-local
+
 groups:
   - name: yambs-native-renders
     dependencies:
       - renders-native_tasks.py
+      - renders-yambs-project.yml
