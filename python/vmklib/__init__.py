@@ -4,7 +4,7 @@ A module exposing task registration interfaces for different kinds of projects.
 
 # built-in
 from pathlib import Path
-from typing import Dict
+from typing import Dict, List
 
 # third-party
 from vcorelib.task.manager import TaskManager
@@ -21,7 +21,10 @@ def register_yambs_native(
 ) -> bool:
     """Register project tasks to the manager."""
 
-    deps = []
+    del project
+    del substitutions
+
+    deps: List[str] = []
 
     manager.register(Yambs("g", cwd), deps)
     manager.register(Yambs("go", cwd, once=True), deps)

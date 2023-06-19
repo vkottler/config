@@ -29,4 +29,6 @@ jobs:
 
       - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
 
+      - run: mk dz-sync
+
       - run: mk python-lint python-sa
