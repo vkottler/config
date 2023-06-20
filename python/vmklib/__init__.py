@@ -10,7 +10,7 @@ from typing import Dict, List
 from vcorelib.task.manager import TaskManager
 
 # internal
-from .yambs import Yambs, YambsRun
+from .yambs import Yambs, YambsRunApp, YambsRunTest
 
 
 def register_yambs_native(
@@ -33,6 +33,8 @@ def register_yambs_native(
     manager.register(Yambs("gw", cwd, watch=True), deps)
 
     # Targets for running binaries.
-    manager.register(YambsRun("r", cwd), ["gb"])
+    manager.register(YambsRunApp("r", cwd), ["gb"])
+    manager.register(YambsRunTest("t", cwd), ["gb"])
+    manager.register(YambsRunTest("t-{pattern}", cwd), ["gb"])
 
     return True

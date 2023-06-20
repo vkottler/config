@@ -13,27 +13,36 @@ from ..prompts import manual_select
 from .base import YambsTask
 
 
-class YambsRun(YambsTask):
+class YambsRunApp(YambsTask):
     """A class for running built binaries."""
 
-    async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
-        """Generate ninja configuration files."""
+    async def run_app(
+        self,
+        root: Path,
+        app: str = "",
+        variant: str = YambsTask.default_variant,
+    ) -> bool:
+        """Run a single application."""
 
-        root: Path = args[0]
         data = self.apps(root)
 
         # Select an application.
-        app = manual_select("app", data["all"], default=kwargs.get("app", ""))
+        app_sel = manual_select("app", data["all"], default=app)
+        if app_sel is None:
+            return False
 
-        app_data = data["all"][app]
+        app_data = data["all"][app_sel]
 
         # Select a variant.
-        variant = manual_select(
+        variant_sel = manual_select(
             "variant",
             app_data["variants"],
-            default=kwargs.get("variant", "debug"),
+            default=variant,
         )
-        entry = app_data["variants"][variant]
+        if variant_sel is None:
+            return False
+
+        entry = app_data["variants"][variant_sel]
 
         result = True
 
@@ -46,3 +55,12 @@ class YambsRun(YambsTask):
             result = await self.exec(entry)
 
         return result
+
+    async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
+        """Generate ninja configuration files."""
+
+        return await self.run_app(
+            args[0],
+            app=kwargs.get("app", ""),
+            variant=kwargs.get("variant", self.default_variant),
+        )
