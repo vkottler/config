@@ -14,7 +14,14 @@ from vcorelib.task.manager import TaskManager
 def audit_local_tasks() -> None:
     """Ensure that shared task infrastructure is present."""
 
-    local = Path(__file__).parent.joinpath("local")
+    local = Path(__file__).parent.joinpath("mklocal")
+
+    # Also link a top-level file.
+    top_level = local.parent.parent.joinpath("mklocal")
+    if not top_level.is_symlink():
+        assert not top_level.exists()
+        top_level.symlink_to(local)
+
     if local.is_symlink():
         return
 
@@ -47,7 +54,7 @@ def register(
 
     audit_local_tasks()
 
-    from local import (  # pylint: disable=import-outside-toplevel
+    from mklocal import (  # pylint: disable=import-outside-toplevel
         register_yambs_native,
     )
 
