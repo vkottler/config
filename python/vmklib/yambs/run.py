@@ -3,6 +3,7 @@ A module implementing interfaces for running built binaries.
 """
 
 # built-in
+import os
 from pathlib import Path
 
 # third-party
@@ -52,7 +53,7 @@ class YambsRunApp(YambsTask):
 
         # Run the application.
         if result:
-            result = await self.exec(entry)
+            result = await self.exec(entry, env=os.environ)
 
         return result
 

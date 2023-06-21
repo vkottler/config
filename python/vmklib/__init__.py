@@ -10,6 +10,7 @@ from typing import Dict, List
 from vcorelib.task.manager import TaskManager
 
 # internal
+from .env import try_source
 from .yambs import Yambs, YambsRunApp, YambsRunTest
 
 
@@ -23,6 +24,9 @@ def register_yambs_native(
 
     del project
     del substitutions
+
+    # Source a 'site.env' if one is present.
+    try_source(cwd.joinpath("site.env"))
 
     deps: List[str] = []
 
