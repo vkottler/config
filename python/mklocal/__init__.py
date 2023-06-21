@@ -8,8 +8,11 @@ from typing import Dict, List
 
 # third-party
 from vcorelib.task.manager import TaskManager
+from yambs.config.common import DEFAULT_CONFIG
+from yambs.config.native import Native
 
 # internal
+from .clean import Clean
 from .env import try_source
 from .yambs import Yambs, YambsRunApp, YambsRunTest
 
@@ -40,5 +43,17 @@ def register_yambs_native(
     manager.register(YambsRunApp("r", cwd), ["gb"])
     manager.register(YambsRunTest("t", cwd), ["gb"])
     manager.register(YambsRunTest("t-{pattern}", cwd), ["gb"])
+
+    config = Native.load(
+        path=cwd.joinpath(DEFAULT_CONFIG), package_config="native.yaml"
+    )
+
+    # Remove build variants.
+    manager.register(
+        Clean(
+            "c", *[cwd.joinpath("build", x) for x in config.data["variants"]]
+        ),
+        deps,
+    )
 
     return True
