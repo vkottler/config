@@ -13,6 +13,9 @@ from vcorelib.io import ARBITER
 from vcorelib.task import Inbox
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 
+# internal
+from .gcov import remove_gcov_data
+
 
 class YambsTask(SubprocessLogMixin):
     """A task for generating ninja configurations."""
@@ -27,6 +30,14 @@ class YambsTask(SubprocessLogMixin):
         return ARBITER.decode(
             root.joinpath("ninja", "apps.json"), require_success=True
         ).data
+
+    def build_dir(self, root: Path, variant: str) -> Path:
+        """Get the path to a variant's build directory."""
+        return root.joinpath("build", variant)
+
+    def remove_coverage_data(self, root: Path, variant: str) -> None:
+        """Clean coverage."""
+        remove_gcov_data(self.build_dir(root, variant))
 
     def mbs(self, inbox: Inbox) -> str:
         """Get the path to the 'mbs' entry script."""
