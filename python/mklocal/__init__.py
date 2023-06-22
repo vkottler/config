@@ -8,6 +8,7 @@ from typing import Dict, List
 
 # third-party
 from vcorelib.task.manager import TaskManager
+from vcorelib.task.subprocess.run import SubprocessShellStreamed
 from yambs.config.common import DEFAULT_CONFIG
 from yambs.config.native import Native
 
@@ -26,7 +27,6 @@ def register_yambs_native(
     """Register project tasks to the manager."""
 
     del project
-    del substitutions
 
     # Source a 'site.env' if one is present.
     try_source(cwd.joinpath("site.env"))
@@ -48,11 +48,20 @@ def register_yambs_native(
         path=cwd.joinpath(DEFAULT_CONFIG), package_config="native.yaml"
     )
 
+    build = cwd.joinpath("build")
+
+    # A target for hosting code coverage.
+    cov = build.joinpath(substitutions.get("variant", "debug"), "html")
+    manager.register(
+        SubprocessShellStreamed(
+            "hc", cmd=(f"cd {cov} && python -m http.server 0")
+        ),
+        deps,
+    )
+
     # Remove build variants.
     manager.register(
-        Clean(
-            "c", *[cwd.joinpath("build", x) for x in config.data["variants"]]
-        ),
+        Clean("c", *[build.joinpath(x) for x in config.data["variants"]]),
         deps,
     )
 

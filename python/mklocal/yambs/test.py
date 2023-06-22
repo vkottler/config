@@ -16,7 +16,7 @@ from vcorelib.task import Inbox, Outbox
 
 # internal
 from .base import YambsTask
-from .gcov import gcov_data
+from .coverage import CoverageManager
 
 
 def test_name(path: Path) -> str:
@@ -48,7 +48,7 @@ class YambsRunTest(YambsTask):
         )
 
     async def process_test_results(
-        self, result: Iterable[TestResult], build_dir: Path
+        self, result: Iterable[TestResult], cov: CoverageManager
     ) -> bool:
         """Process unit-test results."""
 
@@ -72,7 +72,7 @@ class YambsRunTest(YambsTask):
 
         # Generate coverage outputs.
         else:
-            await self.exec("geninfo", *(gcov_data(build_dir)), env=os.environ)
+            await cov.generate()
 
         return success
 
@@ -86,8 +86,8 @@ class YambsRunTest(YambsTask):
         pattern = kwargs.get("pattern", ".*")
         variant = kwargs.get("variant", self.default_variant)
 
-        # Clean coverage.
-        self.remove_coverage_data(root, variant)
+        cov = CoverageManager(self, root, variant)
+        await cov.init()
 
         # Run all the tests and process the results.
         return await self.process_test_results(
@@ -105,5 +105,5 @@ class YambsRunTest(YambsTask):
                     ]
                 )
             ),
-            self.build_dir(root, variant),
+            cov,
         )
