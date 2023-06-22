@@ -7,9 +7,10 @@ from vcorelib.task import Inbox, Outbox
 
 # internal
 from .base import YambsTask
-from .run import YambsRun
+from .run import YambsRunApp
+from .test import YambsRunTest
 
-__all__ = ["Yambs", "YambsRun"]
+__all__ = ["Yambs", "YambsRunApp", "YambsRunTest"]
 
 
 class Yambs(YambsTask):

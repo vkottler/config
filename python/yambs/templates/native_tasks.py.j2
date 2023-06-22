@@ -33,7 +33,7 @@ def audit_local_tasks() -> None:
     assert config.is_dir()
 
     # Initialize submodules if we don't see the directory we're looking for.
-    vmklib = config.joinpath("python", "vmklib")
+    vmklib = config.joinpath("python", "mklocal")
     if not vmklib.is_dir():
         run(
             ["git", "-C", str(config.parent), "submodule", "update", "--init"],

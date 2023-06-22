@@ -19,12 +19,18 @@ class YambsTask(SubprocessLogMixin):
 
     default_requirements = {"vmklib.init", "venv", "python-install-yambs"}
 
+    default_variant = "debug"
+
     @lru_cache(1)
     def apps(self, root: Path) -> Dict[str, Any]:
         """Load data about applications."""
         return ARBITER.decode(
             root.joinpath("ninja", "apps.json"), require_success=True
         ).data
+
+    def build_dir(self, root: Path, variant: str) -> Path:
+        """Get the path to a variant's build directory."""
+        return root.joinpath("build", variant)
 
     def mbs(self, inbox: Inbox) -> str:
         """Get the path to the 'mbs' entry script."""
