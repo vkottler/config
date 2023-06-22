@@ -59,7 +59,7 @@ class CoverageManager:
         await self.task.exec("lcov", "-c", *self.lcov_args, "-o", str(info))
         self.info_files.add(info)
 
-        output = self.build_dir.joinpath("html")
+        output = self.build_dir.with_suffix(".html")
 
         # Finalize coverage and generate HTML.
         await self.task.exec(

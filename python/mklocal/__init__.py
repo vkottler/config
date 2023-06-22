@@ -51,7 +51,9 @@ def register_yambs_native(
     build = cwd.joinpath("build")
 
     # A target for hosting code coverage.
-    cov = build.joinpath(substitutions.get("variant", "debug"), "html")
+    cov = build.joinpath(substitutions.get("variant", "debug")).with_suffix(
+        ".html"
+    )
     manager.register(
         SubprocessShellStreamed(
             "hc", cmd=(f"cd {cov} && python -m http.server 0")

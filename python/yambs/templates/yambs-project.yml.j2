@@ -21,6 +21,10 @@ jobs:
         with:
           submodules: recursive
 
+      - uses: seanmiddleditch/gha-setup-ninja@master
+        with:
+          version: 1.11.1
+
       - name: python${{"{{matrix.python-version}}"}} setup
         uses: actions/setup-python@main
         with:
@@ -32,3 +36,12 @@ jobs:
       - run: mk dz-sync
 
       - run: mk yaml python-lint python-sa
+
+      - run: sudo apt-get install lcov
+
+      - run: mk t
+
+      - uses: codecov/codecov-action@v3
+        with:
+          gcov: true
+          gcov_include: build/debug
