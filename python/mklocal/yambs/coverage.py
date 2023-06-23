@@ -39,7 +39,7 @@ class CoverageManager:
         )
         self.info_files.add(info)
 
-    async def _finalize(self) -> Path:
+    async def _finalize(self, src_only: bool = True) -> Path:
         """Finalize .info data into a single file."""
 
         args = []
@@ -48,7 +48,21 @@ class CoverageManager:
             args.append(str(self.info_files.pop()))
 
         final = self.build_dir.joinpath("final.info")
+
         await self.task.exec("lcov", *self.lcov_args, *args, "-o", str(final))
+
+        # Filter out external coverage if desired.
+        if src_only:
+            await self.task.exec(
+                "lcov",
+                *self.lcov_args,
+                "-e",
+                str(final),
+                "src",
+                "-o",
+                str(final)
+            )
+
         return final
 
     async def generate(self) -> Path:

@@ -62,8 +62,10 @@ def register_yambs_native(
     )
 
     # Remove build variants.
+    clean_dirs = [build.joinpath(x) for x in config.data["variants"]]
+    clean_dirs += [x.with_suffix(".html") for x in clean_dirs]
     manager.register(
-        Clean("c", *[build.joinpath(x) for x in config.data["variants"]]),
+        Clean("c", *clean_dirs),
         deps,
     )
 
