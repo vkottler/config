@@ -40,13 +40,20 @@ class YambsTask(SubprocessLogMixin):
         )
 
     async def handle_build(
-        self, *args, build: bool = True, ninja: str = "ninja"
+        self,
+        *args,
+        build: bool = True,
+        ninja: str = "ninja",
+        target: str = None,
     ) -> bool:
         """Attempt a ninja command."""
 
+        if target is None:
+            target = YambsTask.default_variant
+
         result = True
         if build:
-            result = await self.exec(ninja, *args)
+            result = await self.exec(ninja, *args, target)
         return result
 
     async def run_generate_build(
@@ -70,6 +77,7 @@ class YambsTask(SubprocessLogMixin):
             result = await self.handle_build(
                 build=kwargs.get("build", False),
                 ninja=kwargs.get("ninja", "ninja"),
+                target=kwargs.get("variant"),
             )
 
         return result
