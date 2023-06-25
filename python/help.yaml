@@ -10,6 +10,7 @@ commands:
     dependencies:
       - groups-python-package-renders
       - groups-python-cli-renders
+
   - name: help
     command: "./venv{{python_version}}/bin/{{entry}}"
     force: true
@@ -17,3 +18,23 @@ commands:
       - "-h"
     dependencies:
       - commands-install-local
+
+  # We need alternate versions of the 'help' scaffolding for older packages
+  # (vmklib, datazen) that use a different CLI implementation.
+  - name: install-local-custom
+    command: mk
+    arguments:
+      - python-editable
+      - "PYTHON_VERSION={{python_version}}"
+    dependencies:
+      - groups-python-no-cli
+      - renders-__main__.py
+      - renders-entry.py
+
+  - name: help_custom
+    command: "./venv{{python_version}}/bin/{{entry}}"
+    force: true
+    arguments:
+      - "-h"
+    dependencies:
+      - commands-install-local-custom
