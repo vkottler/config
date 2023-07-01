@@ -40,7 +40,7 @@ jobs:
       - run: sudo apt-get install lcov
 
       - run: mk t variant=clang coverage=false
-      - run: ninja all
+      - run: ninja all format-check
 
       # Need to clean because codecov is not finding coverage otherwise.
       - run: mk c keep=debug
