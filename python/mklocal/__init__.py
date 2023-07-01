@@ -15,7 +15,7 @@ from yambs.config.native import Native
 # internal
 from .clean import Clean
 from .env import try_source
-from .yambs import Yambs, YambsRunApp, YambsRunTest
+from .yambs import GenerateTags, Yambs, YambsRunApp, YambsRunTest
 
 
 def register_yambs_native(
@@ -68,5 +68,8 @@ def register_yambs_native(
         Clean("c", *clean_dirs),
         deps,
     )
+
+    # Generate tags and edit.
+    manager.register(GenerateTags("edit", cwd), deps)
 
     return True
