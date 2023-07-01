@@ -39,11 +39,15 @@ jobs:
 
       - run: sudo apt-get install lcov
 
-      - run: mk t
-
+      - run: mk t variant=clang coverage=false
       - run: ninja all
+
+      # Need to clean because codecov is not finding coverage otherwise.
+      - run: mk c keep=debug
+      - run: mk t
 
       - uses: codecov/codecov-action@v3
         with:
           gcov: true
           gcov_include: build/debug
+          gcov_ignore: .mypy_cache

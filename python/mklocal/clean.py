@@ -16,8 +16,10 @@ class Clean(VmklibBase):
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
         """Generate ninja configuration files."""
 
+        keep = kwargs.get("keep")
+
         for arg in args:
-            if arg.exists():
+            if arg.exists() and keep is None or keep not in arg.name:
                 self.logger.info("Removing '%s'.", arg)
             rmtree(arg, ignore_errors=True)
 

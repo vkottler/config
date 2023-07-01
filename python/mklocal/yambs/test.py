@@ -48,7 +48,9 @@ class YambsRunTest(YambsTask):
         )
 
     async def process_test_results(
-        self, result: Iterable[TestResult], cov: CoverageManager
+        self,
+        result: Iterable[TestResult],
+        cov: CoverageManager = None,
     ) -> bool:
         """Process unit-test results."""
 
@@ -71,7 +73,7 @@ class YambsRunTest(YambsTask):
                         print(stderr, end="")
 
         # Generate coverage outputs.
-        else:
+        elif cov is not None:
             await cov.generate()
 
         return success
@@ -86,8 +88,10 @@ class YambsRunTest(YambsTask):
         pattern = kwargs.get("pattern", ".*")
         variant = kwargs.get("variant", self.default_variant)
 
-        cov = CoverageManager(self, root, variant)
-        await cov.init()
+        cov = None
+        if kwargs.get("coverage", "true").lower() == "true":
+            cov = CoverageManager(self, root, variant)
+            await cov.init()
 
         # Run all the tests and process the results.
         return await self.process_test_results(
