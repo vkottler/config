@@ -15,7 +15,7 @@ from yambs.config.native import Native
 # internal
 from .clean import Clean
 from .env import try_source
-from .yambs import GenerateTags, Yambs, YambsRunApp, YambsRunTest
+from .yambs import GenerateTags, Yambs, YambsDist, YambsRunApp, YambsRunTest
 
 
 def register_yambs_native(
@@ -39,10 +39,15 @@ def register_yambs_native(
     manager.register(Yambs("gb", cwd, once=True, build=True), deps)
     manager.register(Yambs("gw", cwd, watch=True), deps)
 
+    gen_build = ["gb"]
+
     # Targets for running binaries.
-    manager.register(YambsRunApp("r", cwd), ["gb"])
-    manager.register(YambsRunTest("t", cwd), ["gb"])
-    manager.register(YambsRunTest("t-{pattern}", cwd), ["gb"])
+    manager.register(YambsRunApp("r", cwd), gen_build)
+    manager.register(YambsRunTest("t", cwd), gen_build)
+    manager.register(YambsRunTest("t-{pattern}", cwd), gen_build)
+
+    # Build a distribution.
+    manager.register(YambsDist("dist"), gen_build)
 
     config = Native.load(
         path=cwd.joinpath(DEFAULT_CONFIG), package_config="native.yaml"
