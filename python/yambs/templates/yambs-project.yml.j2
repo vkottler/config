@@ -41,6 +41,8 @@ jobs:
 
       - run: mk t
 
+      - run: ninja all
+
       - uses: codecov/codecov-action@v3
         with:
           gcov: true
