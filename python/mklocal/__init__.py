@@ -82,6 +82,7 @@ def register_yambs_native(
     manager.register(GenerateTags("edit", cwd), deps)
 
     # Upload a release.
-    manager.register(YambsUploadRelease("release"), ["dist"])
+    # ["dist"]
+    manager.register(YambsUploadRelease("release"))
 
     return True
