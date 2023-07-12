@@ -9,11 +9,11 @@ from typing import Dict, List
 # third-party
 from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import SubprocessShellStreamed
+from vmklib.tasks.clean import Clean
 from yambs.config.common import DEFAULT_CONFIG
 from yambs.config.native import Native
 
 # internal
-from .clean import Clean
 from .env import try_source
 from .yambs import (
     GenerateTags,

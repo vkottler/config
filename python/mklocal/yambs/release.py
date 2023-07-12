@@ -10,11 +10,11 @@ from typing import Any
 
 # third-party
 from vcorelib.task import Inbox, Outbox
+from vmklib.tasks.github import COMMON_ARGS, ensure_api_token, repo_url
+from vmklib.tasks.mixins import CurlMixin, curl_headers
 
 # internal
 from .base import YambsTask
-from .curl import CurlMixin, curl_headers
-from .github import COMMON_ARGS, ensure_api_token, repo_url
 
 ApiResult = dict[str, Any]
 

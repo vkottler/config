@@ -5,7 +5,7 @@ A module implementing task interfaces for the yambs project.
 # built-in
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict
 
 # third-party
 from vcorelib.io import ARBITER
@@ -20,12 +20,6 @@ class YambsTask(SubprocessLogMixin):
     default_requirements = {"vmklib.init", "venv", "python-install-yambs"}
 
     default_variant = "debug"
-
-    async def shell_cmd_in_dir(self, path: Path, cmd: List[str]) -> bool:
-        """Run a shell command in a specific directory."""
-
-        path.mkdir(exist_ok=True)
-        return await self.shell(f'( cd "{path}"; {" ".join(cmd)} )')
 
     @lru_cache(1)
     def apps(self, root: Path) -> Dict[str, Any]:
