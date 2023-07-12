@@ -7,6 +7,9 @@ on:
   pull_request:
     branches: [master]
 
+env:
+  GITHUB_API_TOKEN: ${{"{{secrets.API_TOKEN}}"}}
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -43,6 +46,7 @@ jobs:
       - run: ninja all format-check
 
       - run: mk dist
+        if: github.ref_name != 'master'
 
       # Need to clean because codecov is not finding coverage otherwise.
       - run: mk c keep=debug
@@ -53,3 +57,6 @@ jobs:
           gcov: true
           gcov_include: build/debug
           gcov_ignore: .mypy_cache
+
+      - run: mk release
+        if: env.GITHUB_API_TOKEN != '' && github.ref_name == 'master'

@@ -15,7 +15,14 @@ from yambs.config.native import Native
 # internal
 from .clean import Clean
 from .env import try_source
-from .yambs import GenerateTags, Yambs, YambsDist, YambsRunApp, YambsRunTest
+from .yambs import (
+    GenerateTags,
+    Yambs,
+    YambsDist,
+    YambsRunApp,
+    YambsRunTest,
+    YambsUploadRelease,
+)
 
 
 def register_yambs_native(
@@ -69,12 +76,12 @@ def register_yambs_native(
     # Remove build variants.
     clean_dirs = [build.joinpath(x) for x in config.data["variants"]]
     clean_dirs += [x.with_suffix(".html") for x in clean_dirs]
-    manager.register(
-        Clean("c", *clean_dirs),
-        deps,
-    )
+    manager.register(Clean("c", *clean_dirs), deps)
 
     # Generate tags and edit.
     manager.register(GenerateTags("edit", cwd), deps)
+
+    # Upload a release.
+    manager.register(YambsUploadRelease("release", cwd), ["dist"])
 
     return True

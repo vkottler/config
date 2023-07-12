@@ -2,9 +2,8 @@
 A module implementing task interfaces for the yambs project.
 """
 
-from functools import lru_cache
-
 # built-in
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List
 
@@ -12,6 +11,7 @@ from typing import Any, Dict, List
 from vcorelib.io import ARBITER
 from vcorelib.task import Inbox
 from vcorelib.task.subprocess.run import SubprocessLogMixin
+from yambs.config.native import Native, load_native
 
 
 class YambsTask(SubprocessLogMixin):
@@ -33,6 +33,11 @@ class YambsTask(SubprocessLogMixin):
         return ARBITER.decode(
             root.joinpath("ninja", "apps.json"), require_success=True
         ).data
+
+    @lru_cache(1)
+    def native_config(self, root: Path) -> Native:
+        """Load a configuration for a native-build project."""
+        return load_native(root=root)
 
     def build_dir(self, root: Path, variant: str) -> Path:
         """Get the path to a variant's build directory."""

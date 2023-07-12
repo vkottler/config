@@ -9,10 +9,18 @@ from vcorelib.task import Inbox, Outbox
 from .base import YambsTask
 from .dist import YambsDist
 from .edit import GenerateTags
+from .release import YambsUploadRelease
 from .run import YambsRunApp
 from .test import YambsRunTest
 
-__all__ = ["Yambs", "YambsRunApp", "YambsRunTest", "GenerateTags", "YambsDist"]
+__all__ = [
+    "Yambs",
+    "YambsRunApp",
+    "YambsRunTest",
+    "GenerateTags",
+    "YambsDist",
+    "YambsUploadRelease",
+]
 
 
 class Yambs(YambsTask):
