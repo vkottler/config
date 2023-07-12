@@ -3,108 +3,97 @@ A module for working with GitHub releases.
 """
 
 # built-in
-from asyncio import subprocess
 from json import loads
-from typing import Any, NamedTuple, Optional
+import os
+from pathlib import Path
+from typing import Any
 
 # third-party
-import requests
-from vcorelib.asyncio.cli import handle_process_cancel
 from vcorelib.task import Inbox, Outbox
 
 # internal
 from .base import YambsTask
+from .curl import CurlMixin, curl_headers
+from .github import COMMON_ARGS, ensure_api_token, repo_url
+
+ApiResult = dict[str, Any]
 
 
-def latest_release(owner: str, repo: str) -> Optional[dict[str, Any]]:
-    """Attempt to get the latest release metadata from a GitHub repository."""
-
-    result = None
-
-    response = requests.get(
-        f"https://api.github.com/repos/{owner}/{repo}/releases/latest",
-        headers={"Accept": "application/vnd.github+json"},
-        timeout=10,
-    )
-    if response.ok:
-        result = response.json()
-
-    return result
-
-
-class CommandResult(NamedTuple):
-    """A container for a system command result."""
-
-    code: int
-    stdout: str
-    stderr: str
-
-
-def repo_url(
-    owner: str, repo: str, kind: str = "api", endpoint: str = "releases"
-) -> str:
-    """Get a GitHub API URL."""
-    return f"https://{kind}.github.com/repos/{owner}/{repo}/{endpoint}"
-
-
-class YambsUploadRelease(YambsTask):
+class YambsUploadRelease(YambsTask, CurlMixin):
     """A class for running the 'dist' command."""
 
-    curl_args = [
-        "-L",
-        "-H",
-        "Accept: application/vnd.github+json",
-        "-H",
-        "X-GitHub-Api-Version: 2022-11-28",
-    ]
+    async def create_release(
+        self, owner: str, repo: str, data: dict[str, Any]
+    ) -> ApiResult:
+        """Attempt to create a release."""
 
-    async def run_curl(self, *args: str) -> CommandResult:
-        """Run a curl command."""
-
-        proc, stdout, stderr = await handle_process_cancel(
-            await self.subprocess_exec(
-                "curl",
-                *args,
-                stdout=subprocess.PIPE,
-                stderr=subprocess.PIPE,
-            ),
-            self.name,
-            self.log,
+        result = await self.curl(
+            *COMMON_ARGS, repo_url(owner, repo), post_data=data
         )
+        return loads(result.stdout)  # type: ignore
 
-        assert proc.returncode is not None
-        assert stdout is not None
-        assert stderr is not None
+    async def upload_release_asset(
+        self, owner: str, repo: str, release_id: int, path: Path
+    ) -> ApiResult:
+        """Attempt to upload a release asset."""
 
-        return CommandResult(proc.returncode, stdout.decode(), stderr.decode())
-
-    async def latest_release(self, owner: str, repo: str) -> dict[str, Any]:
-        """Attempt to get the latest GitHub release for a repository."""
-
-        result = await self.run_curl(
-            *self.curl_args,
-            f"{repo_url(owner, repo)}/latest",
+        result = await self.curl(
+            *COMMON_ARGS,
+            (
+                f"{repo_url(owner, repo, kind='uploads')}/{release_id}/assets"
+                f"?name={path.name}"
+            ),
+            *curl_headers({"Content-Type": "application/octet-stream"}),
+            "--data-binary",
+            f"@{path}",
+            method="POST",
         )
         return loads(result.stdout)  # type: ignore
 
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
         """Generate ninja configuration files."""
 
-        # Need to get project metadata - repo owner and name.
+        # Check for API key in environment.
+        if "GITHUB_API_TOKEN" not in os.environ:
+            self.log.error(
+                "Environment variable 'GITHUB_API_TOKEN' is not set!"
+            )
+            return False
 
-        latest = await self.latest_release("vkottler", "yambs-sample")
+        # Set token header.
+        ensure_api_token(os.environ["GITHUB_API_TOKEN"])
 
-        if latest.get("message", "") == "Not Found":
-            self.log.warning("No latest release found.")
+        cwd: Path = args[0]
 
-        # Check if the current version is newer than the latest release, if
-        # not, skip creating a new release.
-        else:
-            pass
+        # Load the project configuration.
+        config = self.native_config(cwd)
 
-        # Create a release with the 'Create a release' API.
+        # Ensure GitHub parameters are set.
+        if config.project.owner is None:
+            self.log.error("'project.github.owner' not set in configuration!")
+            return False
+
+        # Attempt to create a new release.
+        result = await self.create_release(
+            config.project.owner,
+            config.project.repo,
+            {
+                "tag_name": config.project.version,
+                "generate_release_notes": True,
+            },
+        )
+        if "message" in result and result["message"] == "Validation Failed":
+            self.log.warning("Release at current version already exists.")
+            return True
+
+        release_id = result["id"]
 
         # Use 'Upload a release asset' API to upload all files in the 'dist'
         # directory to the new release.
+        for item in cwd.joinpath("dist").iterdir():
+            result = await self.upload_release_asset(
+                config.project.owner, config.project.repo, release_id, item
+            )
+            self.log.info("Uploaded '%s'.", result["browser_download_url"])
 
-        return False
+        return True
