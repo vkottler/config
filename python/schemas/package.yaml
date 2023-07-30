@@ -48,6 +48,11 @@ classifiers:
 init_local:
   type: string
   required: false
+ci_local:
+  type: list
+  schema:
+    type: string
+  required: false
 no_chdir_arg:
   type: boolean
   required: false

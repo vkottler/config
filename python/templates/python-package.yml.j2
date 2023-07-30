@@ -47,6 +47,14 @@ jobs:
 {% else %}
       - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
 {% endif %}
+{% if "ci_local" in package and package["ci_local"] %}
+
+      # Begin project-specific setup.
+{% for item in package["ci_local"] %}
+      {{item}}
+{% endfor %}
+      # End project-specific setup.
+{% endif %}
 
       - run: mk python-sa-types
 
