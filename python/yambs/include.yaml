@@ -1,6 +1,9 @@
 ---
 default_dirs: false
 
+configs:
+  - configs
+
 templates:
   - templates
 
@@ -16,8 +19,20 @@ renders:
     dependencies:
       - compiles-local
 
+  - name: README.md
+    output_dir: "."
+    dependencies:
+      - compiles-local
+
+  - name: yambs.yaml
+    output_dir: "."
+    dependencies:
+      - compiles-local
+
 groups:
   - name: yambs-native-renders
     dependencies:
       - renders-native_tasks.py
       - renders-yambs-project.yml
+      - renders-README.md
+      - renders-yambs.yaml

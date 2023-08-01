@@ -1,0 +1,10 @@
+---
+project:
+  name: {{project.name}}
+
+  github: {owner: &self {{project.owner}}}
+  version: {major: {{project.version.major}}, minor: {{project.version.minor}}, patch: {{project.version.patch}}}
+{% if project.config_local %}
+
+{{project.config_local}}
+{% endif %}

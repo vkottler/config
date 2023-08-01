@@ -3,9 +3,9 @@ name: Yambs Project
 
 on:
   push:
-    branches: [master]
+    branches: [{{project.main_branch}}]
   pull_request:
-    branches: [master]
+    branches: [{{project.main_branch}}]
 
 env:
   GITHUB_API_TOKEN: ${{"{{secrets.API_TOKEN}}"}}
@@ -46,7 +46,7 @@ jobs:
       - run: ninja all format-check
 
       - run: mk dist
-        if: github.ref_name != 'master'
+        if: github.ref_name != '{{project.main_branch}}'
 
       # Need to clean because codecov is not finding coverage otherwise.
       - run: mk c keep=debug
@@ -59,4 +59,6 @@ jobs:
           gcov_ignore: .mypy_cache
 
       - run: mk release
-        if: env.GITHUB_API_TOKEN != '' && github.ref_name == 'master'
+        if: |
+	  env.GITHUB_API_TOKEN != ''
+	  && github.ref_name == '{{project.main_branch}}'
