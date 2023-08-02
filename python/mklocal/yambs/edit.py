@@ -25,7 +25,7 @@ class GenerateTags(YambsTask):
 
         # Remove existing tags.
         tags = root.joinpath("tags")
-        tags.unlink()
+        tags.unlink(missing_ok=True)
 
         common = ["ctags", "-f", str(tags), "--languages=C,C++"]
 

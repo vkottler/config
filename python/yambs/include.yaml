@@ -14,6 +14,12 @@ renders:
     dependencies:
       - compiles-local
 
+  - name: clang-format
+    output_dir: "."
+    output_path: .clang-format
+    dependencies:
+      - compiles-local
+
   - name: yambs-project.yml
     output_dir: ".github/workflows"
     dependencies:
@@ -36,3 +42,4 @@ groups:
       - renders-yambs-project.yml
       - renders-README.md
       - renders-yambs.yaml
+      - renders-clang-format
