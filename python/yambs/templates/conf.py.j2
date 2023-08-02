@@ -1,0 +1,55 @@
+{% import __templates__["macros"] as macros %}
+# Configuration file for the Sphinx documentation builder.
+#
+# For the full list of built-in configuration values, see the documentation:
+# https://www.sphinx-doc.org/en/master/usage/configuration.html
+
+# -- Project information -----------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+
+project = "{{project.name}}"
+copyright = "{{license.year}}, {{license.name}}"
+author = "{{license.name}}"
+release = "{{macros.version(project)}}"
+
+# -- General configuration ---------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+
+extensions = ["breathe", "exhale"]
+
+templates_path = ["_templates"]
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
+
+# -- Options for HTML output -------------------------------------------------
+# https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
+
+html_theme = "alabaster"
+html_static_path = ["_static"]
+
+# -- Options for extensions --------------------------------------------------
+# https://exhale.readthedocs.io/en/latest/quickstart.html#setup-the-extensions-in-conf-py
+
+breathe_projects = {project: "xml"}
+breathe_default_project = project
+
+exhale_args = {
+    # These arguments are required
+    "containmentFolder": "generated",
+    "rootFileName": "root.rst",
+    "doxygenStripFromPath": "..",
+    # Heavily encouraged optional argument (see docs)
+    "rootFileTitle": "Library API",
+    # Suggested optional arguments
+    "createTreeView": True,
+    # TIP: if using the sphinx-bootstrap-theme, you need
+    # "treeViewIsBootstrap": True,
+    "exhaleExecutesDoxygen": True,
+    "exhaleDoxygenStdin": "INPUT = ../src",
+    "verboseBuild": True,
+}
+
+# Tell sphinx what the primary language being documented is.
+primary_domain = "cpp"
+
+# Tell sphinx what the pygments highlight language should be.
+highlight_language = "cpp"

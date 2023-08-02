@@ -1,0 +1,7 @@
+{% macro version(project) -%}
+{{project.version.major}}.{{project.version.minor}}.{{project.version.patch}}
+{%- endmacro %}
+
+{% macro url(project) -%}
+https://github.com/{{project.owner}}/{{project.name}}/releases/tag/{{version(project)}}
+{%- endmacro %}

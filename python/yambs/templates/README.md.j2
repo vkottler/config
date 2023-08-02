@@ -1,10 +1,5 @@
-{% macro version() -%}
-{{project.version.major}}.{{project.version.minor}}.{{project.version.patch}}
-{%- endmacro %}
-{% macro url() -%}
-https://github.com/{{project.owner}}/{{project.name}}/releases/tag/{{version()}}
-{%- endmacro %}
-# {{project.name}} ([{{version()}}]({{url()}}))
+{% import __templates__["macros"] as macros %}
+# {{project.name}} ([{{macros.version(project)}}]({{macros.url(project)}}))
 
 [![codecov](https://codecov.io/gh/{{project.owner}}/{{project.name}}/branch/{{project.main_branch}}/graph/badge.svg)](https://codecov.io/gh/{{project.owner}}/{{project.name}})
 ![Build Status](https://github.com/{{project.owner}}/{{project.name}}/actions/workflows/yambs-project.yml/badge.svg)

@@ -25,15 +25,30 @@ renders:
     dependencies:
       - compiles-local
 
+  - name: yambs.yaml
+    output_dir: "."
+    dependencies:
+      - compiles-local
+
   - name: README.md
     output_dir: "."
     dependencies:
       - compiles-local
 
-  - name: yambs.yaml
-    output_dir: "."
+  - name: index.rst
+    output_dir: docs
     dependencies:
       - compiles-local
+
+  - name: Makefile
+    output_dir: docs
+    dependencies:
+      - compiles-local
+
+  - name: conf.py
+    output_dir: docs
+    dependencies:
+      - compiles-license
 
 groups:
   - name: yambs-native-renders
@@ -43,3 +58,6 @@ groups:
       - renders-README.md
       - renders-yambs.yaml
       - renders-clang-format
+      - renders-index.rst
+      - renders-conf.py
+      - renders-Makefile
