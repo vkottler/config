@@ -31,7 +31,13 @@ def register(
     # Don't run yamllint on Windows because it will fail on newlines.
     manager.register(
         Phony("yaml"),
-        [] if is_windows() else ["yaml-lint-local", "yaml-lint-manifest.yaml"],
+        []
+        if is_windows()
+        else [
+            "yaml-lint-local",
+            "yaml-lint-manifest.yaml",
+            f"yaml-lint-{project.replace('-', '_')}",
+        ],
     )
 
     if project == "runtimepy":
