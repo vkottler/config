@@ -6,10 +6,14 @@ A module for Python-project task registration.
 from pathlib import Path
 from typing import Dict
 
+# isort: off
+
 # third-party
 from vcorelib.task import Phony
 from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import is_windows
+
+# isort: on
 
 # internal
 from mklocal.docs import SphinxTask

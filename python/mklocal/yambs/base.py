@@ -7,11 +7,15 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict
 
+# isort: off
+
 # third-party
 from vcorelib.io import ARBITER
 from vcorelib.task import Inbox
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 from yambs.config.native import Native, load_native
+
+# isort: on
 
 
 class YambsTask(SubprocessLogMixin):

@@ -6,12 +6,16 @@ A module implementing task interfaces for the yambs project.
 from pathlib import Path
 from typing import Dict, List
 
+# isort: off
+
 # third-party
 from vcorelib.task import Inbox, Outbox
 from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import SubprocessShellStreamed
 from yambs.config.common import DEFAULT_CONFIG
 from yambs.config.native import Native
+
+# isort: on
 
 # internal
 from mklocal.env import try_source
