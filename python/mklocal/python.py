@@ -33,7 +33,7 @@ def register(
     if project == "runtimepy":
         manager.register(ArbiterTask("r", cwd))
 
-    manager.register(SphinxTask("docs", cwd))
+    manager.register(SphinxTask("docs", cwd, project))
 
     del substitutions
 
