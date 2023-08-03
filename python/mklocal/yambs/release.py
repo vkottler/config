@@ -8,9 +8,10 @@ from typing import Any, Dict
 
 # third-party
 from vcorelib.task import Inbox, Outbox
-from vmklib.tasks.release import GithubRelease
 
 # internal
+from vmklib.tasks.release import GithubRelease
+
 from .base import YambsTask
 
 ApiResult = Dict[str, Any]

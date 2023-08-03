@@ -10,14 +10,13 @@ from typing import Dict, List
 from vcorelib.task import Inbox, Outbox
 from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import SubprocessShellStreamed
-from vmklib.tasks.clean import Clean
 from yambs.config.common import DEFAULT_CONFIG
 from yambs.config.native import Native
 
 # internal
 from mklocal.env import try_source
+from vmklib.tasks.clean import Clean
 
-# internal
 from .base import YambsTask
 from .dist import YambsDist
 from .edit import GenerateTags
