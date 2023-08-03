@@ -8,4 +8,8 @@ dev_requirements:
   - isort
   - yamllint
 
+  # For mklocal tasks.
+  - yambs
+  - vmklib
+
 status: 5 - Production/Stable

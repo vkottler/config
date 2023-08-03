@@ -4,7 +4,7 @@ A module for working with GitHub releases.
 
 # built-in
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict
 
 # third-party
 from vcorelib.task import Inbox, Outbox
@@ -13,7 +13,7 @@ from vmklib.tasks.release import GithubRelease
 # internal
 from .base import YambsTask
 
-ApiResult = dict[str, Any]
+ApiResult = Dict[str, Any]
 
 
 class YambsUploadRelease(YambsTask, GithubRelease):

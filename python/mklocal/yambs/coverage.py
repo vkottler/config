@@ -60,7 +60,7 @@ class CoverageManager:
                 str(final),
                 "src",
                 "-o",
-                str(final)
+                str(final),
             )
 
         return final
