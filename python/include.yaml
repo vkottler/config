@@ -86,6 +86,12 @@ renders:
     dependencies:
       - compiles-python
 
+  - name: python_tasks.py
+    output_dir: tasks
+    output_path: conf.py
+    dependencies:
+      - compiles-local
+
 groups:
   - name: python-package-renders
     dependencies:
@@ -95,6 +101,7 @@ groups:
       - renders-setup.py
       - renders-requirements.txt
       - renders-dev_requirements.txt
+      - renders-python_tasks.py
   - name: python-cli-renders
     dependencies:
       - renders-__main__.py

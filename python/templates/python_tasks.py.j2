@@ -54,8 +54,8 @@ def register(
 
     audit_local_tasks()
 
-    from mklocal.yambs import (  # pylint: disable=import-outside-toplevel
-        register_yambs_native,
+    from mklocal.python import (  # pylint: disable=import-outside-toplevel
+        register_python,
     )
 
-    return register_yambs_native(manager, project, cwd, substitutions)
+    return register_python(manager, project, cwd, substitutions)
