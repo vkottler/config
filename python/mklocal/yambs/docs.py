@@ -41,6 +41,9 @@ def register_docs(
 ) -> None:
     """Register a documentation-generation task."""
 
+    del project
+    del substitutions
+
     docs_dir = cwd.joinpath("docs")
 
     manager.register(YambsDist("docs", docs_dir))

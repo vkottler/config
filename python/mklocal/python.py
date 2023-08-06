@@ -11,7 +11,7 @@ from typing import Dict
 # third-party
 from vcorelib.task import Phony
 from vcorelib.task.manager import TaskManager
-from vcorelib.task.subprocess.run import is_windows
+from vcorelib.task.subprocess.run import is_windows, register_http_server_task
 
 # isort: on
 
@@ -44,6 +44,9 @@ def register(
         manager.register(ArbiterTask("r", cwd))
 
     manager.register(SphinxTask("docs", cwd, project))
+    register_http_server_task(
+        manager, cwd.joinpath("docs", "_build"), "hd", ["docs"]
+    )
 
     del substitutions
 
