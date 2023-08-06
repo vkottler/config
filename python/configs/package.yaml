@@ -12,4 +12,8 @@ dev_requirements:
   - yambs
   - vmklib
 
+  # For documentation.
+  - sphinx
+  - sphinx-book-theme
+
 status: 5 - Production/Stable
