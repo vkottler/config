@@ -45,7 +45,7 @@ jobs:
       - run: mk t variant=clang coverage=false
       - run: ninja all format-check
 
-      - run: mk dist
+      - run: mk dist docs
         if: github.ref_name != '{{project.main_branch}}'
 
       # Need to clean because codecov is not finding coverage otherwise.

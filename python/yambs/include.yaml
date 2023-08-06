@@ -40,11 +40,6 @@ renders:
     dependencies:
       - compiles-local
 
-  - name: Makefile
-    output_dir: docs
-    dependencies:
-      - compiles-local
-
   - name: conf.py
     output_dir: docs
     dependencies:
@@ -60,4 +55,3 @@ groups:
       - renders-clang-format
       - renders-index.rst
       - renders-conf.py
-      - renders-Makefile
