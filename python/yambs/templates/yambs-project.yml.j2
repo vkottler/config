@@ -40,7 +40,7 @@ jobs:
 
       - run: mk yaml python-lint python-sa
 
-      - run: sudo apt-get install lcov
+      - run: sudo apt-get install lcov doxygen clang-15 clang-format-15
 
       - run: mk t variant=clang coverage=false
       - run: ninja all format-check

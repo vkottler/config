@@ -8,3 +8,10 @@ project:
 
 {{project["config_local"]}}
 {% endif %}
+
+variants:
+  clang:
+    suffix: &clang_version "-15"
+
+  clang-opt:
+    suffix: *clang_version
