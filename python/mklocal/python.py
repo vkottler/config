@@ -18,6 +18,7 @@ from vcorelib.task.subprocess.run import is_windows, register_http_server_task
 # internal
 from mklocal.docs import SphinxTask
 from mklocal.runtimepy import ArbiterTask
+from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
 
 
 def register(
@@ -43,9 +44,15 @@ def register(
     if project == "runtimepy":
         manager.register(ArbiterTask("r", cwd))
 
+    # Documentation tasks.
     manager.register(SphinxTask("docs", cwd, project))
+
+    docs_dir = cwd.joinpath("docs")
+
+    manager.register(Clean("clean-docs", docs_dir))
+
     register_http_server_task(
-        manager, cwd.joinpath("docs", "_build"), "hd", ["docs"]
+        manager, docs_dir.joinpath("_build"), "hd", ["docs"]
     )
 
     del substitutions
