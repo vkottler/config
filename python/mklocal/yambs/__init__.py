@@ -9,9 +9,9 @@ from typing import Dict, List
 # isort: off
 
 # third-party
-from vcorelib.task import Inbox, Outbox
+from vcorelib.task import Inbox, Outbox, Phony
 from vcorelib.task.manager import TaskManager
-from vcorelib.task.subprocess.run import SubprocessShellStreamed
+from vcorelib.task.subprocess.run import register_http_server_task, is_windows
 from yambs.config.common import DEFAULT_CONFIG
 from yambs.config.native import Native
 
@@ -19,10 +19,11 @@ from yambs.config.native import Native
 
 # internal
 from mklocal.env import try_source
-from vmklib.tasks.clean import Clean
+from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
 
 from .base import YambsTask
 from .dist import YambsDist
+from .docs import register_docs
 from .edit import GenerateTags
 from .release import YambsUploadRelease
 from .run import YambsRunApp
@@ -54,6 +55,8 @@ def register_yambs_native(
 ) -> bool:
     """Register project tasks to the manager."""
 
+    register_docs(manager, project, cwd, substitutions)
+
     del project
 
     # Source a 'site.env' if one is present.
@@ -84,13 +87,12 @@ def register_yambs_native(
     build = cwd.joinpath("build")
 
     # A target for hosting code coverage.
-    cov = build.joinpath(substitutions.get("variant", "debug")).with_suffix(
-        ".html"
-    )
-    manager.register(
-        SubprocessShellStreamed(
-            "hc", cmd=(f"cd {cov} && python -m http.server 0")
+    register_http_server_task(
+        manager,
+        build.joinpath(substitutions.get("variant", "debug")).with_suffix(
+            ".html"
         ),
+        "hc",
         deps,
     )
 
@@ -104,5 +106,17 @@ def register_yambs_native(
 
     # Upload a release.
     manager.register(YambsUploadRelease("release", cwd), ["dist"])
+
+    # YAML linting.
+    manager.register(
+        Phony("yaml"),
+        []
+        if is_windows()
+        else [
+            "yaml-lint-local",
+            "yaml-lint-manifest.yaml",
+            "yaml-lint-yambs.yaml",
+        ],
+    )
 
     return True

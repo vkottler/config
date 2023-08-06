@@ -13,7 +13,12 @@ from vcorelib.task.subprocess.run import SubprocessLogMixin
 class SphinxTask(SubprocessLogMixin):
     """A class to facilitate generating documentatino with sphinx."""
 
-    default_requirements = {"venv", "python-install-sphinx", "python-editable"}
+    default_requirements = {
+        "venv",
+        "python-install-sphinx",
+        "python-install-sphinx-book-theme",
+        "python-editable",
+    }
 
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
         """Generate ninja configuration files."""
@@ -29,6 +34,8 @@ class SphinxTask(SubprocessLogMixin):
             [
                 str(venv_bin.joinpath("sphinx-apidoc")),
                 str(Path("..", project.replace("-", "_"))),
+                "-t",
+                str(Path(__file__).with_name("templates")),
                 "-A",
                 f"\"{kwargs.get('author', 'Vaughn Kottler')}\"",
                 "-f",
