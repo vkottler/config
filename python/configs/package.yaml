@@ -17,3 +17,5 @@ dev_requirements:
   - sphinx-book-theme
 
 status: 5 - Production/Stable
+
+log_format: "(name)-36s - %(levelname)-6s - %(message)s"

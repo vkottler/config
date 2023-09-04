@@ -73,7 +73,7 @@ def main(argv: List[str] = None) -> int:
         log_level = logging.DEBUG if args.verbose else logging.INFO
         logging.basicConfig(
             level=log_level,
-            format="%(name)-36s - %(levelname)-6s - %(message)s",
+            format="{{package["log_format"]}}",
         )
 
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}

@@ -70,6 +70,10 @@ pyproject_local:
   type: string
   required: false
 
+# Log-format initialization customization.
+log_format:
+  type: string
+
 # Project-specific command-line commands.
 commands:
   type: list
