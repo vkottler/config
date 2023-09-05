@@ -18,4 +18,4 @@ dev_requirements:
 
 status: 5 - Production/Stable
 
-log_format: "(name)-36s - %(levelname)-6s - %(message)s"
+log_format: "%(name)-36s - %(levelname)-6s - %(message)s"
