@@ -24,6 +24,16 @@ from {{pkg_slug}} import DESCRIPTION, VERSION
 from {{pkg_slug}}.app import add_app_args, entry
 
 
+def init_logging(args: argparse.Namespace) -> None:
+    """Initialize logging based on command-line arguments."""
+
+    if not getattr(args, "curses", False):
+        logging.basicConfig(
+            level=logging.DEBUG if args.verbose else logging.INFO,
+            format="{{package["log_format"]}}",
+        )
+
+
 def main(argv: List[str] = None) -> int:
     """Program entry-point."""
 
@@ -47,6 +57,13 @@ def main(argv: List[str] = None) -> int:
         action="store_true",
         help="set to increase logging verbosity",
     )
+{% if "curses" in package and package["curses"] %}
+    parser.add_argument(
+        "--curses",
+        action="store_true",
+        help="whether or not to use curses.wrapper when starting",
+    )
+{% endif %}
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
     parser.add_argument(
         "-C",
@@ -70,11 +87,7 @@ def main(argv: List[str] = None) -> int:
 {% endif %}
 
         # initialize logging
-        log_level = logging.DEBUG if args.verbose else logging.INFO
-        logging.basicConfig(
-            level=log_level,
-            format="{{package["log_format"]}}",
-        )
+        init_logging(args)
 
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
         # change to the specified directory

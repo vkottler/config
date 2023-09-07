@@ -30,10 +30,3 @@ def add_app_args(parser: _ArgumentParser) -> None:
     global COMMAND  # pylint: disable=global-statement
     add, COMMAND = _app_args(commands, {})
     add(parser)
-{% if "curses" in package and package["curses"] %}
-    parser.add_argument(
-        "--curses",
-        action="store_true",
-        help="whether or not to use curses.wrapper when starting",
-    )
-{% endif %}
