@@ -60,6 +60,11 @@ time_command:
   type: boolean
   required: false
 
+# Whether or not to generate a command-line switch for TUI mode.
+curses:
+  type: boolean
+  required: false
+
 # Project-specific configurations.
 mypy_local:
   type: string
