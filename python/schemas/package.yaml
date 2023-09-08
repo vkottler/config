@@ -65,6 +65,10 @@ curses:
   type: boolean
   required: false
 
+no_logging_init:
+  type: boolean
+  required: false
+
 # Project-specific configurations.
 mypy_local:
   type: string
