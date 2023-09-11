@@ -5,18 +5,16 @@ This package's command-line entry-point (boilerplate).
 
 # built-in
 import argparse
-{% if "no_logging_init" not in package or not package["no_logging_init"] %}
-import logging
-{% endif %}
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
 import os
 from pathlib import Path
 {% endif %}
 import sys
 from typing import List
-{% if "time_command" in package and package["time_command"] %}
 
 # third-party
+from vcorelib.logging import init_logging, logging_args
+{% if "time_command" in package and package["time_command"] %}
 from vcorelib.logging import log_time as _log_time
 {% endif %}
 
@@ -24,18 +22,6 @@ from vcorelib.logging import log_time as _log_time
 {% set pkg_slug = package["name"]|replace("-", "_") %}
 from {{pkg_slug}} import DESCRIPTION, VERSION
 from {{pkg_slug}}.app import add_app_args, entry
-{% if "no_logging_init" not in package or not package["no_logging_init"] %}
-
-
-def init_logging(args: argparse.Namespace) -> None:
-    """Initialize logging based on command-line arguments."""
-
-    if not getattr(args, "curses", False):
-        logging.basicConfig(
-            level=logging.DEBUG if args.verbose else logging.INFO,
-            format="{{package["log_format"]}}",
-        )
-{% endif %}
 
 
 def main(argv: List[str] = None) -> int:
@@ -55,19 +41,7 @@ def main(argv: List[str] = None) -> int:
         action="version",
         version=f"%(prog)s {VERSION}",
     )
-    parser.add_argument(
-        "-v",
-        "--verbose",
-        action="store_true",
-        help="set to increase logging verbosity",
-    )
-{% if "curses" in package and package["curses"] %}
-    parser.add_argument(
-        "--curses",
-        action="store_true",
-        help="whether or not to use curses.wrapper when starting",
-    )
-{% endif %}
+    logging_args(parser)
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
     parser.add_argument(
         "-C",
@@ -92,10 +66,12 @@ def main(argv: List[str] = None) -> int:
 {% if "no_logging_init" not in package or not package["no_logging_init"] %}
 
         # initialize logging
-        init_logging(args)
+        init_logging(
+            args, default_format="{{package["log_format"]}}"
+        )
 {% endif %}
-
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
+
         # change to the specified directory
         os.chdir(args.dir)
 

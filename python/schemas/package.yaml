@@ -60,11 +60,6 @@ time_command:
   type: boolean
   required: false
 
-# Whether or not to generate a command-line switch for TUI mode.
-curses:
-  type: boolean
-  required: false
-
 no_logging_init:
   type: boolean
   required: false
