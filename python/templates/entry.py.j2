@@ -13,7 +13,11 @@ import sys
 from typing import List
 
 # third-party
+{% if "no_logging_init" not in package or not package["no_logging_init"] %}
 from vcorelib.logging import init_logging, logging_args
+{% else %}
+from vcorelib.logging import logging_args
+{% endif %}
 {% if "time_command" in package and package["time_command"] %}
 from vcorelib.logging import log_time as _log_time
 {% endif %}
