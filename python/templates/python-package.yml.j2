@@ -46,9 +46,10 @@ jobs:
       - run: pip${{"{{matrix.python-version}}"}} install -e .
 {% elif package["name"] == "vcorelib" %}
       - run: pip${{"{{matrix.python-version}}"}} install -e .
-      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib
+      - run: mk python-editable
 {% else %}
-      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib
 {% endif %}
 {% if "ci_local" in package and package["ci_local"] %}
 
