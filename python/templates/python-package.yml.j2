@@ -44,6 +44,9 @@ jobs:
 
 {% if package["name"] == "vmklib" %}
       - run: pip${{"{{matrix.python-version}}"}} install -e .
+{% elif package["name"] == "vcorelib" %}
+      - run: pip${{"{{matrix.python-version}}"}} install -e .
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
 {% else %}
       - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0
 {% endif %}
