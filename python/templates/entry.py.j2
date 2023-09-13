@@ -5,6 +5,9 @@ This package's command-line entry-point (boilerplate).
 
 # built-in
 import argparse
+{% if "time_command" in package and package["time_command"] %}
+from logging import getLogger
+{% endif %}
 {% if "no_chdir_arg" not in package or not package["no_chdir_arg"] %}
 import os
 from pathlib import Path
@@ -14,12 +17,13 @@ from typing import List
 
 # third-party
 {% if "no_logging_init" not in package or not package["no_logging_init"] %}
+  {% if "time_command" in package and package["time_command"] %}
+from vcorelib.logging import init_logging, log_time, logging_args
+  {% else %}
 from vcorelib.logging import init_logging, logging_args
+  {% endif %}
 {% else %}
 from vcorelib.logging import logging_args
-{% endif %}
-{% if "time_command" in package and package["time_command"] %}
-from vcorelib.logging import log_time as _log_time
 {% endif %}
 
 # internal
@@ -82,7 +86,7 @@ def main(argv: List[str] = None) -> int:
 {% endif %}
         # run the application
 {% if "time_command" in package and package["time_command"] %}
-        with _log_time(logging.getLogger(__name__), "Command"):
+        with log_time(getLogger(__name__), "Command"):
             result = entry(args)
 {% else %}
         result = entry(args)
