@@ -46,12 +46,16 @@ renders:
       - compiles-license
 
 groups:
-  - name: yambs-native-renders
+  - name: yambs-native-renders-minimal
     dependencies:
       - renders-native_tasks.py
+      - renders-clang-format
+      - renders-conf.py
+
+  - name: yambs-native-renders
+    dependencies:
       - renders-yambs-project.yml
       - renders-README.md
       - renders-yambs.yaml
-      - renders-clang-format
       - renders-index.rst
-      - renders-conf.py
+      - groups-yambs-native-renders-minimal
