@@ -24,7 +24,13 @@ class CoverageManager:
 
         self.info_files: Set[Path] = set()
 
-        self.lcov_args = ["-q", "-d", str(self.build_dir)]
+        self.lcov_args = [
+            "--gcov-tool",
+            "gcov-12",
+            "-q",
+            "-d",
+            str(self.build_dir),
+        ]
 
     async def init(self) -> None:
         """Initialize code-coverage gathering."""
