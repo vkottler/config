@@ -57,6 +57,9 @@ jobs:
           gcov: true
           gcov_include: build/debug
           gcov_ignore: .mypy_cache
+          gcov_executable: gcov-12
+          fail_ci_if_error: true
+          verbose: true
 
       - run: mk release
         if: |
