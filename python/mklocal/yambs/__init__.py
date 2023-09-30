@@ -28,6 +28,7 @@ from .edit import GenerateTags
 from .release import YambsUploadRelease
 from .run import YambsRunApp
 from .test import YambsRunTest
+from .toolchains import register_toolchains
 
 __all__ = [
     "Yambs",
@@ -56,8 +57,6 @@ def register_yambs_native(
     """Register project tasks to the manager."""
 
     register_docs(manager, project, cwd, substitutions)
-
-    del project
 
     # Source a 'site.env' if one is present.
     try_source(cwd.joinpath("site.env"))
@@ -118,5 +117,7 @@ def register_yambs_native(
             "yaml-lint-yambs.yaml",
         ],
     )
+
+    register_toolchains(manager, project, cwd, substitutions)
 
     return True
