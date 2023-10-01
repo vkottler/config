@@ -104,6 +104,7 @@ def register_yambs_native(
     manager.register(GenerateTags("edit", cwd), deps)
 
     # Upload a release.
+    manager.register(YambsUploadRelease("release-only", cwd))
     manager.register(YambsUploadRelease("release", cwd), ["dist"])
 
     # YAML linting.
