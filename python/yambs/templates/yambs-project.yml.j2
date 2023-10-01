@@ -39,14 +39,17 @@ jobs:
       - run: mk dz-sync
 
       - run: mk yaml python-lint python-sa
+{% if "embedded" not in project and not project["embedded"] %}
 
       - run: sudo apt-get install lcov doxygen clang-15 clang-format-15
 
       - run: mk t variant=clang coverage=false
       - run: ninja all format-check
+{% endif %}
 
       - run: mk dist docs
         if: github.ref_name != '{{project.main_branch}}'
+{% if "embedded" not in project and not project["embedded"] %}
 
       # Need to clean because codecov is not finding coverage otherwise.
       - run: mk c keep=debug
@@ -60,6 +63,7 @@ jobs:
           gcov_executable: gcov-12
           fail_ci_if_error: true
           verbose: true
+{% endif %}
 
       - run: mk release
         if: |

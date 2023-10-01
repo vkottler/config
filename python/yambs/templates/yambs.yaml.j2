@@ -22,6 +22,8 @@ variants:
   clang-opt:
     suffix: *clang_version
 {% else %}
+includes:
+  - local/yambs.yaml
 
 variants:
   # Disable regular targets.

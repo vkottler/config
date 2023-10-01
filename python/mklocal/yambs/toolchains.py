@@ -20,6 +20,7 @@ from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
 # isort: on
 
 # internal
+from .common import add_path
 from .jlink import register_jlink
 from .jlink.gdbserver import jlink_gdbserver_task
 
@@ -114,6 +115,8 @@ def register_toolchains(
 
     toolchains = ["arm-picolibc-eabi"]
     manager.register(Phony("toolchains"), [f"pack-{x}" for x in toolchains])
+    for toolchain in toolchains:
+        add_path(cwd.joinpath("toolchains", toolchain, "bin"))
 
     third_party = cwd.joinpath("third-party")
 
