@@ -8,6 +8,7 @@ project:
 
 {{project["config_local"]}}
 {% endif %}
+{% if "embedded" not in project and not project["embedded"] %}
 
 variants:
   debug:
@@ -20,3 +21,16 @@ variants:
 
   clang-opt:
     suffix: *clang_version
+{% else %}
+
+variants:
+  # Disable regular targets.
+  debug:
+    enabled: false
+  opt:
+    enabled: false
+  clang:
+    enabled: false
+  clang-opt:
+    enabled: false
+{% endif %}
