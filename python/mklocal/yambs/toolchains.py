@@ -19,6 +19,12 @@ from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
 
 # isort: on
 
+# internal
+from .jlink import register_jlink
+from .jlink.gdbserver import jlink_gdbserver_task
+
+BOARDS = ["relax_kit", "grand_central", "pi_pico"]
+
 
 class CrosstoolTask(ConcreteOnceMixin, SubprocessLogMixin):
     """
@@ -108,6 +114,12 @@ def register_toolchains(
 
     toolchains = ["arm-picolibc-eabi"]
     manager.register(Phony("toolchains"), [f"pack-{x}" for x in toolchains])
+
+    third_party = cwd.joinpath("third-party")
+
+    register_jlink(manager, third_party)
+    for board in BOARDS:
+        assert manager.register(jlink_gdbserver_task(board, third_party))
 
     del project
     del substitutions
