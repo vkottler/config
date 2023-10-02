@@ -8,31 +8,29 @@ project:
 
 {{project["config_local"]}}
 {% endif %}
+variants:
+  clang:
+    suffix: &clang_version "-15"
 {% if "embedded" not in project and not project["embedded"] %}
 
-variants:
   debug:
     suffix: "-12"
   opt:
     suffix: "-12"
 
-  clang:
-    suffix: &clang_version "-15"
-
   clang-opt:
     suffix: *clang_version
 {% else %}
-includes:
-  - local/yambs.yaml
+    enabled: false
 
-variants:
   # Disable regular targets.
   debug:
     enabled: false
   opt:
     enabled: false
-  clang:
-    enabled: false
   clang-opt:
     enabled: false
+
+includes:
+  - local/yambs.yaml
 {% endif %}
