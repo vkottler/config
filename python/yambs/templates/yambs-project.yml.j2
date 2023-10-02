@@ -51,7 +51,7 @@ jobs:
 {% endif %}
       - run: ninja all format-check
 
-      - run: mk dist docs
+      - run: mk dist{% if project.get("embedded") %}={{project["name"]}}{% endif %} docs
         if: github.ref_name != '{{project.main_branch}}'
 {% if "embedded" not in project and not project["embedded"] %}
 
