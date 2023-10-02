@@ -45,7 +45,7 @@ jobs:
 
       - run: mk t variant=clang coverage=false
 {% else %}
-      - run: sudo apt-get install clang-format-15
+      - run: sudo apt-get install doxygen clang-format-15
       - run: mk download-toolchains
       - run: mk g
 {% endif %}
