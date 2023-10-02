@@ -57,12 +57,13 @@ class YambsTask(SubprocessLogMixin):
     ) -> bool:
         """Attempt a ninja command."""
 
-        if target is None:
-            target = YambsTask.default_variant
-
         result = True
         if build:
-            result = await self.exec(ninja, *args, target)
+            all_args = [*args]
+            if target is not None:
+                all_args.append(target)
+
+            result = await self.exec(ninja, *all_args)
         return result
 
     async def run_generate_build(
