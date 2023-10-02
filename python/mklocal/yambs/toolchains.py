@@ -21,6 +21,7 @@ from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
 
 # internal
 from .common import add_path
+from .download import YambsDownload
 from .jlink import register_jlink
 from .jlink.gdbserver import jlink_gdbserver_task
 
@@ -123,6 +124,9 @@ def register_toolchains(
     register_jlink(manager, third_party)
     for board in BOARDS:
         assert manager.register(jlink_gdbserver_task(board, third_party))
+
+    # Register a task for downloading toolchains.
+    manager.register(YambsDownload("download-toolchains", cwd))
 
     del project
     del substitutions

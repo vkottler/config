@@ -44,8 +44,10 @@ jobs:
       - run: sudo apt-get install lcov doxygen clang-15 clang-format-15
 
       - run: mk t variant=clang coverage=false
-      - run: ninja all format-check
+{% else %}
+      - run: mk download-toolchains
 {% endif %}
+      - run: ninja all format-check
 
       - run: mk dist docs
         if: github.ref_name != '{{project.main_branch}}'
