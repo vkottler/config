@@ -11,7 +11,7 @@ project:
 variants:
   clang:
     suffix: &clang_version "-15"
-{% if "embedded" not in project and not project["embedded"] %}
+{% if "embedded" not in project or not project["embedded"] %}
 
   debug:
     suffix: "-12"

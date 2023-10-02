@@ -39,7 +39,7 @@ jobs:
       - run: mk dz-sync
 
       - run: mk yaml python-lint python-sa
-{% if "embedded" not in project and not project["embedded"] %}
+{% if "embedded" not in project or not project["embedded"] %}
 
       - run: sudo apt-get install lcov doxygen clang-15 clang-format-15
 
@@ -51,10 +51,10 @@ jobs:
 {% endif %}
       - run: ninja all format-check
 
-      - run: mk dist docs{% if project.get("embedded") %} variant={{project["name"]}}{% endif %}
+      - run: mk dist docs{% if "embedded" in project and project["embedded"] %} variant={{project["name"]}}{% endif %}
 
         if: github.ref_name != '{{project.main_branch}}'
-{% if "embedded" not in project and not project["embedded"] %}
+{% if "embedded" not in project or not project["embedded"] %}
 
       # Need to clean because codecov is not finding coverage otherwise.
       - run: mk c keep=debug
@@ -70,7 +70,7 @@ jobs:
           verbose: true
 {% endif %}
 
-      - run: mk release{% if project.get("embedded") %} variant={{project["name"]}}{% endif %}
+      - run: mk release{% if "embedded" in project and project["embedded"] %} variant={{project["name"]}}{% endif %}
 
         if: |
           env.GITHUB_API_TOKEN != ''
