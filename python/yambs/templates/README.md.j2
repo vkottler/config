@@ -5,3 +5,22 @@
 ![Build Status](https://github.com/{{project.owner}}/{{project.name}}/actions/workflows/yambs-project.yml/badge.svg)
 
 *{{project.description}}*
+
+## Workflow
+
+Install [vmklib](https://github.com/vkottler/vmklib) such that you can
+`mk --version` (a `pip install vmklib` to your desired Python environment is
+all that's needed).
+
+From a fresh checkout:
+
+```
+git submodule update --init
+mk dz-sync
+{% if "embedded" in project and project["embedded"] %}
+mk download-toolchains
+{% endif %}
+mk g
+```
+
+This should result in fully compiled code that you can now use or add to.
