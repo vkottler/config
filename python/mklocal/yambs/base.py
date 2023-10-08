@@ -41,12 +41,15 @@ class YambsTask(SubprocessLogMixin):
         """Get the path to a variant's build directory."""
         return root.joinpath("build", variant)
 
+    def python_script(self, entry: str, inbox: Inbox) -> str:
+        """Get the path to a python script in the virtual environment."""
+        return str(
+            inbox["venv"]["venv{python_version}"]["bin"].joinpath(entry)
+        )
+
     def mbs(self, inbox: Inbox) -> str:
         """Get the path to the 'mbs' entry script."""
-
-        return str(
-            inbox["venv"]["venv{python_version}"]["bin"].joinpath("mbs")
-        )
+        return self.python_script("mbs", inbox)
 
     async def handle_build(
         self,

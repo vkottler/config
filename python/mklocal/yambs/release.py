@@ -9,9 +9,9 @@ from typing import Any, Dict
 # third-party
 from vcorelib.task import Inbox, Outbox
 
-# internal
 from vmklib.tasks.release import GithubRelease
 
+# internal
 from .base import YambsTask
 
 ApiResult = Dict[str, Any]
@@ -21,7 +21,7 @@ class YambsUploadRelease(YambsTask, GithubRelease):
     """A class for running the 'dist' command."""
 
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
-        """Generate ninja configuration files."""
+        """Create a GitHub release."""
 
         cwd: Path = args[0]
 
