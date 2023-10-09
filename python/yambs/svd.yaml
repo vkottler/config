@@ -1,0 +1,7 @@
+---
+variants:
+  debug: &targets
+    targets: [apps]
+  clang: *targets
+  opt: *targets
+  clang-opt: *targets
