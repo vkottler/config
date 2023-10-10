@@ -45,6 +45,10 @@ class IfgenTask(YambsTask):
             self.ifgen(inbox), "-C", str(cwd), cmd, *params
         )
 
+        # Format generated code.
+        if cmd != "svd" and result:
+            result &= await self.exec("ninja", "format")
+
         return result
 
 
