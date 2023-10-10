@@ -31,11 +31,19 @@ class GenerateTags(YambsTask):
 
         src = root.joinpath("src")
 
+        sources = [str(src)]
+
+        # Tag third-party dependencies.
+        third_party = root.joinpath("third-party", "include")
+        if third_party.is_dir():
+            sources.append(str(third_party))
+
         # Create initial tags file.
         result = await self.shell_cmd_in_dir(
             root,
             common
-            + [f"--exclude={src.joinpath('third-party')}", "-R", str(src)],
+            + [f"--exclude={src.joinpath('third-party')}", "-R"]
+            + sources,
         )
 
         # Run editor.
