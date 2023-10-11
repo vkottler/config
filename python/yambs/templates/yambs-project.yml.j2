@@ -41,15 +41,15 @@ jobs:
       - run: mk yaml python-lint python-sa
 {% if "embedded" not in project or not project["embedded"] %}
 
-      - run: sudo apt-get install lcov doxygen clang-15 clang-format-15
+      - run: sudo apt-get install lcov doxygen clang-15{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
 
       - run: mk t variant=clang coverage=false
 {% else %}
-      - run: sudo apt-get install doxygen clang-format-15
+      - run: sudo apt-get install doxygen{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
       - run: mk download-toolchains
       - run: mk g
 {% endif %}
-      - run: ninja all format-check
+      - run: ninja all{% if "format" not in project or project["format"] %} format-check{% endif %}
 
       - run: mk dist docs{% if "embedded" in project and project["embedded"] %} variant={{project["name"]}}{% endif %}
 
