@@ -6,10 +6,14 @@ A module for working with GitHub releases.
 from pathlib import Path
 from typing import Any, Dict
 
+# isort: off
+
 # third-party
 from vcorelib.task import Inbox, Outbox
 
 from vmklib.tasks.release import GithubRelease
+
+# isort: on
 
 # internal
 from .base import YambsTask
