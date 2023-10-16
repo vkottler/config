@@ -46,6 +46,7 @@ jobs:
       - run: mk t variant=clang coverage=false
 {% else %}
       - run: sudo apt-get install doxygen{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
+
       - run: mk download-toolchains
       - run: mk g
 {% endif %}
