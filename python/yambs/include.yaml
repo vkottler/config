@@ -35,6 +35,11 @@ renders:
     dependencies:
       - compiles-local
 
+  - name: env
+    output_dir: "."
+    dependencies:
+      - compiles-local
+
   - name: index.rst
     output_dir: docs
     dependencies:
