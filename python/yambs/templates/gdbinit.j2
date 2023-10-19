@@ -8,7 +8,10 @@ monitor reset
 break main
 continue
 
-# Enable semihosting.
+# Enable semihosting (for the debugger).
 monitor semihosting breakOnError
 monitor semihosting enable
 monitor semihosting IOClient 2
+
+# Enable semihosting (in the program).
+set var enable_semihosting = true
