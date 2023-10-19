@@ -37,6 +37,13 @@ renders:
 
   - name: env
     output_dir: "."
+    output_path: .env
+    dependencies:
+      - compiles-local
+
+  - name: gdbinit
+    output_dir: "."
+    output_path: .gdbinit
     dependencies:
       - compiles-local
 
@@ -56,6 +63,11 @@ groups:
       - renders-native_tasks.py
       - renders-clang-format
       - renders-conf.py
+
+  - name: yambs-embedded-renders
+    dependencies:
+      - renders-env
+      - renders-gdbinit
 
   - name: yambs-native-renders
     dependencies:
