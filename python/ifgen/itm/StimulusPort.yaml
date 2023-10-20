@@ -1,0 +1,18 @@
+---
+structs:
+  ItmStimulusPort:
+    description: A generic 32-bit container.
+    fields:
+      - name: u32
+        type: uint32_t
+        alternates:
+          - {name: u8, type: uint8_t}
+          - {name: u16, type: uint16_t}
+        fields:
+          - name: FIFOREADY
+            index: 0
+            write: false
+            description: |-
+              Indicates whether the stimulus port FIFO can accept data.
+
+    instances: [{name: DONTUSE1, address: "0x0"}]

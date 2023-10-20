@@ -1,0 +1,10 @@
+---
+struct:
+  stream: false
+  codec: false
+  methods: false
+  unit_test: false
+  identifier: false
+enum:
+  use_map: false
+  identifier: false

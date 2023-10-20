@@ -1,0 +1,123 @@
+---
+includes_left:
+  - StimulusPort.yaml
+
+structs:
+  itm:
+    description: Instrumentation Trace Macrocell Unit
+    instances: [{name: ITM, address: '0xE0000000'}]
+    fields:
+      - name: STIM
+        type: ItmStimulusPort
+        array_length: 256
+
+      - name: TER
+        type: &reg_type uint32_t
+        expected_offset: 0xE00
+        array_length: 8
+        fields:
+          - name: STIMENA
+            index: 0
+            width: 32
+            description: Enable or disable stimulus port (32x + n).
+
+      - name: TPR
+        description: |-
+          (Cortex-M4) Enables an operating system to control the stimulus ports
+          that are accessible by user code.
+        type: *reg_type
+        expected_offset: 0xE40
+        fields:
+          - name: PRIVMASK
+            index: 0
+            width: 32
+            description: Bit mask to enable tracing on ITM stimulus ports.
+
+      - name: TCR
+        type: *reg_type
+        expected_offset: 0xE80
+        fields:
+          - name: BUSY
+            index: 23
+            description: Whether or not the ITM is currently processing events.
+            write: false
+          - name: TraceBusID
+            index: 16
+            width: 6
+            description: Identifier for multi-source trace stream formatting.
+          - name: GTSFREQ
+            index: 10
+            width: 2
+            description: Global timestamp frequency.
+          - name: TSPrescale
+            index: 8
+            width: 2
+            description: Local timestamp prescaler.
+          - name: SWOENA
+            index: 4
+            description: |-
+              Enables asynchronous clocking of the timestamp counter.
+          - name: TXENA
+            index: 3
+            description: |-
+              Enables forwarding of hardware event packet from the DWT unit to
+              the ITM for output to TPIU.
+          - name: SYNCENA
+            index: 2
+            description: |-
+              Enables Synchronization packet transmission for a synchronous
+              TPIU.
+          - name: TSENA
+            index: 1
+            description: Enables Local timestamp generation.
+          - name: ITMENA
+            index: 0
+            description: This is the enable control for the ITM unit.
+
+      - name: PID4
+        type: *reg_type
+        expected_offset: 0xFD0
+
+      - name: PID5
+        type: *reg_type
+        expected_offset: 0xFD4
+
+      - name: PID6
+        type: *reg_type
+        expected_offset: 0xFD8
+
+      - name: PID7
+        type: *reg_type
+        expected_offset: 0xFDC
+
+      - name: PID0
+        type: *reg_type
+        expected_offset: 0xFE0
+
+      - name: PID1
+        type: *reg_type
+        expected_offset: 0xFE4
+
+      - name: PID2
+        type: *reg_type
+        expected_offset: 0xFE8
+
+      - name: PID3
+        type: *reg_type
+        expected_offset: 0xFEC
+
+      - name: CID0
+        type: *reg_type
+        expected_offset: 0xFF0
+
+      - name: CID1
+        type: *reg_type
+        expected_offset: 0xFF4
+
+      - name: CID2
+        type: *reg_type
+        expected_offset: 0xFF8
+
+      - name: CID3
+        type: *reg_type
+        expected_offset: 0xFFC
