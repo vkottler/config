@@ -1,6 +1,13 @@
 ---
 cflag_groups:
   picolib: [-specs=picolibcpp.specs]
-  m4: [-mcpu=cortex-m4]
+
   hwfp: [-mfpu=auto, -mfloat-abi=hard]
+
+  # Processors.
+  m0plus: [-mcpu=cortex-m0plus]
+  m4: [-mcpu=cortex-m4]
+
+  # Architectures.
+  armv6m: [-march=armv6-m]
   armv7emfp: [-march=armv7e-m+fp]
