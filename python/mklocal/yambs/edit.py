@@ -38,6 +38,14 @@ class GenerateTags(YambsTask):
         if third_party.is_dir():
             sources.append(str(third_party))
 
+        # Toolchains.
+        toolchain = kwargs.get("toolchain", "arm-picolibc-eabi")
+        toolchain_include = root.joinpath(
+            "toolchains", toolchain, toolchain, "include"
+        )
+        if toolchain_include.is_dir():
+            sources.append(str(toolchain_include))
+
         # Create initial tags file.
         result = await self.shell_cmd_in_dir(
             root,

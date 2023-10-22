@@ -15,3 +15,6 @@ monitor semihosting IOClient 2
 
 # Enable semihosting (in the program).
 set var enable_semihosting = true
+
+# Enable the command-line interface (in the program).
+set var enable_cli = true
