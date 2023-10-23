@@ -47,6 +47,12 @@ renders:
     dependencies:
       - compiles-local
 
+  - name: vimrc
+    output_dir: "."
+    output_path: .vimrc
+    dependencies:
+      - compiles-local
+
   - name: index.rst
     output_dir: docs
     dependencies:
@@ -68,6 +74,7 @@ groups:
     dependencies:
       - renders-env
       - renders-gdbinit
+      - renders-vimrc
 
   - name: yambs-native-renders
     dependencies:
