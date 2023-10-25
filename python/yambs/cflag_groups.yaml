@@ -1,4 +1,9 @@
 ---
+extra_dist: [local]
+
+ldflag_groups:
+  semihost: [-lsemihost]
+
 cflag_groups:
   picolib: [-specs=picolibcpp.specs]
 
