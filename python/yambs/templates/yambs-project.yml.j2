@@ -41,7 +41,7 @@ jobs:
       - run: mk yaml python-lint python-sa
 {% if "embedded" not in project or not project["embedded"] %}
 
-      - run: sudo apt-get install lcov doxygen clang-15{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
+      - run: sudo apt-get install gcc-12 g++-12 lcov doxygen clang-15{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
 
       - run: mk t variant=clang coverage=false
 {% else %}
