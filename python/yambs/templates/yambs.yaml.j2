@@ -1,3 +1,4 @@
+{% import __templates__["yambs_constants"] as constants %}
 ---
 project:
   name: {{project.name}}
@@ -10,13 +11,13 @@ project:
 {% endif %}
 variants:
   clang:
-    suffix: &clang_version "-15"
+    suffix: &clang_version "{{constants.clang_suffix}}"
 {% if "embedded" not in project or not project["embedded"] %}
 
   debug:
-    suffix: "-13"
+    suffix: &gcc_version "{{constants.gcc_suffix}}"
   opt:
-    suffix: "-13"
+    suffix: *gcc_version
 
   clang-opt:
     suffix: *clang_version

@@ -1,3 +1,4 @@
+{% import __templates__["yambs_constants"] as constants %}
 ---
 name: Yambs Project
 
@@ -41,11 +42,11 @@ jobs:
       - run: mk yaml python-lint python-sa
 {% if "embedded" not in project or not project["embedded"] %}
 
-      - run: sudo apt-get install gcc-12 g++-12 lcov doxygen clang-15{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
+      - run: sudo apt-get install gcc{{constants.gcc_suffix}} g++{{constants.gcc_suffix}} lcov doxygen clang{{constants.clang_suffix}}{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
 
       - run: mk t variant=clang coverage=false
 {% else %}
-      - run: sudo apt-get install doxygen{% if "format" not in project or project["format"] %} clang-format-15{% endif %}
+      - run: sudo apt-get install doxygen{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
 
       - run: mk download-toolchains
       - run: mk g
@@ -66,7 +67,7 @@ jobs:
           gcov: true
           gcov_include: build/debug
           gcov_ignore: .mypy_cache
-          gcov_executable: gcov-12
+          gcov_executable: gcov{{constants.gcc_suffix}}
           fail_ci_if_error: true
           verbose: true
 {% endif %}
