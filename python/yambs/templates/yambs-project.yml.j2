@@ -44,6 +44,12 @@ jobs:
 
       - run: sudo apt-get install gcc{{constants.gcc_suffix}} g++{{constants.gcc_suffix}} lcov doxygen clang{{constants.clang_suffix}}{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
 
+      # List versions.
+      - run: gcc{{constants.gcc_suffix}} --version
+      - run: g++{{constants.gcc_suffix}} --version
+      - run: clang{{constants.clang_suffix}} --version
+      - run: clang++{{constants.clang_suffix}} --version
+
       - run: mk t variant=clang coverage=false
 {% else %}
       - run: sudo apt-get install doxygen{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
