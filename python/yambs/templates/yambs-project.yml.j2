@@ -42,6 +42,13 @@ jobs:
       - run: mk yaml python-lint python-sa
 {% if "embedded" not in project or not project["embedded"] %}
 
+      - name: setup clang {{constants.clang_version}}
+        run: |
+          wget https://apt.llvm.org/llvm.sh
+          chmod +x ./llvm.sh
+          sudo ./llvm.sh {{constants.clang_version}}
+          rm llvm.sh
+
       - run: sudo apt-get install gcc{{constants.gcc_suffix}} g++{{constants.gcc_suffix}} lcov doxygen clang{{constants.clang_suffix}}{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
 
       # List versions.
