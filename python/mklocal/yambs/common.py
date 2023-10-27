@@ -3,6 +3,7 @@ Utilities common to multiple project tasks.
 """
 
 # built-in
+from contextlib import suppress
 from os import environ, pathsep
 from pathlib import Path
 from typing import Dict
@@ -24,19 +25,24 @@ def add_program_path(
     *parts: str,
     update_path: bool = False,
     local_bin: bool = False,
-) -> None:
+) -> bool:
     """Register a path to a program."""
 
     prog = third_party.joinpath(*parts).resolve()
     assert program not in PATHS, prog
 
-    if update_path:
-        add_path(prog.parent)
+    result = False
 
-    if local_bin:
-        link_local_bin(prog)
+    with suppress(FileNotFoundError):
+        if update_path:
+            add_path(prog.parent)
 
-    PATHS[program] = prog
+        if local_bin:
+            link_local_bin(prog)
+
+        PATHS[program] = prog
+
+    return result
 
 
 def program_str(program: str) -> str:
