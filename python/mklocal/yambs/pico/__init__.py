@@ -13,6 +13,7 @@ from vcorelib.task.subprocess.run import SubprocessLogMixin
 from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
 
 # internal
+from ..base import YambsTask
 from ..common import add_program_path
 
 PIOASM_DIR = ["pico-sdk", "tools", "pioasm"]
@@ -41,25 +42,31 @@ class BuildPioasm(ConcreteOnceMixin, SubprocessLogMixin):
         return result
 
 
-class PicotoolDeploy(SubprocessLogMixin):
+class PicotoolDeploy(YambsTask):
     """A class implementing a simple picotool-based firmware deploy."""
+
+    default_variant = "pico"
 
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
         """Perform a firmware update using picotool."""
 
         root: Path = args[0]
-        print(root)
 
-        # Always attempt to build. Keep this?
-        # assert await self.exec("ninja")
+        entry = await self.select_app_variant(
+            root, app=kwargs.get("app", ""), variant=kwargs.get("variant")
+        )
 
-        # Perform load then reboot.
-        # assert await self.exec(
-        #     "picotool", "load", str(elf_path.with_suffix(".uf2"))
-        # )
-        # assert await self.exec("picotool", "reboot")
+        result = False
 
-        return True
+        if entry:
+            entry = entry.with_suffix(".uf2")
+            if entry.is_file():
+                # Perform load then reboot.
+                assert await self.exec("picotool", "load", str(entry))
+                assert await self.exec("picotool", "reboot")
+                result = True
+
+        return result
 
 
 def register(manager: TaskManager, cwd: Path) -> None:
@@ -76,4 +83,4 @@ def register(manager: TaskManager, cwd: Path) -> None:
         local_bin=True
     )
 
-    manager.register(PicotoolDeploy("picotool", cwd), ["gb"])
+    manager.register(PicotoolDeploy("pd", cwd), ["gb"])

@@ -10,7 +10,6 @@ from pathlib import Path
 from vcorelib.task import Inbox, Outbox
 
 # internal
-from ..prompts import manual_select
 from .base import YambsTask
 
 
@@ -18,42 +17,17 @@ class YambsRunApp(YambsTask):
     """A class for running built binaries."""
 
     async def run_app(
-        self,
-        root: Path,
-        app: str = "",
-        variant: str = YambsTask.default_variant,
+        self, root: Path, app: str = "", variant: str = None
     ) -> bool:
         """Run a single application."""
 
-        data = self.apps(root)
+        entry = await self.select_app_variant(root, app=app, variant=variant)
 
-        # Select an application.
-        app_sel = manual_select("app", data["all"], default=app)
-        if app_sel is None:
-            return False
-
-        app_data = data["all"][app_sel]
-
-        # Select a variant.
-        variant_sel = manual_select(
-            "variant",
-            app_data["variants"],
-            default=variant,
-        )
-        if variant_sel is None:
-            return False
-
-        entry = app_data["variants"][variant_sel]
-
-        result = True
-
-        # Build if the file isn't there.
-        if not Path(entry).is_file():
-            result = await self.handle_build()
+        result = False
 
         # Run the application.
-        if result:
-            result = await self.exec(entry, env=os.environ)
+        if entry is not None and entry.is_file():
+            result = await self.exec(str(entry), env=os.environ)
 
         return result
 
