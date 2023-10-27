@@ -26,6 +26,7 @@ from .dist import YambsDist
 from .docs import register_docs
 from .edit import GenerateTags
 from .ifgen import register_ifgen
+from .pico import register as register_pico
 from .release import YambsUploadRelease
 from .run import YambsRunApp
 from .test import YambsRunTest
@@ -123,5 +124,7 @@ def register_yambs_native(
     # Register additional workflow tasks.
     for register in [register_toolchains, register_ifgen]:
         register(manager, project, cwd, substitutions)
+
+    register_pico(manager, cwd)
 
     return True

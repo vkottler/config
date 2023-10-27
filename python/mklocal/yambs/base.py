@@ -5,7 +5,7 @@ A module implementing task interfaces for the yambs project.
 # built-in
 from functools import lru_cache
 from pathlib import Path
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 # isort: off
 
@@ -16,6 +16,9 @@ from vcorelib.task.subprocess.run import SubprocessLogMixin
 from yambs.config.native import Native, load_native
 
 # isort: on
+
+# internal
+from ..prompts import manual_select
 
 
 class YambsTask(SubprocessLogMixin):
@@ -94,3 +97,40 @@ class YambsTask(SubprocessLogMixin):
             )
 
         return result
+
+    async def select_app_variant(
+        self,
+        root: Path,
+        app: str = "",
+        variant: str = None,
+    ) -> Optional[Path]:
+        """Select a compiled application (.elf)."""
+
+        if variant is None:
+            variant = self.default_variant
+
+        data = self.apps(root)
+
+        # Select an application.
+        app_sel = manual_select("app", data["all"], default=app)
+        if app_sel is None:
+            return None
+
+        app_data = data["all"][app_sel]
+
+        # Select a variant.
+        variant_sel = manual_select(
+            "variant",
+            app_data["variants"],
+            default=variant,
+        )
+        if variant_sel is None:
+            return None
+
+        entry = Path(app_data["variants"][variant_sel])
+
+        # Build if the file isn't there.
+        if not entry.is_file():
+            await self.handle_build(target=variant)
+
+        return entry

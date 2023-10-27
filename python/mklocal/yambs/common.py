@@ -23,7 +23,7 @@ def add_program_path(
     third_party: Path,
     *parts: str,
     update_path: bool = False,
-    local_bin: bool = False
+    local_bin: bool = False,
 ) -> None:
     """Register a path to a program."""
 
