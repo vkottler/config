@@ -3,6 +3,13 @@ cflag_groups:
   pico-sdk:
     # Disable some compile-time warnings.
     - -Wno-pedantic
+    - -Wno-unused-function
+
+    # Required definitions.
+    - -DCFG_TUSB_MCU=OPT_MCU_RP2040
+    - -DCFG_TUSB_OS=OPT_OS_PICO
+    - -DPICO_RP2040_USB_DEVICE_ENUMERATION_FIX=1
+    - -DPICO_RP2040_USB_DEVICE_UFRAME_FIX=1
 
     # Include directories.
     - -Ipico-sdk/src/boards/include
@@ -12,6 +19,7 @@ cflag_groups:
     - -Ipico-sdk/src/common/pico_sync/include
     - -Ipico-sdk/src/common/pico_util/include
     - -Ipico-sdk/src/common/pico_binary_info/include
+    - -Ipico-sdk/src/common/pico_usb_reset_interface/include
     - -Ipico-sdk/src/rp2_common/boot_stage2/asminclude
     - -Ipico-sdk/src/rp2_common/boot_stage2/include
     - -Ipico-sdk/src/rp2_common/cmsis/include
@@ -19,6 +27,8 @@ cflag_groups:
     - -Ipico-sdk/src/rp2_common/pico_printf/include
     - -Ipico-sdk/src/rp2_common/pico_bootrom/include
     - -Ipico-sdk/src/rp2_common/pico_multicore/include
+    - -Ipico-sdk/src/rp2_common/pico_stdio/include
+    - -Ipico-sdk/src/rp2_common/pico_stdio_usb/include
     - -Ipico-sdk/src/rp2_common/hardware_pio/include
     - -Ipico-sdk/src/rp2_common/hardware_gpio/include
     - -Ipico-sdk/src/rp2_common/hardware_base/include
@@ -27,11 +37,14 @@ cflag_groups:
     - -Ipico-sdk/src/rp2_common/hardware_sync/include
     - -Ipico-sdk/src/rp2_common/hardware_timer/include
     - -Ipico-sdk/src/rp2_common/hardware_uart/include
+    - -Ipico-sdk/src/rp2_common/hardware_flash/include
     - -Ipico-sdk/src/rp2_common/hardware_clocks/include
     - -Ipico-sdk/src/rp2_common/hardware_resets/include
     - -Ipico-sdk/src/rp2_common/hardware_watchdog/include
     - -Ipico-sdk/src/rp2_common/hardware_pll/include
     - -Ipico-sdk/src/rp2_common/hardware_xosc/include
+    - -Ipico-sdk/src/rp2_common/pico_unique_id/include
+    - -Ipico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/include
     - -Ipico-sdk/src/rp2040/hardware_regs/include
     - -Ipico-sdk/src/rp2040/hardware_structs/include
 
@@ -39,6 +52,15 @@ cflag_groups:
     - -Ipico-sdk/src/rp2_common/cmsis/include
     - -Ipico-sdk/src/rp2_common/cmsis/stub/CMSIS/Core/Include
     - -Ipico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Include
+
+    # TinyUSB.
+    - -Ipico-sdk/lib/tinyusb/src
+    - -Ipico-sdk/lib/tinyusb/src/class/cdc
+    - -Ipico-sdk/lib/tinyusb/src/common
+    - -Ipico-sdk/lib/tinyusb/src/device
+    - -Ipico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040
+    - -Ipico-sdk/lib/tinyusb/hw
+    - -Ipico-sdk/lib/tinyusb/hw/bsp/rp2040
 
 extra_sources:
   # Source directories.
@@ -56,11 +78,24 @@ extra_sources:
   - pico-sdk/src/rp2_common/hardware_xosc
   - pico-sdk/src/rp2_common/hardware_pll
   - pico-sdk/src/rp2_common/hardware_uart
+  - pico-sdk/src/rp2_common/hardware_flash
   - pico-sdk/src/rp2_common/pico_bootrom
   - pico-sdk/src/rp2_common/pico_runtime
   - pico-sdk/src/rp2_common/pico_platform
   - pico-sdk/src/rp2_common/pico_multicore
   - pico-sdk/src/rp2_common/pico_standard_link
+  - pico-sdk/src/rp2_common/pico_stdio
+  - pico-sdk/src/rp2_common/pico_stdio_usb
+  - pico-sdk/src/rp2_common/pico_unique_id
+  - pico-sdk/src/rp2_common/pico_fix/rp2040_usb_device_enumeration
 
   # CMSIS sources.
   - pico-sdk/src/rp2_common/cmsis/stub/CMSIS/Device/RaspberryPi/RP2040/Source
+
+  # TinyUSB.
+  - pico-sdk/lib/tinyusb/src
+  - pico-sdk/lib/tinyusb/src/class/cdc
+  - pico-sdk/lib/tinyusb/src/common
+  - pico-sdk/lib/tinyusb/src/device
+  - pico-sdk/lib/tinyusb/src/portable/raspberrypi/rp2040
+  - pico-sdk/lib/tinyusb/hw/bsp/rp2040

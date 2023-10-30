@@ -3,6 +3,7 @@ A module implementing tasks for RP2040 boards.
 """
 
 # built-in
+import asyncio
 from pathlib import Path
 
 # third-party
@@ -61,7 +62,11 @@ class PicotoolDeploy(YambsTask):
         if entry:
             entry = entry.with_suffix(".uf2")
             if entry.is_file():
+                assert await self.exec("picotool", "reboot", "-f", "-u")
+                await asyncio.sleep(2.0)
+
                 # Perform load then reboot.
+                assert await self.exec("picotool", "info")
                 assert await self.exec("picotool", "load", str(entry))
                 assert await self.exec("picotool", "reboot")
                 result = True
