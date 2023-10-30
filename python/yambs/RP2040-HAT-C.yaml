@@ -1,0 +1,19 @@
+---
+cflag_groups:
+  RP2040-HAT-C:
+    # Disable some compile-time warnings.
+    - -Wno-return-type
+    - -Wno-unused-but-set-variable
+
+    # Required definitions.
+    - -DUSE_SPI_DMA
+
+    # Include directories.
+    - -IRP2040-HAT-C/port
+    - -IRP2040-HAT-C/port/timer
+    - -IRP2040-HAT-C/port/mbedtls/inc
+    - -IRP2040-HAT-C/port/ioLibrary_Driver/inc
+
+extra_sources:
+  - RP2040-HAT-C/port/ioLibrary_Driver/src
+  - RP2040-HAT-C/port/timer

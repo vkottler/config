@@ -1,0 +1,19 @@
+---
+cflag_groups:
+  ioLibrary_Driver:
+    # Disable some compile-time warnings.
+    - -Wno-unused-parameter
+    - -Wno-misleading-indentation
+
+    # Include directories.
+    - -IioLibrary_Driver/Ethernet
+
+    - -IioLibrary_Driver/Internet/DHCP
+    - -IioLibrary_Driver/Internet/DNS
+
+extra_sources:
+  - ioLibrary_Driver/Ethernet
+  - ioLibrary_Driver/Ethernet/W5500
+
+  - ioLibrary_Driver/Internet/DHCP
+  - ioLibrary_Driver/Internet/DNS
