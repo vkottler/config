@@ -5,12 +5,37 @@ A module implementing a target for preparing tags for editing.
 # built-in
 import os
 from pathlib import Path
+from typing import List
 
 # third-party
 from vcorelib.task import Inbox, Outbox
 
 # internal
 from .base import YambsTask
+
+
+def get_extra_sources(root: Path) -> List[str]:
+    """Add extra source directories that may be used."""
+
+    result: List[str] = []
+
+    for candidate in [
+        ("pico-sdk", "src", "boards"),
+        ("pico-sdk", "src", "common"),
+        ("pico-sdk", "src", "rp2_common"),
+        ("pico-sdk", "src", "rp2040"),
+        ("RP2040-HAT-C",),
+        ("ioLibrary_Driver", "Ethernet"),
+        ("ioLibrary_Driver", "Internet", "DHCP"),
+        ("ioLibrary_Driver", "Internet", "DNS"),
+        # Create tags for this at some point?
+        # ("pico-sdk", "lib", "tinyusb", "src"),
+    ]:
+        full = root.joinpath(*candidate)
+        if full.is_dir():
+            result.append(str(full))
+
+    return result
 
 
 class GenerateTags(YambsTask):
@@ -31,7 +56,7 @@ class GenerateTags(YambsTask):
 
         src = root.joinpath("src")
 
-        sources = [str(src)]
+        sources = [str(src)] + get_extra_sources(root)
 
         # Tag third-party dependencies.
         third_party = root.joinpath("third-party", "include")
