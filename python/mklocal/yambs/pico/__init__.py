@@ -6,16 +6,19 @@ A module implementing tasks for RP2040 boards.
 import asyncio
 from pathlib import Path
 
+# isort: off
+
 # third-party
+from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
 from vcorelib.task import Inbox, Outbox
 from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 
-from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
-
 # internal
 from ..base import YambsTask
 from ..common import add_program_path
+
+# isort: on
 
 PIOASM_DIR = ["pico-sdk", "tools", "pioasm"]
 
