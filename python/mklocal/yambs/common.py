@@ -33,14 +33,15 @@ def add_program_path(
 
     result = False
 
-    with suppress(FileNotFoundError):
-        if update_path:
-            add_path(prog.parent)
+    if prog.is_file():
+        with suppress(FileNotFoundError):
+            if local_bin:
+                link_local_bin(prog)
 
-        if local_bin:
-            link_local_bin(prog)
+            if update_path:
+                add_path(prog.parent)
 
-        PATHS[program] = prog
+            PATHS[program] = prog
 
     return result
 

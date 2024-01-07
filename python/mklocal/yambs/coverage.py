@@ -25,9 +25,9 @@ class CoverageManager:
         self.info_files: Set[Path] = set()
 
         self.lcov_args = [
-            "--gcov-tool",
-            "gcov-12",
             "-q",
+            "--gcov-tool",
+            "gcov-13",
             "-d",
             str(self.build_dir),
         ]

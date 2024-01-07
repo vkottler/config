@@ -81,6 +81,7 @@ def register(manager: TaskManager, cwd: Path) -> None:
     """Register tasks related to the Pi Pico."""
 
     manager.register(BuildPioasm("pioasm", cwd))
+
     add_program_path(
         "pioasm",
         cwd,
