@@ -39,6 +39,7 @@ def register(
         if is_windows()
         else [
             "yaml-lint-local",
+            "yaml-lint-tasks",
             "yaml-lint-manifest.yaml",
             f"yaml-lint-{project.replace('-', '_')}",
         ],
