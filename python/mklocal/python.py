@@ -16,6 +16,7 @@ from vcorelib.task.subprocess.run import is_windows, register_http_server_task
 # isort: on
 
 # internal
+from mklocal.conntextual import register as register_conntextual
 from mklocal.docs import SphinxTask
 from mklocal.runtimepy import ArbiterTask
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
@@ -28,6 +29,8 @@ def register(
     substitutions: Dict[str, str],
 ) -> bool:
     """Register project tasks to the manager."""
+
+    register_conntextual(manager, project, cwd, substitutions)
 
     # Don't run yamllint on Windows because it will fail on newlines.
     manager.register(
