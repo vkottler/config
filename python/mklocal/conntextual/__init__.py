@@ -44,7 +44,7 @@ class ConntextualTask(SubprocessLogMixin):
             if path.is_file():
                 ext = FileExtension.from_path(path)
                 if ext is not None and ext.is_data():
-                    configs[path.name] = path
+                    configs[path.with_suffix("").name] = path
 
         app = manual_select(
             "app", configs, default=kwargs.get("app", "default")
@@ -52,7 +52,7 @@ class ConntextualTask(SubprocessLogMixin):
 
         result = False
         if app is not None:
-            config_args = []
+            config_args = [str(configs[app])]
 
             # Add extra data.
             extra_data: Dict[str, Any] = args[1]
