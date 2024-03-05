@@ -18,7 +18,6 @@ from vcorelib.task.subprocess.run import is_windows, register_http_server_task
 # internal
 from mklocal.conntextual import register as register_conntextual
 from mklocal.docs import SphinxTask
-from mklocal.runtimepy import ArbiterTask
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
 
 
@@ -45,8 +44,9 @@ def register(
         ],
     )
 
-    if project == "runtimepy":
-        manager.register(ArbiterTask("r", cwd))
+    # Use conntextual 'r' style target instead.
+    # if project == "runtimepy":
+    #     manager.register(ArbiterTask("r", cwd))
 
     # Documentation tasks.
     manager.register(SphinxTask("docs", cwd, project))
