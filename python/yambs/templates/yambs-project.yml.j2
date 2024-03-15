@@ -48,6 +48,12 @@ jobs:
           chmod +x ./llvm.sh
           sudo ./llvm.sh {{constants.clang_version}}
           rm llvm.sh
+{% if "wasm" in project and project["wasm"] %}
+
+      - run: sudo apt-get install emscripten
+      - run: emcc --version
+      - run: em++ --version
+{% endif %}
 
       - run: sudo apt-get install gcc{{constants.gcc_suffix}} g++{{constants.gcc_suffix}} lcov doxygen clang{{constants.clang_suffix}}{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
 
