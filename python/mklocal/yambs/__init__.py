@@ -18,6 +18,7 @@ from yambs.config.native import Native
 # isort: on
 
 # internal
+from mklocal.conntextual import register as register_conntextual
 from mklocal.env import try_source
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
 
@@ -112,18 +113,25 @@ def register_yambs_native(
     # YAML linting.
     manager.register(
         Phony("yaml"),
-        []
-        if is_windows()
-        else [
-            "yaml-lint-local",
-            "yaml-lint-manifest.yaml",
-            "yaml-lint-yambs.yaml",
-        ],
+        (
+            []
+            if is_windows()
+            else [
+                "yaml-lint-local",
+                "yaml-lint-manifest.yaml",
+                "yaml-lint-yambs.yaml",
+            ]
+        ),
     )
 
     # Register additional workflow tasks.
-    for register in [register_toolchains, register_ifgen]:
+    for register in [
+        register_toolchains,
+        register_ifgen,
+    ]:
         register(manager, project, cwd, substitutions)
+
+    register_conntextual(manager, project, cwd, substitutions, prefix="wa")
 
     register_pico(manager, cwd)
 

@@ -29,7 +29,6 @@ class ConntextualTask(SubprocessLogMixin):
     default_requirements = {
         "vmklib.init",
         "venv",
-        "python-editable",
         "python-install-conntextual",
     }
 
@@ -79,6 +78,7 @@ def register(
     project: str,
     cwd: Path,
     substitutions: Dict[str, str],
+    prefix: str = "r",
 ) -> bool:
     """Register project tasks to the manager."""
 
@@ -92,9 +92,13 @@ def register(
     standard: List[str] = []
     headless: List[str] = ["-v", "headless"]
 
-    manager.register(ConntextualTask("r", cwd, extra_data, standard))
-    manager.register(ConntextualTask("rh", cwd, extra_data, headless))
-    manager.register(ConntextualTask("r-{app}", cwd, extra_data, standard))
-    manager.register(ConntextualTask("rh-{app}", cwd, extra_data, headless))
+    manager.register(ConntextualTask(prefix, cwd, extra_data, standard))
+    manager.register(ConntextualTask(prefix + "h", cwd, extra_data, headless))
+    manager.register(
+        ConntextualTask(prefix + "-{app}", cwd, extra_data, standard)
+    )
+    manager.register(
+        ConntextualTask(prefix + "h-{app}", cwd, extra_data, headless)
+    )
 
     return True
