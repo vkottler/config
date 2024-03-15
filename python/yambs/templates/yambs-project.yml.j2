@@ -78,13 +78,13 @@ jobs:
 {% if "embedded" not in project or not project["embedded"] %}
 
       # Need to clean because codecov is not finding coverage otherwise.
-      - run: mk c keep=debug
-      - run: mk t
+      - run: mk c keep={{project["ci_variant"]}}
+      - run: mk t variant={{project["ci_variant"]}}
 
       - uses: codecov/codecov-action@v3
         with:
           gcov: true
-          gcov_include: build/debug
+          gcov_include: build/{{project["ci_variant"]}}
           gcov_ignore: .mypy_cache
           gcov_executable: gcov{{constants.gcc_suffix}}
           fail_ci_if_error: true
