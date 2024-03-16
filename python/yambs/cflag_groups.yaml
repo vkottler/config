@@ -4,6 +4,8 @@ extra_dist: [local]
 ldflag_groups:
   semihost: [-lsemihost]
 
+  wasm: [-lembind]
+
 cflag_groups:
   picolib: [-specs=picolibcpp.specs]
 
