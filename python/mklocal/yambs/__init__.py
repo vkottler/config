@@ -22,10 +22,10 @@ from mklocal.conntextual import register as register_conntextual
 from mklocal.env import try_source
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
 
+from ..edit import GenerateTags
 from .base import YambsTask
 from .dist import YambsDist
 from .docs import register_docs
-from .edit import GenerateTags
 from .ifgen import register_ifgen
 from .pico import register as register_pico
 from .release import YambsUploadRelease

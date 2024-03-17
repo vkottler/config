@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 from subprocess import run
 from sys import executable
+from typing import Iterable, Iterator
 
 
 def source_file(path: Path) -> None:
@@ -31,3 +32,14 @@ def try_source(path: Path) -> None:
 
     if path.is_file():
         source_file(path)
+
+
+def real_sources(
+    root: Path, candidates: Iterable[tuple[str, ...]]
+) -> Iterator[Path]:
+    """Add extra source directories that may be used."""
+
+    for candidate in candidates:
+        full = root.joinpath(*candidate)
+        if full.is_dir():
+            yield full
