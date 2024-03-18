@@ -14,6 +14,23 @@ from vcorelib.task.subprocess.run import SubprocessLogMixin
 # internal
 from mklocal.env import real_sources
 
+PREFIX = Path.home().joinpath(".local")
+
+
+def local_bin(program: str) -> Path:
+    """Get the path to a local binary."""
+    return PREFIX.joinpath("bin", program)
+
+
+def is_local_bin(program: str) -> bool:
+    """Determine if a binary or entry script is installed locally."""
+    return local_bin(program).is_file()
+
+
+def local_bin_if(program: str) -> str:
+    """Prefer a local binary instead if it exists."""
+    return str(local_bin(program)) if is_local_bin(program) else program
+
 
 class GenerateTags(SubprocessLogMixin):
     """A class implementing a task for generating tags files."""
@@ -45,7 +62,7 @@ class GenerateTags(SubprocessLogMixin):
         tags.unlink(missing_ok=True)
 
         common = [
-            "ctags",
+            local_bin_if("ctags"),
             "-f",
             str(rel(tags, base=root)),
             f"--languages={self.languages}",
