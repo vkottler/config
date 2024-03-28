@@ -24,12 +24,17 @@ class ArbiterTask(SubprocessLogMixin):
 
         config = configs.joinpath(kwargs.get("config", "test") + ".yaml")
 
-        return await self.exec(
+        cli_args = [
             str(
                 inbox["venv"]["venv{python_version}"]["bin"].joinpath(
                     "runtimepy"
                 )
-            ),
-            "arbiter",
-            str(config),
-        )
+            )
+        ]
+
+        if kwargs.get("verbose", False):
+            cli_args.append("--verbose")
+
+        cli_args += ["arbiter", str(config)]
+
+        return await self.exec(*cli_args)
