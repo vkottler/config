@@ -6,13 +6,17 @@ A module implementing a target for preparing tags for editing.
 import os
 from pathlib import Path
 
+# isort: off
+
+# internal
+from mklocal.env import real_sources
+
 # third-party
 from vcorelib.paths import rel
 from vcorelib.task import Inbox, Outbox
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 
-# internal
-from mklocal.env import real_sources
+# isort: on
 
 PREFIX = Path.home().joinpath(".local")
 
