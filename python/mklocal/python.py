@@ -33,7 +33,11 @@ class PythonTags(GenerateTags):
 
     languages = "Python"
 
-    extra_source_candidates = [("tasks",), ("tests",)]
+    extra_source_candidates = [
+        ("tasks",),
+        ("tests",),
+        (Path.home(), "src", "python", "cpython", "Lib"),
+    ]
 
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
         """Generate a tags files."""

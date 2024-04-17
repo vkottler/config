@@ -35,11 +35,14 @@ def try_source(path: Path) -> None:
 
 
 def real_sources(
-    root: Path, candidates: Iterable[tuple[str, ...]]
+    root: Path, candidates: Iterable[tuple[str | Path, ...]]
 ) -> Iterator[Path]:
     """Add extra source directories that may be used."""
 
     for candidate in candidates:
-        full = root.joinpath(*candidate)
+        full = Path(*candidate)
+        if not full.is_absolute():
+            full = root.joinpath(full)
+
         if full.is_dir():
             yield full

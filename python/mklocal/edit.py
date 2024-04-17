@@ -42,7 +42,7 @@ class GenerateTags(SubprocessLogMixin):
     default_editor = "vim"
     languages = "C,C++"
 
-    extra_source_candidates = [
+    extra_source_candidates: list[tuple[str | Path, ...]] = [
         ("pico-sdk", "src", "boards"),
         ("pico-sdk", "src", "common"),
         ("pico-sdk", "src", "rp2_common"),
