@@ -89,8 +89,8 @@ def register(
         "substitutions": substitutions,
     }
 
-    standard: List[str] = []
-    headless: List[str] = ["-v", "headless"]
+    standard: List[str] = ["-n"]
+    headless: List[str] = standard + ["-v", "headless"]
 
     manager.register(ConntextualTask(prefix, cwd, extra_data, standard))
     manager.register(ConntextualTask(prefix + "h", cwd, extra_data, headless))
