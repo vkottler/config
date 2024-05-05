@@ -102,8 +102,8 @@ class YambsRunTest(YambsTask):
                         test
                         # Aggregate scripts to run.
                         for test in [
-                            Path(data["all"][test_name]["variants"][variant])
-                            for test_name in data["tests"]
+                            Path(data["all"][name]["variants"][variant])
+                            for name in data["tests"]
                         ]
                         if search(pattern, test_name(test)) is not None
                     ]
