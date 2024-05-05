@@ -16,7 +16,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.11]
+        python-version: [3.11, 3.12]
+
     env:
       PYTHON_VERSION: ${{"{{matrix.python-version}}"}}
 
@@ -81,7 +82,7 @@ jobs:
       - run: mk c keep={{project["ci_variant"]}}
       - run: mk t variant={{project["ci_variant"]}}
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v3.1.5
         with:
           gcov: true
           gcov_include: build/{{project["ci_variant"]}}
