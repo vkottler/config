@@ -10,6 +10,7 @@ on:
 
 env:
   GITHUB_API_TOKEN: ${{"{{secrets.API_TOKEN}}"}}
+  CODECOV_TOKEN: ${{"{{secrets.CODECOV_TOKEN}}"}}
 
 jobs:
   build:
@@ -90,6 +91,7 @@ jobs:
           gcov_executable: gcov{{constants.gcc_suffix}}
           fail_ci_if_error: true
           verbose: true
+          token: ${{"{{secrets.CODECOV_TOKEN}}"}}
 {% endif %}
 
       - run: mk release{% if "embedded" in project and project["embedded"] %} variant={{project["name"]}}{% endif %}
