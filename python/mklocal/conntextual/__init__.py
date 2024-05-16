@@ -89,7 +89,7 @@ def register(
         "substitutions": substitutions,
     }
 
-    standard: List[str] = ["-n"]
+    standard: List[str] = ["-n", "--no-poller"]
     headless: List[str] = standard + ["-v", "headless"]
 
     manager.register(ConntextualTask(prefix, cwd, extra_data, standard))
