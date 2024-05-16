@@ -93,15 +93,19 @@ renders:
       - compiles-local
 
 groups:
+  - name: base-project
+    dependencies:
+      - renders-requirements.txt
+      - renders-dev_requirements.txt
+      - renders-python_tasks.py
+
   - name: python-package-renders
     dependencies:
+      - groups-base-project
       - renders-__init__.py
       - renders-pyproject.toml
       - renders-mypy.ini
       - renders-setup.py
-      - renders-requirements.txt
-      - renders-dev_requirements.txt
-      - renders-python_tasks.py
   - name: python-cli-renders
     dependencies:
       - renders-__main__.py
