@@ -98,25 +98,28 @@ groups:
       - renders-requirements.txt
       - renders-dev_requirements.txt
       - renders-python_tasks.py
+      - renders-mypy.ini
+      - renders-__init__.py
 
   - name: python-package-renders
     dependencies:
       - groups-base-project
-      - renders-__init__.py
       - renders-pyproject.toml
-      - renders-mypy.ini
       - renders-setup.py
+
   - name: python-cli-renders
     dependencies:
       - renders-__main__.py
       - renders-entry.py
       - renders-app.py
       - renders-all.py
+
   - name: python
     dependencies:
       - groups-python-package-renders
       - groups-python-cli-renders
       - renders-python-package.yml
+
   - name: python-no-cli
     dependencies:
       - groups-python-package-renders
