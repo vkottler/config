@@ -42,7 +42,6 @@ jobs:
       - run: mk dz-sync
 
       - run: mk yaml python-lint python-sa
-{% if "embedded" not in project or not project["embedded"] %}
 
       - name: setup clang {{constants.clang_version}}
         run: |
@@ -50,6 +49,7 @@ jobs:
           chmod +x ./llvm.sh
           sudo ./llvm.sh {{constants.clang_version}}
           rm llvm.sh
+{% if "embedded" not in project or not project["embedded"] %}
 {% if "wasm" in project and project["wasm"] %}
 
       - run: sudo apt-get install emscripten
