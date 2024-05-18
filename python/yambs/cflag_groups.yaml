@@ -1,5 +1,5 @@
 ---
-extra_dist: [local]
+extra_dist: [local, config/python/yambs]
 
 ldflag_groups:
   semihost: [-lsemihost]
