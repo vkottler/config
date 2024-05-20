@@ -4,6 +4,7 @@ A module implementing project tasks for working with toolchains.
 
 # built-in
 from pathlib import Path
+from platform import machine
 from typing import Dict
 
 # isort: off
@@ -126,7 +127,7 @@ def register_toolchains(
         assert manager.register(jlink_gdbserver_task(board, third_party))
 
     # Register a task for downloading toolchains.
-    manager.register(YambsDownload("download-toolchains", cwd))
+    manager.register(YambsDownload("download-toolchains", cwd, "-p", machine()))
 
     del project
     del substitutions
