@@ -8,6 +8,7 @@ cflag_groups:
     # Required definitions.
     - -DCFG_TUSB_MCU=OPT_MCU_RP2040
     - -DCFG_TUSB_OS=OPT_OS_PICO
+    - -DPICO_ON_DEVICE=1
     - -DPICO_RP2040_USB_DEVICE_ENUMERATION_FIX=1
     - -DPICO_RP2040_USB_DEVICE_UFRAME_FIX=1
 
