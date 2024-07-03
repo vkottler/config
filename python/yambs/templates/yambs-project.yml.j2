@@ -43,12 +43,12 @@ jobs:
 
       - run: mk yaml python-lint python-sa
 
-      - name: setup clang {{constants.clang_version}}
-        run: |
-          wget https://apt.llvm.org/llvm.sh
-          chmod +x ./llvm.sh
-          sudo ./llvm.sh {{constants.clang_version}}
-          rm llvm.sh
+      # - name: setup clang {{constants.clang_version}}
+      #   run: |
+      #     wget https://apt.llvm.org/llvm.sh
+      #     chmod +x ./llvm.sh
+      #     sudo ./llvm.sh {{constants.clang_version}}
+      #     rm llvm.sh
 {% if "embedded" not in project or not project["embedded"] %}
 {% if "wasm" in project and project["wasm"] %}
 
