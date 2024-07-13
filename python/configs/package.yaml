@@ -8,9 +8,10 @@ dev_requirements:
   - isort
   - yamllint
 
-  # For mklocal tasks.
+  # For workflow tasks.
   - yambs
   - vmklib
+  # - experimental-lowqa
 
   # For documentation.
   - sphinx

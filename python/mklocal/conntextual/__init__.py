@@ -17,10 +17,10 @@ from vcorelib.task import Inbox, Outbox
 from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 
-# isort: on
-
 # internal
-from ..prompts import manual_select
+from experimental_lowqa.prompts import manual_select
+
+# isort: on
 
 
 class ConntextualTask(SubprocessLogMixin):
