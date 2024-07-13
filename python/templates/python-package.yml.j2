@@ -45,7 +45,7 @@ jobs:
 
 {% if package["name"] == "vmklib" %}
       - run: pip${{"{{matrix.python-version}}"}} install -e .
-{% elif package["name"] == "vcorelib" %}
+{% elif package["name"] in ["vcorelib", "experimental-lowqa"] %}
       - run: pip${{"{{matrix.python-version}}"}} install -e .
       - run: pip${{"{{matrix.python-version}}"}} install vmklib
       - run: mk python-editable

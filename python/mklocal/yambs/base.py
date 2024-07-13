@@ -15,10 +15,10 @@ from vcorelib.task import Inbox
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 from yambs.config.native import Native, load_native
 
-# isort: on
-
 # internal
-from ..prompts import manual_select
+from experimental_lowqa.prompts import manual_select
+
+# isort: on
 
 
 class YambsTask(SubprocessLogMixin):
