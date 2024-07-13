@@ -10,7 +10,7 @@ dev_requirements:
 
   # For workflow tasks.
   - yambs
-  - vmklib
+  - vmklib>=2.0.3
 
   # For documentation.
   - sphinx
