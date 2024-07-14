@@ -7,12 +7,13 @@ from pathlib import Path
 from typing import Any, Dict
 
 # third-party
-from userfs.build import run_process
-from userfs.config import ProjectSpecification
 from vcorelib.paths.context import in_dir
 
 # internal
-from hooks_common import PREFIX, is_local_bin
+from experimental_lowqa.edit import is_local_bin
+from experimental_lowqa.userfs import PREFIX
+from userfs.build import run_process
+from userfs.config import ProjectSpecification
 
 
 def post_fetch(

@@ -6,12 +6,12 @@ A module for implementing picamera2 hooks.
 from pathlib import Path
 from typing import Any, Dict
 
+# internal
+from experimental_lowqa.userfs import PROGS
+
 # third-party
 from userfs.build import run_process
 from userfs.config import ProjectSpecification
-
-# internal
-from hooks_common import PROGS
 
 
 def pre_build(
@@ -24,5 +24,5 @@ def pre_build(
 
     run_process(
         project.logger,
-        [PROGS["pip"], "install", "-e", project.location(root=root)],
+        [str(PROGS["pip"]), "install", "-e", str(project.location(root=root))],
     )

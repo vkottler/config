@@ -6,11 +6,11 @@ A module for implementing OctoPrint hooks.
 from pathlib import Path
 from typing import Any, Dict
 
+# internal
+from experimental_lowqa.userfs import PROGS
+
 # third-party
 from userfs.config import ProjectSpecification
-
-# internal
-from hooks_common import PROGS
 
 
 def pre_build(

@@ -6,12 +6,12 @@ A module for implementing ansible hooks.
 from pathlib import Path
 from typing import Any, Dict
 
+# internal
+from experimental_lowqa.userfs import PROGS
+
 # third-party
 from userfs.build import run_process
 from userfs.config import ProjectSpecification
-
-# internal
-from hooks_common import PROGS
 
 
 def pre_deploy(
