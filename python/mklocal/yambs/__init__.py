@@ -15,8 +15,6 @@ from vcorelib.task.subprocess.run import register_http_server_task, is_windows
 from yambs.config.common import DEFAULT_CONFIG
 from yambs.config.native import Native
 
-# isort: on
-
 # internal
 from experimental_lowqa.edit import GenerateTags
 from experimental_lowqa.env import try_source
@@ -24,6 +22,8 @@ from experimental_lowqa.tasks.conntextual import (
     register as register_conntextual,
 )
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
+
+# isort: on
 
 from .base import YambsTask
 from .dist import YambsDist

@@ -6,10 +6,7 @@ A module for Python-project task registration.
 from pathlib import Path
 from typing import Dict
 
-# third-party
-from vcorelib.task import Phony
-from vcorelib.task.manager import TaskManager
-from vcorelib.task.subprocess.run import is_windows, register_http_server_task
+# isort: off
 
 # internal
 from experimental_lowqa.tasks.conntextual import (
@@ -17,7 +14,15 @@ from experimental_lowqa.tasks.conntextual import (
 )
 from experimental_lowqa.tasks.docs import SphinxTask
 from experimental_lowqa.tasks.python import PythonTags
+
+# third-party
+from vcorelib.task import Phony
+from vcorelib.task.manager import TaskManager
+from vcorelib.task.subprocess.run import is_windows, register_http_server_task
+
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
+
+# isort: on
 
 
 def register(
