@@ -7,8 +7,9 @@ from pathlib import Path
 from typing import Set
 
 # internal
+from experimental_lowqa.tasks.yambs.gcov import remove_gcov_data
+
 from .base import YambsTask
-from .gcov import remove_gcov_data
 
 
 class CoverageManager:

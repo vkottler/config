@@ -21,10 +21,11 @@ from vmklib.tasks.mixins.concrete import ConcreteOnceMixin
 # isort: on
 
 # internal
-from .common import add_path
+from experimental_lowqa.tasks.yambs.common import add_path
+from experimental_lowqa.tasks.yambs.jlink import register_jlink
+from experimental_lowqa.tasks.yambs.jlink.gdbserver import jlink_gdbserver_task
+
 from .download import YambsDownload
-from .jlink import register_jlink
-from .jlink.gdbserver import jlink_gdbserver_task
 
 BOARDS = ["relax_kit", "grand_central", "pi_pico"]
 
@@ -127,7 +128,9 @@ def register_toolchains(
         assert manager.register(jlink_gdbserver_task(board, third_party))
 
     # Register a task for downloading toolchains.
-    manager.register(YambsDownload("download-toolchains", cwd, "-p", machine()))
+    manager.register(
+        YambsDownload("download-toolchains", cwd, "-p", machine())
+    )
 
     del project
     del substitutions

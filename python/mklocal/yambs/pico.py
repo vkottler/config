@@ -15,8 +15,8 @@ from vcorelib.task.manager import TaskManager
 from vcorelib.task.subprocess.run import SubprocessLogMixin
 
 # internal
-from ..base import YambsTask
-from ..common import add_program_path
+from experimental_lowqa.tasks.yambs.common import add_program_path
+from .base import YambsTask
 
 # isort: on
 

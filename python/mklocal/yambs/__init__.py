@@ -18,11 +18,13 @@ from yambs.config.native import Native
 # isort: on
 
 # internal
-from mklocal.conntextual import register as register_conntextual
-from mklocal.env import try_source
+from experimental_lowqa.edit import GenerateTags
+from experimental_lowqa.env import try_source
+from experimental_lowqa.tasks.conntextual import (
+    register as register_conntextual,
+)
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
 
-from ..edit import GenerateTags
 from .base import YambsTask
 from .dist import YambsDist
 from .docs import register_docs
