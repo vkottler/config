@@ -16,13 +16,55 @@ from experimental_lowqa.tasks.docs import SphinxTask
 from experimental_lowqa.tasks.python import PythonTags
 
 # third-party
-from vcorelib.task import Phony
+from vcorelib.task import Phony, Inbox, Outbox
 from vcorelib.task.manager import TaskManager
-from vcorelib.task.subprocess.run import is_windows, register_http_server_task
+from vcorelib.task.subprocess.run import (
+    is_windows,
+    register_http_server_task,
+    SubprocessLogMixin,
+)
 
 from vmklib.tasks.clean import Clean  # pylint: disable=wrong-import-order
+from vmklib.tasks.python import PREFIX
 
 # isort: on
+
+
+class SvgenTask(SubprocessLogMixin):
+    """A task for running svgen."""
+
+    default_requirements = {"venv", PREFIX + "install-svgen"}
+
+    async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
+        """Generate a tags files."""
+
+        tasks = Path("tasks", "svgen")
+        build = Path("build", "svgen")
+        build.mkdir(parents=True, exist_ok=True)
+
+        variant = kwargs.get("variant", "default")
+
+        svgen_args = [
+            "-c",
+            str(tasks.joinpath(f"{variant}.yaml")),
+            "-o",
+            str(build.joinpath(f"{variant}.svg")),
+        ]
+
+        if kwargs.get("images"):
+            svgen_args.append("--images")
+
+        svgen_args.append(str(tasks.joinpath(f"{variant}.py")))
+
+        return await self.shell_cmd_in_dir(
+            args[0],
+            [
+                str(inbox["venv"]["venv{python_version}"]["python"]),
+                "-m",
+                "svgen",
+            ]
+            + svgen_args,
+        )
 
 
 def register(
@@ -66,6 +108,10 @@ def register(
     register_http_server_task(
         manager, docs_dir.joinpath("_build"), "hd", ["docs"]
     )
+
+    # SVG tasks.
+    manager.register(SvgenTask("svgen", cwd))
+    manager.register(SvgenTask("svgeni", cwd, images=True))
 
     del substitutions
 
