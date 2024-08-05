@@ -56,14 +56,11 @@ class SvgenTask(SubprocessLogMixin):
 
         svgen_args.append(str(tasks.joinpath(f"{variant}.py")))
 
-        return await self.shell_cmd_in_dir(
-            args[0],
-            [
-                str(inbox["venv"]["venv{python_version}"]["python"]),
-                "-m",
-                "svgen",
-            ]
-            + svgen_args,
+        return await self.exec(
+            str(inbox["venv"]["venv{python_version}"]["python"]),
+            "-m",
+            "svgen",
+            *svgen_args,
         )
 
 
@@ -110,8 +107,8 @@ def register(
     )
 
     # SVG tasks.
-    manager.register(SvgenTask("svgen", cwd))
-    manager.register(SvgenTask("svgeni", cwd, images=True))
+    manager.register(SvgenTask("svgen"))
+    manager.register(SvgenTask("svgeni", images=True))
 
     del substitutions
 
