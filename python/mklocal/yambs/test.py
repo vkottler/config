@@ -40,9 +40,7 @@ class YambsRunTest(YambsTask):
         name = test_name(path)
 
         return name, await handle_process_cancel(
-            await method(  # type: ignore
-                str(path), *args, stdout=PIPE, stderr=PIPE, **kwargs
-            ),
+            await method(str(path), *args, stdout=PIPE, stderr=PIPE, **kwargs),
             name,
             self.logger,
         )
