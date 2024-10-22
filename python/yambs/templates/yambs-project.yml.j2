@@ -1,4 +1,6 @@
 {% import __templates__["yambs_constants"] as constants %}
+{% set is_wasm = "wasm" in project and project["wasm"] %}
+{% set is_embedded = "embedded" in project and project["embedded"] %}
 ---
 name: Yambs Project
 
@@ -49,8 +51,8 @@ jobs:
       #     chmod +x ./llvm.sh
       #     sudo ./llvm.sh {{constants.clang_version}}
       #     rm llvm.sh
-{% if "embedded" not in project or not project["embedded"] %}
-{% if "wasm" in project and project["wasm"] %}
+{% if not is_embedded %}
+{% if is_wasm %}
 
       - run: sudo apt-get install emscripten
       - run: emcc --version
@@ -65,7 +67,11 @@ jobs:
       - run: clang{{constants.clang_suffix}} --version
       - run: clang++{{constants.clang_suffix}} --version
 
+{% if not is_wasm %}
       - run: mk t variant=clang coverage=false
+{% else %}
+      - run: mk g
+{% endif %}
 {% else %}
       - run: sudo apt-get install doxygen{% if "format" not in project or project["format"] %} clang-format{{constants.clang_suffix}}{% endif %}
 
@@ -74,10 +80,10 @@ jobs:
 {% endif %}
       - run: ninja all{% if "format" not in project or project["format"] %} format-check{% endif %}
 
-      - run: mk dist{% if "ci_docs" not in project or project["ci_docs"] %} docs{% endif %}{% if "embedded" in project and project["embedded"] %} variant={{project["name"]}}{% endif %}
+      - run: mk dist{% if "ci_docs" not in project or project["ci_docs"] %} docs{% endif %}{% if is_embedded %} variant={{project["name"]}}{% endif %}
 
         if: github.ref_name != '{{project.main_branch}}'
-{% if "embedded" not in project or not project["embedded"] %}
+{% if not is_embedded and not is_wasm %}
 
       # Need to clean because codecov is not finding coverage otherwise.
       - run: mk c keep={{project["ci_variant"]}}
@@ -94,7 +100,7 @@ jobs:
           token: ${{"{{secrets.CODECOV_TOKEN}}"}}
 {% endif %}
 
-      - run: mk release{% if "embedded" in project and project["embedded"] %} variant={{project["name"]}}{% endif %}
+      - run: mk release{% if is_embedded %} variant={{project["name"]}}{% endif %}
 
         if: |
           env.GITHUB_API_TOKEN != ''
