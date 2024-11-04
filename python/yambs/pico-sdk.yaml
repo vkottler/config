@@ -32,6 +32,7 @@ cflag_groups:
     - -Ipico-sdk/src/rp2_common/pico_stdio_usb/include
     - -Ipico-sdk/src/rp2_common/hardware_pio/include
     - -Ipico-sdk/src/rp2_common/hardware_gpio/include
+    - -Ipico-sdk/src/rp2_common/hardware_i2c/include
     - -Ipico-sdk/src/rp2_common/hardware_base/include
     - -Ipico-sdk/src/rp2_common/hardware_claim/include
     - -Ipico-sdk/src/rp2_common/hardware_irq/include
@@ -72,6 +73,7 @@ extra_sources:
   - pico-sdk/src/common/pico_sync
   - pico-sdk/src/rp2_common/hardware_pio
   - pico-sdk/src/rp2_common/hardware_gpio
+  - pico-sdk/src/rp2_common/hardware_i2c
   - pico-sdk/src/rp2_common/hardware_irq
   - pico-sdk/src/rp2_common/hardware_timer
   - pico-sdk/src/rp2_common/hardware_claim
