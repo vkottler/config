@@ -4,6 +4,7 @@ A module for Python-project task registration.
 
 # built-in
 from pathlib import Path
+from shutil import rmtree
 from typing import Dict
 
 # isort: off
@@ -38,11 +39,14 @@ class SvgenTask(SubprocessLogMixin):
     async def run(self, inbox: Inbox, outbox: Outbox, *args, **kwargs) -> bool:
         """Generate a tags files."""
 
-        tasks = Path("tasks", "svgen")
-        build = Path("build", "svgen")
-        build.mkdir(parents=True, exist_ok=True)
-
         variant = kwargs.get("variant", "default")
+
+        tasks = Path("tasks", "svgen")
+        build = Path("build", "svgen", variant)
+
+        if build.is_dir() and kwargs.get("clean"):
+            rmtree(build)
+        build.mkdir(parents=True, exist_ok=True)
 
         svgen_args = [
             "-c",
