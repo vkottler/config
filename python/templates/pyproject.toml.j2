@@ -20,8 +20,9 @@ readme = "README.md"
 {% if "versions" in python and python["versions"] %}
 requires-python = ">={{python["versions"][0]}}"
 {% endif %}
+license = "MIT"
+license-files = ["LICENSE"]
 {% if "keywords" in package and package["keywords"] %}
-license = {file = "LICENSE"}
 keywords = [
 {% for keyword in package["keywords"] %}
   "{{keyword}}"{% if not loop.last %},{% endif %}
@@ -54,8 +55,7 @@ classifiers = [
   "Operating System :: Unix",
 {% endif %}
 {% endif %}
-  "Development Status :: {{package["status"]}}",
-  "License :: OSI Approved :: MIT License"
+  "Development Status :: {{package["status"]}}"
 ]
 dynamic = ["dependencies"]
 {% if "dev_requirements" in package and package["dev_requirements"] %}
