@@ -77,11 +77,14 @@ jobs:
         env:
           PY_TEST_EXTRA_ARGS: --cov-report=xml
 
-      - uses: codecov/codecov-action@v3.1.5
+      - uses: codecov/codecov-action@v5
         with:
           fail_ci_if_error: true
           verbose: true
           token: ${{"{{secrets.CODECOV_TOKEN}}"}}
+{% if python.author_info.username == "libre-embedded" %}
+          slug: {{python.author_info.username}}/{{package.name}}
+{% endif %}
 
       - run: mk pypi-upload-ci
         env:
