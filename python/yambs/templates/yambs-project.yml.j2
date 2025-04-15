@@ -89,7 +89,7 @@ jobs:
       - run: mk c keep={{project["ci_variant"]}}
       - run: mk t variant={{project["ci_variant"]}}
 
-      - uses: codecov/codecov-action@v3.1.5
+      - uses: codecov/codecov-action@v5
         with:
           gcov: true
           gcov_include: build/{{project["ci_variant"]}}
@@ -98,6 +98,9 @@ jobs:
           fail_ci_if_error: true
           verbose: true
           token: ${{"{{secrets.CODECOV_TOKEN}}"}}
+{% if project.owner == "libre-embedded" %}
+          slug: {{project.owner}}/{{project.name}}
+{% endif %}
 {% endif %}
 
       - run: mk release{% if is_embedded %} variant={{project["name"]}}{% endif %}
