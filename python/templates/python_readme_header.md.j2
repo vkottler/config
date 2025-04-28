@@ -8,6 +8,10 @@
 ![Dependents (via libraries.io)](https://img.shields.io/librariesio/dependents/pypi/{{package["name"]}})
 
 *{{package["description"]}}*
+{% if python["author_info"]["username"] == "libre-embedded" %}
+
+Consider [sponsoring development](https://github.com/sponsors/libre-embedded).
+{% endif %}
 
 ([interface documentation](https://{{python["author_info"]["username"]}}.github.io/python/{{package["name"]}}))
 {% if "versions" in python %}
