@@ -17,6 +17,10 @@ systems:
   schema:
     type: string
 
+codecov_ubuntu:
+  type: boolean
+  required: false
+
 versions:
   required: false
   type: list

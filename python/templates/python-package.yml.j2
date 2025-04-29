@@ -85,6 +85,9 @@ jobs:
 {% if python.author_info.username == "libre-embedded" %}
           slug: {{python.author_info.username}}/{{package.name}}
 {% endif %}
+{% if "codecov_ubuntu" in python and python["codecov_ubuntu"] %}
+        if: matrix.system == 'ubuntu-latest'
+{% endif %}
 
       - run: mk pypi-upload-ci
         env:
