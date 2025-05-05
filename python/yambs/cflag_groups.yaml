@@ -1,4 +1,7 @@
 ---
+includes:
+  - package://ifgen/yambs.yaml
+
 extra_dist: [local, config/python/yambs]
 
 ldflag_groups:
