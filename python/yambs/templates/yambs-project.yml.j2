@@ -91,7 +91,6 @@ jobs:
 
       - uses: codecov/codecov-action@v5
         with:
-          gcov: true
           gcov_include: build/{{project["ci_variant"]}}
           gcov_ignore: .mypy_cache
           gcov_executable: gcov{{constants.gcc_suffix}}
