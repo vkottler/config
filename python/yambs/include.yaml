@@ -11,52 +11,52 @@ renders:
   - name: native_tasks.py
     output_dir: tasks
     output_path: conf.py
-    dependencies:
+    dependencies: &local
       - compiles-local
 
   - name: clang-format
     output_dir: "."
     output_path: .clang-format
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
+  # depends on yambs_constants
   - name: yambs-project.yml
     output_dir: ".github/workflows"
-    dependencies:
-      - compiles-local
+    dependencies: *local
+    template_dependencies: &constants
+      - yambs_constants
+
+  - name: requirements.txt
+    output_dir: "{{slug}}"
+    template_dependencies: *constants
+    dependencies: *local
 
   - name: yambs.yaml
     output_dir: "."
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
   - name: README.md
     output_dir: "."
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
   - name: env
     output_dir: "."
     output_path: .env
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
   - name: gdbinit
     output_dir: "."
     output_path: .gdbinit
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
   - name: vimrc
     output_dir: "."
     output_path: .vimrc
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
   - name: index.rst
     output_dir: docs
-    dependencies:
-      - compiles-local
+    dependencies: *local
 
   - name: conf.py
     output_dir: docs
@@ -69,6 +69,7 @@ groups:
       - renders-native_tasks.py
       - renders-clang-format
       - renders-conf.py
+      - renders-requirements.txt
 
   - name: yambs-embedded-renders
     dependencies:
