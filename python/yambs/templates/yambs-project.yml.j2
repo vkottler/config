@@ -30,8 +30,6 @@ jobs:
           submodules: recursive
 
       - uses: seanmiddleditch/gha-setup-ninja@master
-        with:
-          version: 1.11.1
 
       - name: python${{"{{matrix.python-version}}"}} setup
         uses: actions/setup-python@main
@@ -39,7 +37,7 @@ jobs:
           python-version: ${{"{{matrix.python-version}}"}}
           cache: pip
 
-      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0 yambs ifgen>=4.2.4
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=1.8.0 yambs ifgen>=4.2.5
 
       - run: mk dz-sync
 
