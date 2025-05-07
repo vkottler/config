@@ -41,7 +41,9 @@ jobs:
 
       - run: mk dz-sync
 
-      - run: mk yaml python-lint python-sa
+      - run: mk yaml
+      - run: mk python-lint
+      - run: mk python-sa
 
       # - name: setup clang {{constants.clang_version}}
       #   run: |
