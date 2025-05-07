@@ -1,0 +1,8 @@
+---
+struct:
+  id_underlying: uint8_t
+  default_endianness: little
+
+enum:
+  id_underlying: uint8_t
+  use_map: false
