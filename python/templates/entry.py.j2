@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 {% endif %}
 import sys
-from typing import List
 
 # third-party
 {% if "no_logging_init" not in package or not package["no_logging_init"] %}
@@ -32,7 +31,7 @@ from {{pkg_slug}} import DESCRIPTION, VERSION
 from {{pkg_slug}}.app import add_app_args, entry
 
 
-def main(argv: List[str] = None) -> int:
+def main(argv: list[str] = None) -> int:
     """Program entry-point."""
 
     result = 0
