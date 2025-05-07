@@ -28,7 +28,7 @@ class CoverageManager:
         self.lcov_args = [
             "-q",
             "--gcov-tool",
-            "gcov-13",
+            "gcov-14",
             "-d",
             str(self.build_dir),
         ]
