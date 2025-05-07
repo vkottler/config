@@ -54,6 +54,11 @@ renders:
     output_path: .vimrc
     dependencies: *local
 
+  - name: gitignore
+    output_dir: "."
+    output_path: .gitignore
+    dependencies: *local
+
   - name: index.rst
     output_dir: docs
     dependencies: *local
@@ -70,6 +75,7 @@ groups:
       - renders-clang-format
       - renders-conf.py
       - renders-requirements.txt
+      - renders-gitignore
 
   - name: yambs-embedded-renders
     dependencies:
