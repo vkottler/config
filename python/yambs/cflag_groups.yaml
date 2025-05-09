@@ -2,7 +2,7 @@
 includes:
   - package://ifgen/yambs.yaml
 
-extra_dist: [local, config/python/yambs]
+extra_dist: [local, config/python/yambs, config/python/ifgen]
 
 ldflag_groups:
   semihost: [-lsemihost]

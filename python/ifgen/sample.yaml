@@ -1,0 +1,39 @@
+---
+structs:
+  Struct1:
+    fields:
+      - name: field1
+        type: uint8_t
+      - name: field2
+        type: Enum1
+      - name: field3
+        type: Enum2
+      - name: field4
+        type: int16_t
+
+  Struct2:
+    fields:
+      - name: field5
+        type: uint32_t
+      - name: field6
+        type: Enum2
+      - name: field7
+        type: Enum1
+      - name: field8
+        type: int64_t
+
+enums:
+  Enum1:
+    underlying: uint16_t
+    enum:
+      A:
+      B: {description: A sample value.}
+      C: {value: 1000}
+      D: {value: 2000}
+
+  Enum2:
+    enum:
+      A:
+      B: {description: A sample value.}
+      C: {value: 6}
+      D: {value: 7}
