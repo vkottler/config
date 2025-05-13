@@ -25,6 +25,7 @@ structs:
 enums:
   Enum1:
     underlying: uint16_t
+    default: C
     enum:
       A:
       B: {description: A sample value.}
@@ -32,6 +33,7 @@ enums:
       D: {value: 2000}
 
   Enum2:
+    default: D
     enum:
       A:
       B: {description: A sample value.}
