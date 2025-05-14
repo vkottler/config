@@ -22,6 +22,24 @@ structs:
       - name: field8
         type: int64_t
 
+  Struct3:
+    fields:
+      - name: field9
+        type: Struct1
+        array_length: 3
+
+      - name: field10
+        type: Struct2
+        array_length: 3
+
+      - name: field11
+        type: Enum1
+        array_length: 3
+
+      - name: field12
+        type: Enum2
+        array_length: 3
+
 enums:
   Enum1:
     underlying: uint16_t
