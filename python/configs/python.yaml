@@ -1,4 +1,4 @@
 ---
-default_version: "3.12"
+default_version: "3.13"
 systems:
   - ubuntu-latest
