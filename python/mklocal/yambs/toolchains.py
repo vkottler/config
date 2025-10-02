@@ -53,7 +53,9 @@ class PackToolchainTask(SubprocessLogMixin):
         cwd = root.joinpath(toolchain)
 
         dest = root.joinpath("dist")
-        output = dest.joinpath(f"{toolchain}.{DEFAULT_ARCHIVE_EXT}")
+        output = dest.joinpath(
+            f"{toolchain}-{machine()}.{DEFAULT_ARCHIVE_EXT}"
+        )
 
         link = cwd.joinpath(toolchain)
         out = cwd.joinpath("out")
@@ -63,6 +65,10 @@ class PackToolchainTask(SubprocessLogMixin):
         if not output.exists():
             result = make_archive(link, dst_dir=dest)
             assert result[0] is not None
+
+            if result[0] != output:
+                result[0].rename(output)
+
             self.logger.info(
                 "Created '%s' in %s.",
                 output,
