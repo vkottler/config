@@ -3,6 +3,8 @@ struct:
   id_underlying: uint8_t
   default_endianness: little
 
+clang_format: clang-format-19
+
 enum:
   id_underlying: uint8_t
   use_map: false
