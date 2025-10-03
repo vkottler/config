@@ -10,9 +10,7 @@ ldflag_groups:
   wasm: [-lembind]
 
 cflag_groups:
-  # -specs=picolibcpp.specs
-  # no picolibc option for toolchain anymore
-  picolib: []
+  picolib: [-specs=picolibcpp.specs]
 
   hwfp: [-mfpu=auto, -mfloat-abi=hard]
 
