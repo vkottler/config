@@ -31,6 +31,9 @@ class CoverageManager:
             "gcov-14",
             "-d",
             str(self.build_dir),
+            # having difficulty excluding standard library
+            "--ignore-errors",
+            "inconsistent",
         ]
 
     async def init(self) -> None:
