@@ -5,7 +5,9 @@ includes:
 extra_dist: [local, config/python/yambs, config/python/ifgen]
 
 ldflag_groups:
-  semihost: [-lsemihost, "-Wl,--verbose"]
+  semihost: [-lsemihost]
+
+  verbose: ["-Wl,--verbose"]
 
   wasm: [-lembind]
 
