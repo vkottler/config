@@ -31,14 +31,18 @@ cflag_groups:
     - -Ipico-sdk/src/common/pico_usb_reset_interface_headers/include
     - -Ipico-sdk/src/rp2_common/boot_stage2/asminclude
     - -Ipico-sdk/src/rp2_common/boot_stage2/include
+    - -Ipico-sdk/src/rp2_common/boot_bootrom_headers/include
     - -Ipico-sdk/src/rp2_common/cmsis/include
     - -Ipico-sdk/src/rp2_common/pico_printf/include
     - -Ipico-sdk/src/rp2_common/pico_bootrom/include
     - -Ipico-sdk/src/rp2_common/pico_multicore/include
+    - -Ipico-sdk/src/rp2_common/pico_flash/include
     - -Ipico-sdk/src/rp2_common/pico_stdio/include
     - -Ipico-sdk/src/rp2_common/pico_stdio_usb/include
     - -Ipico-sdk/src/rp2_common/hardware_boot_lock/include
     - -Ipico-sdk/src/rp2_common/hardware_pio/include
+    - -Ipico-sdk/src/rp2_common/hardware_vreg/include
+    - -Ipico-sdk/src/rp2_common/hardware_xip_cache/include
     - -Ipico-sdk/src/rp2_common/hardware_gpio/include
     - -Ipico-sdk/src/rp2_common/hardware_i2c/include
     - -Ipico-sdk/src/rp2_common/hardware_base/include
@@ -60,6 +64,7 @@ cflag_groups:
     - -Ipico-sdk/src/rp2_common/pico_platform_compiler/include
     - -Ipico-sdk/src/rp2_common/pico_platform_sections/include
     - -Ipico-sdk/src/rp2_common/pico_platform_panic/include
+    - -Ipico-sdk/src/rp2_common/pico_platform_common/include
     - -Ipico-sdk/src/rp2_common/pico_runtime/include
     - -Ipico-sdk/src/rp2_common/pico_runtime_init/include
     - -Ipico-sdk/src/rp2_common/pico_time_adapter/include
