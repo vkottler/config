@@ -9,6 +9,7 @@ enums:
 
 structs:
   BufferState:
+    allocate: false
     fields:
       - name: write_cursor
         type: uint32_t
