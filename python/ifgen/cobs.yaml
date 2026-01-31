@@ -1,0 +1,19 @@
+---
+structs:
+  CobsDecoder:
+    fields:
+      - name: buffer_bytes
+        type: uint32_t
+      - name: dropped_bytes
+        type: uint32_t
+      - name: message_count
+        type: uint16_t
+
+  CobsEncoder:
+    fields:
+      - name: buffer_bytes
+        type: uint32_t
+      - name: sent_bytes
+        type: uint32_t
+      - name: message_count
+        type: uint16_t
