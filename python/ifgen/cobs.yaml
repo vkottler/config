@@ -1,6 +1,7 @@
 ---
 structs:
   CobsDecoder:
+    control: false
     fields:
       - name: buffer_bytes
         type: uint32_t
@@ -10,6 +11,7 @@ structs:
         type: uint16_t
 
   CobsEncoder:
+    control: false
     fields:
       - name: buffer_bytes
         type: uint32_t
