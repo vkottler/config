@@ -5,6 +5,8 @@
 name: Yambs Project
 
 on:
+  workflow_dispatch:
+    inputs: {}
   push:
     branches: [{{project.main_branch}}]
   pull_request:
