@@ -1,0 +1,6 @@
+---
+includes:
+  - config/python/ifgen/settings.yaml
+  - config/python/ifgen/sample.yaml
+  - config/python/ifgen/cobs.yaml
+  - package://ifgen/plugins/struct_receiver.yaml
