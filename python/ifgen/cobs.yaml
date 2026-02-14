@@ -2,7 +2,7 @@
 structs:
   CobsDecoder:
     control: false
-    fields:
+    fields: &decoder
       - name: buffer_bytes
         type: uint32_t
       - name: dropped_bytes
@@ -19,3 +19,7 @@ structs:
         type: uint32_t
       - name: message_count
         type: uint16_t
+
+  McuDecoder:
+    control: false
+    fields: *decoder
