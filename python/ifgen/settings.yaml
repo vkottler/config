@@ -2,6 +2,7 @@
 struct:
   id_underlying: uint8_t
   default_endianness: little
+  # unused features
   stream: false
   unit_test: false
 
@@ -10,3 +11,5 @@ clang_format: clang-format-19
 enum:
   id_underlying: uint8_t
   use_map: false
+  # unused features
+  unit_test: false
