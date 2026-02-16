@@ -2,6 +2,8 @@
 struct:
   id_underlying: uint8_t
   default_endianness: little
+  stream: false
+  unit_test: false
 
 clang_format: clang-format-19
 
