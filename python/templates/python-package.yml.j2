@@ -47,10 +47,10 @@ jobs:
       - run: pip${{"{{matrix.python-version}}"}} install -e .
 {% elif package["name"] in ["vcorelib", "experimental-lowqa"] %}
       - run: pip${{"{{matrix.python-version}}"}} install -e .
-      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=2.0.3
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=2.0.9
       - run: mk python-editable
 {% else %}
-      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=2.0.3
+      - run: pip${{"{{matrix.python-version}}"}} install vmklib>=2.0.9
 {% endif %}
 {% if "ci_local" in package and package["ci_local"] %}
 
