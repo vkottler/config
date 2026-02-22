@@ -63,15 +63,15 @@ jobs:
 
       - run: mk python-sa-types
 
-      - name: lint and build
-        run: mk python-lint python-sa yaml python-build-once
-        env:
-          PY_LINT_MYPY_EXTRA_ARGS: --no-incremental
-
       - run: mk docs version={{package.version}}
         if: |
           matrix.python-version == '{{python["default_version"]}}'
           && matrix.system == 'ubuntu-latest'
+
+      - name: lint and build
+        run: mk python-lint python-sa yaml python-build-once
+        env:
+          PY_LINT_MYPY_EXTRA_ARGS: --no-incremental
 
       - run: mk python-test
         env:
