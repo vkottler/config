@@ -80,6 +80,8 @@ def register(
 
     manager.register(PythonTags("e", cwd))
 
+    slug = project.replace("-", "_")
+
     # Don't run yamllint on Windows because it will fail on newlines.
     manager.register(
         Phony("yaml"),
@@ -90,7 +92,7 @@ def register(
                 "yaml-lint-local",
                 "yaml-lint-tasks",
                 "yaml-lint-manifest.yaml",
-                f"yaml-lint-{project.replace('-', '_')}",
+                f"yaml-lint-{slug}",
             ]
         ),
     )
@@ -106,7 +108,9 @@ def register(
 
     docs_dir = cwd.joinpath("docs")
 
-    manager.register(Clean("clean-docs", docs_dir))
+    manager.register(
+        Clean("clean-docs", docs_dir, cwd.joinpath(slug, "data", "docs"))
+    )
 
     register_http_server_task(
         manager, docs_dir.joinpath("_build"), "hd", ["docs"]
