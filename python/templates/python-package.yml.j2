@@ -68,7 +68,7 @@ jobs:
         env:
           PY_LINT_MYPY_EXTRA_ARGS: --no-incremental
 
-      - run: mk docs
+      - run: mk docs version={{package.version}}
         if: |
           matrix.python-version == '{{python["default_version"]}}'
           && matrix.system == 'ubuntu-latest'

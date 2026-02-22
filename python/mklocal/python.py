@@ -100,7 +100,9 @@ def register(
     #     manager.register(ArbiterTask("r", cwd))
 
     # Documentation tasks.
-    manager.register(SphinxTask("docs", cwd, project))
+    manager.register(
+        SphinxTask("docs", cwd, project, version=substitutions.get("version"))
+    )
 
     docs_dir = cwd.joinpath("docs")
 
@@ -113,8 +115,6 @@ def register(
     # SVG tasks.
     manager.register(SvgenTask("svgen"))
     manager.register(SvgenTask("svgeni", images=True))
-
-    del substitutions
 
     return True
 

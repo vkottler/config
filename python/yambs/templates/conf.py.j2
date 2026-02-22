@@ -10,7 +10,8 @@
 project = "{{project.name}}"
 copyright = "{{license.year}}, {{license.name}}"
 author = "{{license.name}}"
-release = "{{macros.version(project)}}"
+version = "{{macros.version(project)}}"
+release = version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -24,8 +25,11 @@ exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_book_theme"
+html_title = "docs"
 html_theme_options = {"navigation_with_keys": True}
 html_static_path = ["_static"]
+html_logo = "https://www.libre-embedded.com/static/png/chip-circle-bootstrap/128x128.png"
+html_favicon = "https://www.libre-embedded.com/favicon.ico"
 
 # -- Options for extensions --------------------------------------------------
 # https://exhale.readthedocs.io/en/latest/quickstart.html#setup-the-extensions-in-conf-py
