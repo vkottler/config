@@ -2,3 +2,10 @@
 default_version: "3.14"
 systems:
   - ubuntu-latest
+
+author_info:
+  name: Libre Embedded
+  email: vaughn@libre-embedded.com
+  username: libre-embedded
+
+versions: ["3.13", "3.14"]
