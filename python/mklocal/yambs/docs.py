@@ -4,6 +4,7 @@ A module implementing a documentation-building task.
 
 # built-in
 from pathlib import Path
+from shutil import copytree, rmtree
 from typing import Dict
 
 # third-party
@@ -24,6 +25,13 @@ class YambsDist(YambsTask):
         """Generate ninja configuration files."""
 
         docs_dir: Path = args[0]
+        cwd = docs_dir.parent
+
+        # README dependencies.
+        for subdir in ["im", "md"]:
+            if cwd.joinpath(subdir).is_dir():
+                rmtree(docs_dir.joinpath(subdir), ignore_errors=True)
+                copytree(cwd.joinpath(subdir), docs_dir.joinpath(subdir))
 
         venv_bin = inbox["venv"]["venv{python_version}"]["bin"]
 
