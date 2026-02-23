@@ -88,6 +88,7 @@ jobs:
       - run: ninja all{% if "format" not in project or project["format"] %} format-check{% endif %}
 
 {% if "ci_docs" not in project or project["ci_docs"] %}
+      - run: pip${{"{{matrix.python-version}}"}} install -e git+https://github.com/renefritze/exhale.git@feat/cpp-concepts#egg=exhale
       - run: mk docs
 {% endif %}
       - run: mk dist{% if is_embedded %} variant={{project["name"]}}{% endif %}
