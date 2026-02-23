@@ -87,7 +87,10 @@ jobs:
 {% endif %}
       - run: ninja all{% if "format" not in project or project["format"] %} format-check{% endif %}
 
-      - run: mk dist{% if "ci_docs" not in project or project["ci_docs"] %} docs{% endif %}{% if is_embedded %} variant={{project["name"]}}{% endif %}
+{% if "ci_docs" not in project or project["ci_docs"] %}
+      - run: mk docs
+{% endif %}
+      - run: mk dist{% if is_embedded %} variant={{project["name"]}}{% endif %}
 
         if: github.ref_name != '{{project.main_branch}}'
 {% if not is_embedded and not is_wasm %}
