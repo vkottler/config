@@ -1,5 +1,3 @@
 ---
 ci_variant: debug
-
-# https://github.com/svenevs/exhale/issues/195
-ci_docs: false
+ci_docs: true
