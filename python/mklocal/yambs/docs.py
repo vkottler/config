@@ -46,7 +46,12 @@ class YambsDist(YambsTask):
             dest.mkdir()
 
             for item in docs_dir.joinpath("_build").iterdir():
-                if item.name in {"_modules", "_static", "_images"}:
+                if item.name in {
+                    "_modules",
+                    "_static",
+                    "_images",
+                    "generated",
+                }:
                     copytree(item, dest.joinpath(item.name))
                 elif item.suffix in {".html", ".js"}:
                     copyfile(item, dest.joinpath(item.name))
