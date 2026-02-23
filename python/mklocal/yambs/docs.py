@@ -4,7 +4,7 @@ A module implementing a documentation-building task.
 
 # built-in
 from pathlib import Path
-from shutil import copytree, rmtree
+from shutil import copyfile, copytree, rmtree
 from typing import Dict
 
 # third-party
@@ -38,6 +38,19 @@ class YambsDist(YambsTask):
         result = await self.shell_cmd_in_dir(
             docs_dir, [str(venv_bin.joinpath("sphinx-build")), ".", "_build"]
         )
+
+        # Create docs/dist for packaging.
+        if result:
+            dest = docs_dir.joinpath("dist")
+            rmtree(dest, ignore_errors=True)
+            dest.mkdir()
+
+            for item in docs_dir.joinpath("_build").iterdir():
+                if item.name in {"_modules", "_static", "_images"}:
+                    copytree(item, dest.joinpath(item.name))
+                elif item.suffix in {".html", ".js"}:
+                    copyfile(item, dest.joinpath(item.name))
+
         return result
 
 
