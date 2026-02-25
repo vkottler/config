@@ -23,7 +23,10 @@ cflag_groups:
   # Processors.
   m0plus: [-mcpu=cortex-m0plus]
   m4: [-mcpu=cortex-m4]
+  m33: [-mcpu=cortex-m33]
 
   # Architectures.
   armv6m: [-march=armv6-m]
   armv7emfp: [-march=armv7e-m+fp]
+  armv8m: [-march=armv8-m.main+fp+dsp]
+  hazard3: [-march=rv32ima_zicsr_zifencei_zba_zbb_zbs_zbkb_zca_zcb_zcmp]
