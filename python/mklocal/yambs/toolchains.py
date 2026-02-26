@@ -106,6 +106,9 @@ class UserfsTask(SubprocessLogMixin):
         )
 
 
+ALL_TOOLCHAINS = ["arm-picolibc-eabi", "riscv32-picolibc-elf"]
+
+
 def register_toolchains(
     manager: TaskManager,
     project: str,
@@ -122,9 +125,10 @@ def register_toolchains(
         PackToolchainTask("pack-{toolchain}", cwd), ["crosstool-{toolchain}"]
     )
 
-    toolchains = ["arm-picolibc-eabi"]
-    manager.register(Phony("toolchains"), [f"pack-{x}" for x in toolchains])
-    for toolchain in toolchains:
+    manager.register(
+        Phony("toolchains"), [f"pack-{x}" for x in ALL_TOOLCHAINS]
+    )
+    for toolchain in ALL_TOOLCHAINS:
         add_path(cwd.joinpath("toolchains", toolchain, "bin"))
 
     third_party = cwd.joinpath("third-party")
