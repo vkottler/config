@@ -83,7 +83,7 @@ jobs:
 
       - run: mk download-toolchains
       - run: mk g
-      - run: echo "$(git rev-parse --show-toplevel)/toolchains/arm-picolibc-eabi/bin" >> "$GITHUB_PATH"
+      - run: echo "$(git rev-parse --show-toplevel)/toolchains/{{constants.embedded_toolchain}}/bin" >> "$GITHUB_PATH"
 {% endif %}
       - run: ninja all{% if "format" not in project or project["format"] %} format-check{% endif %}
 

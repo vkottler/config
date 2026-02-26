@@ -106,7 +106,8 @@ class UserfsTask(SubprocessLogMixin):
         )
 
 
-ALL_TOOLCHAINS = ["arm-picolibc-eabi", "riscv32-picolibc-elf"]
+CURRENT_EMBEDDED = "riscv32-picolibc-elf"
+ALL_TOOLCHAINS = ["arm-picolibc-eabi", CURRENT_EMBEDDED]
 
 
 def register_toolchains(
@@ -139,7 +140,9 @@ def register_toolchains(
 
     # Register a task for downloading toolchains.
     manager.register(
-        YambsDownload("download-toolchains", cwd, "-p", machine())
+        YambsDownload(
+            "download-toolchains", cwd, "-p", f"{CURRENT_EMBEDDED}-{machine()}"
+        )
     )
 
     del project
