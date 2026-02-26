@@ -1,12 +1,16 @@
 target extended-remote :3333
 
+set remotetimeout unlimited
+set mem inaccessible-by-default off
+
 # Load the program.
 load
-monitor reset
+monitor reset halt
 
 # Get to main.
-# break main
-# continue
+break main
+continue
+tui enable
 
 # Enable semihosting (for the debugger).
 # monitor semihosting breakOnError
