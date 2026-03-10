@@ -72,6 +72,14 @@ jobs:
       - run: g++{{constants.gcc_suffix}} --version
       - run: clang{{constants.clang_suffix}} --version
       - run: clang++{{constants.clang_suffix}} --version
+{% if "ci_local" in project and project["ci_local"] %}
+
+      # Begin project-specific setup.
+{% for item in project["ci_local"] %}
+      {{item}}
+{% endfor %}
+      # End project-specific setup.
+{% endif %}
 
 {% if not is_wasm %}
       - run: mk t variant=clang coverage=false
