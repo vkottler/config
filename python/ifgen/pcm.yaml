@@ -9,11 +9,15 @@ structs:
         type: uint32_t
       - name: buffered_points
         type: uint32_t
-      - name: channels
-        type: int16_t
-        array_length: 2
-
   PcmControl:
     fields:
       - name: frequency
         type: double
+
+  Stereo:
+    control: false
+    fields:
+      - name: left
+        type: int16_t
+      - name: right
+        type: int16_t
