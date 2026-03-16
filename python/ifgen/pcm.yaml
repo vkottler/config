@@ -1,4 +1,34 @@
 ---
+enums:
+  SampleFormat:
+    default: S16_LE
+    description: |
+      Must match:
+
+      https://github.com/alsa-project/alsa-lib/blob/master/include/pcm.h#L128
+    enum:
+      S16_LE:
+        value: 2  # need to confirm value of SND_PCM_
+
+  ChannelConfig:
+    default: STEREO
+    description: Used as underlying value for channel count.
+    enum:
+      STEREO:
+        value: 2
+
+  SampleRate:
+    underlying: uint32_t
+    default: FOUR8
+    description: Used as actual underlying integer sample rate value.
+    enum:
+      FOUR8:
+        value: 48000
+      DOUBLE:
+        value: 96000
+      QUAD:
+        value: 192000
+
 structs:
   PcmStatus:
     control: false
