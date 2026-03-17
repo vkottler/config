@@ -22,6 +22,14 @@ enums:
       QUAD:
         value: 192000
 
+  WaveShape:
+    default: SINE
+    enum:
+      SINE: {}
+      TRIANGLE: {}
+      SQUARE: {}
+      SAWTOOTH: {}
+
 structs:
   PcmStatus:
     control: false
