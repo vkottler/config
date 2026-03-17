@@ -15,7 +15,7 @@ enums:
     description: Used as underlying value for channel count.
     enum:
       STEREO:
-        value: 2
+        value: &num_channels 2  # keep anchor tied to default
 
   SampleRate:
     underlying: uint32_t
@@ -44,10 +44,9 @@ structs:
       - name: frequency
         type: double
 
-  Stereo:
+  Audio:
     control: false
     fields:
-      - name: left
-        type: int16_t
-      - name: right
-        type: int16_t
+      - name: sample
+        type: int16_t  # must match SampleFormat default
+        array_length: *num_channels
