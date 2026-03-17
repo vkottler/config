@@ -30,6 +30,22 @@ enums:
       SQUARE: {}
       SAWTOOTH: {}
 
+  Note:
+    default: C
+    enum:
+      C: {}
+      Db: {}  # Cs
+      D: {}
+      Eb: {}  # Ds
+      E: {}
+      F: {}
+      Gb: {}  # Fs
+      G: {}
+      Ab: {}  # Gs
+      A: {}
+      Bb: {}  # As
+      B: {}
+
 structs:
   PcmStatus:
     control: false
@@ -42,8 +58,15 @@ structs:
         type: uint32_t
   PcmControl:
     fields:
-      - name: frequency
+      - name: frequency  # make this defunct (use note + octave)
         type: double
+
+      - name: shape
+        type: WaveShape
+      - name: note
+        type: Note
+      - name: octave_offset  # needs a UI slider
+        type: int8_t
 
   Audio:
     control: false
