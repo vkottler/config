@@ -1,21 +1,14 @@
 ---
 enums:
   SampleFormat:
-    default: S16_LE
+    default: S16_LE  # must match Audio sample primitive
     description: |
       Must match:
 
       https://github.com/alsa-project/alsa-lib/blob/master/include/pcm.h#L128
     enum:
       S16_LE:
-        value: 2  # need to confirm value of SND_PCM_
-
-  ChannelConfig:
-    default: STEREO
-    description: Used as underlying value for channel count.
-    enum:
-      STEREO:
-        value: &num_channels 2  # keep anchor tied to default
+        value: 2
 
   SampleRate:
     underlying: uint32_t
@@ -49,4 +42,4 @@ structs:
     fields:
       - name: sample
         type: int16_t  # must match SampleFormat default
-        array_length: *num_channels
+        array_length: 2  # the number of audio channels
