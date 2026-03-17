@@ -34,16 +34,21 @@ enums:
     default: C
     enum:
       C: {}
-      Db: {}  # Cs
+      Db:
+        description: Cs
       D: {}
-      Eb: {}  # Ds
+      Eb:
+        description: Ds
       E: {}
       F: {}
-      Gb: {}  # Fs
+      Gb:
+        description: Fs
       G: {}
-      Ab: {}  # Gs
+      Ab:
+        description: Gs
       A: {}
-      Bb: {}  # As
+      Bb:
+        description: as
       B: {}
 
 structs:
