@@ -25,7 +25,8 @@ enums:
   WaveShape:
     default: SINE
     enum:
-      SINE: {}
+      SINE:
+        value: 0
       TRIANGLE: {}
       SQUARE: {}
       SAWTOOTH: {}
@@ -33,7 +34,8 @@ enums:
   Note:
     default: C
     enum:
-      C: {}
+      C:
+        value: 0
       Db:
         description: Cs
       D: {}
