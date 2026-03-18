@@ -66,6 +66,8 @@ structs:
       - name: frequency  # make this defunct (use note + octave)
         type: double
 
+      - name: enable
+        type: bool
       - name: shape
         type: WaveShape
       - name: note
