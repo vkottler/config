@@ -54,6 +54,13 @@ enums:
       B: {}
 
 structs:
+  Audio:
+    control: false
+    fields:
+      - name: sample
+        type: int16_t  # must match SampleFormat default
+        array_length: &num_channels 2  # the number of audio channels
+
   PcmStatus:
     control: false
     fields:
@@ -69,14 +76,8 @@ structs:
         type: bool
       - name: shape
         type: WaveShape
+        array_length: *num_channels
       - name: note
         type: Note
       - name: octave_offset  # needs a UI slider
         type: int8_t
-
-  Audio:
-    control: false
-    fields:
-      - name: sample
-        type: int16_t  # must match SampleFormat default
-        array_length: 2  # the number of audio channels
