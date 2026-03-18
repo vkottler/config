@@ -65,9 +65,6 @@ structs:
         type: uint32_t
   PcmControl:
     fields:
-      - name: frequency  # make this defunct (use note + octave)
-        type: double
-
       - name: enable
         type: bool
       - name: shape
