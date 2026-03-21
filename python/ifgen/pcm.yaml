@@ -81,14 +81,18 @@ structs:
         type: uint32_t
       - name: buffered_points
         type: uint32_t
-  PcmControl:
+  WaveControl:
     fields:
       - name: enable
         type: bool
       - name: shape
         type: WaveShape
-        array_length: *num_channels
       - name: note
         type: Note
       - name: octave_offset  # needs a UI slider
         type: int8_t
+  PcmControl:
+    fields:
+      - name: channel
+        type: WaveControl
+        array_length: *num_channels
