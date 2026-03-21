@@ -22,6 +22,17 @@ enums:
       QUAD:
         value: 192000
 
+  FrameRate:
+    default: SIXTY
+    description: Used as actual underlying integer frame rate value.
+    enum:
+      SIXTY:
+        value: 60
+      DOUBLE:
+        value: 120
+      QUAD:
+        value: 240
+
   WaveShape:
     default: SINE
     enum:
