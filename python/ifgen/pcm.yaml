@@ -72,6 +72,17 @@ structs:
         type: int16_t  # must match SampleFormat default
         array_length: &num_channels 2  # the number of audio channels
 
+  AudioFrameData:
+    control: false
+    fields:
+      - name: volume
+        type: double
+      - name: volumes
+        type: double
+        array_length: *num_channels
+      - name: balance  # use first two channels
+        type: double
+
   PcmStatus:
     control: false
     fields:
