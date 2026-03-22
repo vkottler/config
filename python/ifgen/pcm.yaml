@@ -61,7 +61,7 @@ enums:
         description: Gs
       A: {}
       Bb:
-        description: as
+        description: As
       B: {}
 
 structs:
@@ -69,19 +69,36 @@ structs:
     control: false
     fields:
       - name: sample
+        description: audio sample point for all channels
         type: int16_t  # must match SampleFormat default
         array_length: &num_channels 2  # the number of audio channels
+
+  AudioChannelData:
+    control: false
+    fields:
+      - name: volume
+        type: &float_t double
+        description: average point magnitude
+      - name: peak
+        description: peak absolute point value
+        type: *float_t
+      - name: clip
+        type: bool
+        description: "true if point clipped peak during frame"
 
   AudioFrameData:
     control: false
     fields:
       - name: volume
-        type: double
-      - name: volumes
-        type: double
+        type: *float_t
+        description: "'mono' mix volume"
+      - name: balance
+        type: *float_t
+        description: based on first two channels
+      - name: channel
+        type: AudioChannelData
         array_length: *num_channels
-      - name: balance  # use first two channels
-        type: double
+        description: per-channel analysis
 
   PcmStatus:
     control: false
@@ -96,12 +113,14 @@ structs:
     fields:
       - name: enable
         type: bool
+        default: false
       - name: shape
         type: WaveShape
       - name: note
         type: Note
       - name: octave_offset  # needs a UI slider
         type: int8_t
+        default: 0
   PcmControl:
     fields:
       - name: channel
