@@ -118,11 +118,25 @@ structs:
         type: WaveShape
       - name: note
         type: Note
+      - name: gain
+        type: *float_t
+        default: 1.0
+        config: &gain_ctl
+          max_val: 1.5
+          min_val: 0.0
+          step: 0.01
       - name: octave_offset  # needs a UI slider
         type: int8_t
         default: 0
+        config:
+          max_val: 6
+          min_val: -4
   PcmControl:
     fields:
+      - name: gain
+        type: *float_t
+        default: 1.0
+        config: *gain_ctl
       - name: channel
         type: WaveControl
         array_length: *num_channels
