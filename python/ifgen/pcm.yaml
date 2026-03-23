@@ -43,10 +43,14 @@ enums:
       SAWTOOTH: {}
 
   Note:
-    default: C
+    default: A
     enum:
-      C:
+      A:
         value: 0
+      Bb:
+        description: As
+      B: {}
+      C: {}
       Db:
         description: Cs
       D: {}
@@ -59,10 +63,6 @@ enums:
       G: {}
       Ab:
         description: Gs
-      A: {}
-      Bb:
-        description: As
-      B: {}
 
 structs:
   Audio:
@@ -123,14 +123,28 @@ structs:
         default: &gain_default 0.0
         config: &gain_ctl
           max_val: 12.0
-          min_val: -60.0
-          step: 288
-      - name: octave_offset  # needs a UI slider
+          min_val: -40.0
+          step: 208
+      - name: octave_offset
         type: int8_t
         default: 0
         config:
           max_val: 6
           min_val: -4
+  Phonon:
+    fields:
+      - name: gain_db
+        type: *float_t
+        default: *gain_default
+      - name: duration
+        type: *float_t
+      - name: shape
+        type: WaveShape
+      - name: note
+        type: Note
+      - name: octave_offset
+        type: int8_t
+        default: 0
   PcmControl:
     fields:
       - name: gain_db
