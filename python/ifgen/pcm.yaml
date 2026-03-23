@@ -124,7 +124,7 @@ structs:
         config: &gain_ctl
           max_val: 1.5
           min_val: 0.0
-          step: 0.01
+          step: 150
       - name: octave_offset  # needs a UI slider
         type: int8_t
         default: 0
