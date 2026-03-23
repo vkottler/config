@@ -138,13 +138,10 @@ structs:
         default: *gain_default
       - name: duration
         type: *float_t
+      - name: frequency
+        type: *float_t
       - name: shape
         type: WaveShape
-      - name: note
-        type: Note
-      - name: octave_offset
-        type: int8_t
-        default: 0
   PcmControl:
     fields:
       - name: gain_db
