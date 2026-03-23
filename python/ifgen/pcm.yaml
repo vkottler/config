@@ -120,7 +120,7 @@ structs:
         type: Note
       - name: gain_db
         type: *float_t
-        default: 0.0
+        default: &gain_default 0.0
         config: &gain_ctl
           max_val: 12.0
           min_val: -60.0
@@ -135,7 +135,7 @@ structs:
     fields:
       - name: gain_db
         type: *float_t
-        default: 1.0
+        default: *gain_default
         config: *gain_ctl
       - name: channel
         type: WaveControl
