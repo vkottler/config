@@ -22,6 +22,7 @@ structs:
         type: int16_t
 
   Struct2:
+    control: false
     fields:
       - name: field5
         type: uint32_t
