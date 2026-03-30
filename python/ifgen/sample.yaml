@@ -20,11 +20,16 @@ structs:
         type: Enum2
       - name: field4
         type: int16_t
+        config:
+          max_val: 12
+          min_val: -12
 
   Struct2:
     control: false
     fields:
       - name: field5
+        default: 5
+        description: Description.
         type: uint32_t
       - name: field6
         type: Enum2
