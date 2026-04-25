@@ -5,3 +5,19 @@ includes:
   - config/python/ifgen/cobs.yaml
   - config/python/ifgen/pcm.yaml
   - package://ifgen/plugins/struct_receiver.yaml
+
+enums:
+  Action:
+    default: POST
+    enum:
+      POST: {description: Trigger a log message.}
+      RESET: {description: Reboot to application.}
+      BOOTLOADER: {description: Reboot to bootloader.}
+
+structs:
+  Actionable:
+    fields:
+      - name: sequence
+        type: uint8_t
+      - name: action
+        type: Action
