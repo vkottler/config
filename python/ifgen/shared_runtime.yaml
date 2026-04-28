@@ -15,6 +15,22 @@ enums:
       BOOTLOADER: {description: Reboot to bootloader.}
 
 structs:
+  Rgb:
+    control: false
+    fields:
+      - name: red
+        type: uint8_t
+      - name: green
+        type: uint8_t
+      - name: blue
+        type: uint8_t
+
+  RgbDemo:
+    fields:
+      - name: leds
+        type: Rgb
+        array_length: 5
+
   Actionable:
     fields:
       - name: sequence
