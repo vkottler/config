@@ -20,10 +20,13 @@ structs:
     fields:
       - name: red
         type: uint8_t
+        default: 0
       - name: green
         type: uint8_t
+        default: 0
       - name: blue
         type: uint8_t
+        default: 0
 
   RgbDemo:
     fields:
