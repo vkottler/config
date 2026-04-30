@@ -32,7 +32,7 @@ structs:
     fields:
       - name: leds
         type: Rgb
-        array_length: 5
+        array_length: 16
 
   Actionable:
     fields:
