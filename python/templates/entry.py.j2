@@ -31,7 +31,7 @@ from {{pkg_slug}} import DESCRIPTION, VERSION
 from {{pkg_slug}}.app import add_app_args, entry
 
 
-def main(argv: list[str] = None) -> int:
+def main(argv: list[str] | None = None) -> int:
     """Program entry-point."""
 
     result = 0
